@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Ray2Mod.Types;
+using Ray2Mod.Components.Types;
 
-namespace Ray2Mod.GameFunctions
+namespace Ray2Mod.Game.Functions
 {
     public class EngineFunctions : FunctionContainer
     {
@@ -15,7 +15,7 @@ namespace Ray2Mod.GameFunctions
             Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(0x476960);
         }
 
-        public Dictionary<string, Action> Actions { get; } = new Dictionary<string, Action>();
+        public event Action EngineLoop;
 
         #region VEngine
 
@@ -30,11 +30,7 @@ namespace Ray2Mod.GameFunctions
 
             try
             {
-                lock (Actions)
-                {
-                    foreach (KeyValuePair<string, Action> action in Actions)
-                        action.Value.Invoke();
-                }
+                EngineLoop?.Invoke();
             }
             catch (Exception e)
             {

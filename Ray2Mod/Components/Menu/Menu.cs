@@ -1,38 +1,33 @@
-﻿using Ray2Mod.GameFunctions;
-using Ray2Mod.Structs;
-using Ray2Mod.Types;
+﻿using Ray2Mod.Game;
 using Ray2Mod.Utils;
 using System;
 using System.Collections.Generic;
+using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs;
+using Ray2Mod.Game.Types;
 
 namespace Ray2Mod.Components.Menu
 {
-    public partial class Menu
+    public class Menu
     {
-        private Menu(EngineFunctions engine, GfxFunctions gfx, InputFunctions input, TextFunctions text,
-            Vector3 position, float width = 0, params MenuItem[] items)
-        {
-            Engine = engine;
-            Gfx = gfx;
-            Input = input;
-            Text = text;
-            Items = new List<MenuItem>(items);
+        public Menu(GameFunctions gameFunctions, params MenuItem[] items) : this(gameFunctions, new Vector3(3, 13, 0), 0, items) { }
 
+        public Menu(GameFunctions gameFunctions, Vector3 position, params MenuItem[] items) : this(gameFunctions, position, 0, items) { }
+
+        private Menu(GameFunctions gameFunctions, Vector3 position, float width = 0, params MenuItem[] items)
+        {
+            Game = gameFunctions;
             Position = position;
             Width = width > 0 ? width : CalculateWidth();
+            Items = new List<MenuItem>(items);
         }
 
-        private EngineFunctions Engine { get; }
-        private GfxFunctions Gfx { get; }
-        private InputFunctions Input { get; }
-        private TextFunctions Text { get; }
-
         private string Id { get; } = Guid.NewGuid().ToString();
+        private GameFunctions Game { get; }
 
         private Vector3 Position { get; }
         private float Width { get; }
         private Menu ParentMenu { get; set; }
-
         public List<MenuItem> Items { get; }
 
         private int _selected;
@@ -51,20 +46,20 @@ namespace Ray2Mod.Components.Menu
             ParentMenu = parentMenu;
             Selected = 0;
 
-            Input.DisableGameInput();
-            Input.ExclusiveInput = ProcessInput;
+            Game.Input.DisableGameInput();
+            Game.Input.ExclusiveInput = ProcessInput;
 
-            Engine.Actions.Set(Id, DrawGraphics);
-            Text.Actions.Set(Id, DrawText);
+            Game.Engine.EngineLoop += DrawGraphics;
+            Game.Text.TextLoop += DrawText;
         }
 
         public void Hide()
         {
-            Engine.Actions.Delete(Id);
-            Text.Actions.Delete(Id);
+            Game.Engine.EngineLoop -= DrawGraphics;
+            Game.Text.TextLoop -= DrawText;
 
-            Input.ExclusiveInput = null;
-            Input.EnableGameInput();
+            Game.Input.ExclusiveInput = null;
+            Game.Input.EnableGameInput();
         }
 
         private void ProcessInput(char ch, KeyCode code)
@@ -92,10 +87,10 @@ namespace Ray2Mod.Components.Menu
 
         private void DrawGraphics()
         {
-            Vector3 vpos2 = new Vector3(Position.X + Width + 2,Position.Y + 2 + Items.Count * 4, 0);
+            Vector3 vpos2 = new Vector3(Position.X + Width + 2, Position.Y + 2 + Items.Count * 4, 0);
             using (StructPtr pos1 = new StructPtr(Position), pos2 = new StructPtr(vpos2))
             {
-                Gfx.VAddParticle.Call(110, pos1, pos2, TexturePointers.blueSparkTexture, 190);
+                Game.Gfx.VAddParticle.Call(110, pos1, pos2, TexturePointers.blueSparkTexture, 190);
             }
         }
 
@@ -103,7 +98,7 @@ namespace Ray2Mod.Components.Menu
         {
             for (int i = 0; i < Items.Count; i++)
             {
-                Text.CustomText(i == Selected ? Items[i].Name.Yellow() : Items[i].Name, 9, (Position.X + 1) * 10, (Position.Y + 2 + i * 4) * 10);
+                Game.Text.CustomText(i == Selected ? Items[i].Name.Yellow() : Items[i].Name, 9, (Position.X + 1) * 10, (Position.Y + 2 + i * 4) * 10);
             }
         }
 

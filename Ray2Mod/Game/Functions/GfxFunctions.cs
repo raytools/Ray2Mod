@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Ray2Mod.Structs;
-using Ray2Mod.Types;
+using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs;
 
-namespace Ray2Mod.GameFunctions
+namespace Ray2Mod.Game.Functions
 {
     public class GfxFunctions : FunctionContainer
     {

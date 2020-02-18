@@ -1,8 +1,10 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Structs {
+namespace Ray2Mod.Game.Structs
+{
     [StructLayout(LayoutKind.Sequential)]
-    public struct Matrix {
+    public struct Matrix
+    {
         public int transformationType;
         public float x;
         public float y;

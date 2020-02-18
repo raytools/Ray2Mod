@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Structs
+namespace Ray2Mod.Game.Structs
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct TextureData

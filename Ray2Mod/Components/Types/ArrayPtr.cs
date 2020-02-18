@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Types
+namespace Ray2Mod.Components.Types
 {
     /// <summary>
     /// Pointer to an Int32 array in unmanaged memory.

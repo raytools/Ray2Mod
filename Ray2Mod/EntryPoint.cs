@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using EasyHook;
-using Ray2Mod.Components.Menu;
 
 namespace Ray2Mod
 {
@@ -12,7 +11,7 @@ namespace Ray2Mod
         protected EntryPoint(RemoteHooking.IContext context, string channelName)
         {
             Interface = RemoteHooking.IpcConnectClient<RemoteInterface>(channelName);
-            Interface.Injected(RemoteHooking.GetCurrentProcessId());
+            Interface.Injected(RemoteHooking.GetCurrentProcessId(), GetType().Assembly.GetName().Name);
         }
 
         private bool Running { get; set; } = true;
@@ -52,11 +51,6 @@ namespace Ray2Mod
                 hook.Value.Dispose();
 
             Running = false;
-        }
-
-        ~EntryPoint()
-        {
-            Interface.GameClosed();
         }
     }
 }

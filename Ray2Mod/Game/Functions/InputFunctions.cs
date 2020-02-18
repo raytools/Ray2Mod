@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Ray2Mod.Types;
+using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Types;
 
-namespace Ray2Mod.GameFunctions
+namespace Ray2Mod.Game.Functions
 {
     public class InputFunctions : FunctionContainer
     {
@@ -37,13 +38,11 @@ namespace Ray2Mod.GameFunctions
             if (ExclusiveInput == null)
             {
                 lock (Actions)
+                lock (KeycodeActions)
                 {
-                    lock (KeycodeActions)
-                    {
-                        if (Actions.TryGetValue((char)result, out Action action) ||
-                            KeycodeActions.TryGetValue((KeyCode)ch, out action))
-                            action.Invoke();
-                    }
+                    if (Actions.TryGetValue((char) result, out Action action) ||
+                        KeycodeActions.TryGetValue((KeyCode) ch, out action))
+                        action.Invoke();
                 }
             }
             else ExclusiveInput.Invoke((char)result, (KeyCode)ch);

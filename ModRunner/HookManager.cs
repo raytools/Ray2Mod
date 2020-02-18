@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Threading;
@@ -11,11 +13,17 @@ namespace ModRunner
 {
     public class HookManager
     {
-        public HookManager(string libraryName, RemoteInterface remote, params string[] processNames)
+        public HookManager(string[] libraryNames, RemoteInterface remote, params string[] processNames)
         {
-            InjectionLib = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), libraryName);
-            ProcessNames = processNames;
+            Libraries = new List<string>();
+            foreach (string libraryName in libraryNames)
+            {
+                Libraries.Add(Path.IsPathRooted(libraryName) 
+                    ? libraryName
+                    : Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), libraryName));
+            }
 
+            ProcessNames = processNames;
             Remote = remote;
         }
 
@@ -23,7 +31,7 @@ namespace ModRunner
         private IpcServerChannel ipc;
         private RemoteInterface Remote { get; }
         private string[] ProcessNames { get; }
-        private string InjectionLib { get; }
+        private List<string> Libraries { get; }
 
         public bool IsHookAttached { get; set; }
 
@@ -53,8 +61,11 @@ namespace ModRunner
 
                     try
                     {
-                        RemoteHooking.Inject(processId, InjectionOptions.DoNotRequireStrongName,
-                            InjectionLib, InjectionLib, _channelName);
+                        foreach (string library in Libraries)
+                        {
+                            RemoteHooking.Inject(processId, InjectionOptions.DoNotRequireStrongName,
+                                library, library, _channelName);
+                        }
 
                         IsHookAttached = true;
                         Remote.Log("Injection finished.");

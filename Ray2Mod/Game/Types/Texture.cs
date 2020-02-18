@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using Ray2Mod.Structs;
+using Ray2Mod.Game.Structs;
 
-namespace Ray2Mod.Types
+namespace Ray2Mod.Game.Types
 {
     public class Texture
     {

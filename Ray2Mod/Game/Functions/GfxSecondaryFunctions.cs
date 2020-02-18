@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
-using Ray2Mod.Types;
+using Ray2Mod.Components.Types;
 
-namespace Ray2Mod.GameFunctions
+namespace Ray2Mod.Game.Functions
 {
     public class GfxSecondaryFunctions : FunctionContainer
     {

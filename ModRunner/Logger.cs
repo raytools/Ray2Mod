@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Threading;
 using Ray2Mod;
 
 namespace ModRunner
 {
     public class Logger : RemoteInterface
     {
-        public override void Injected(int pid)
+        public override void Injected(int pid, string modName)
         {
-            Console.WriteLine($"DLL injected, PID: {pid}");
+            Console.WriteLine($"{modName} injected, PID: {pid}");
         }
 
-        public override void Log(string msgPacket)
+        public override void Log(string msgPacket, uint id = 0)
         {
             Console.WriteLine(msgPacket);
         }
@@ -19,16 +18,6 @@ namespace ModRunner
         public override void HandleError(Exception e)
         {
             Console.WriteLine(e.ToString());
-        }
-
-        public override void GameClosed()
-        {
-            // lazy hack to make sure IPC channel is closed
-            new Thread(() =>
-            {
-                Thread.Sleep(500);
-                System.Environment.Exit(0);
-            }).Start();
         }
     }
 }

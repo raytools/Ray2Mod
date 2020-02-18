@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using EasyHook;
 
-namespace Ray2Mod.Types
+namespace Ray2Mod.Components.Types
 {
     public class GameFunction<T> where T : Delegate
     {

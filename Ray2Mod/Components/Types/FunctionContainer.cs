@@ -1,4 +1,4 @@
-﻿namespace Ray2Mod.Types
+﻿namespace Ray2Mod.Components.Types
 {
     public class FunctionContainer
     {

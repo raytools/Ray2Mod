@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Ray2Mod.Structs;
-using Ray2Mod.Types;
+using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs;
 
-namespace Ray2Mod.GameFunctions
+namespace Ray2Mod.Game.Functions
 {
     public class TextFunctions : FunctionContainer
     {
@@ -15,6 +15,7 @@ namespace Ray2Mod.GameFunctions
         }
 
         public Dictionary<string, Action> Actions { get; } = new Dictionary<string, Action>();
+        public event Action TextLoop;
 
         #region DrawsTexts
 
@@ -27,11 +28,7 @@ namespace Ray2Mod.GameFunctions
         {
             try
             {
-                lock (Actions)
-                {
-                    foreach (KeyValuePair<string, Action> action in Actions)
-                        action.Value.Invoke();
-                }
+                TextLoop?.Invoke();
             }
             catch (Exception e)
             {
