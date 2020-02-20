@@ -7,7 +7,7 @@ namespace Ray2Mod.Game.Functions
 {
     public class GfxFunctions : FunctionContainer
     {
-        public GfxFunctions(EntryPoint entry) : base(entry)
+        public GfxFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
         {
             VAddParticle = new GameFunction<DVAddParticle>(0x463390, HVAddParticle);
             VCreatePart = new GameFunction<DVCreatePart>(0x4600C0, HVCreatePart);

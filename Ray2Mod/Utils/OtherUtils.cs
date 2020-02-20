@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Ray2Mod.Utils
 {
     public static class OtherUtils
     {
-        public static Version Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        public static string GetVersionString(Assembly assembly)
+        {
+            Version assemblyVersion = assembly.GetName().Version;
+            string version = $"{assemblyVersion.Major}.{assemblyVersion.Minor}.{assemblyVersion.Build}";
 
-        public static string GetVersion = $"{Version.Major}.{Version.Minor}.{Version.Build}";
+            return version;
+        }
+
+        public static string GetAssemblyVersion() => GetVersionString(Assembly.GetCallingAssembly());
+
+        public static string GetAssemblyProductName() => Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
 
         public static Dictionary<string, Dictionary<string, string>> Levels = new Dictionary<string, Dictionary<string, string>>
         {
             {
                 "Woods of Light", new Dictionary<string, string>
-                { 
+                {
                     { "Jail", "jail_20" },
                     { "Woods of Light", "learn_10" }
                 }

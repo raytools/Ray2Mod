@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Ray2Mod.Components.Types;
 
@@ -7,7 +6,7 @@ namespace Ray2Mod.Game.Functions
 {
     public class EngineFunctions : FunctionContainer
     {
-        public EngineFunctions(EntryPoint entry) : base(entry)
+        public EngineFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
         {
             VEngine = new GameFunction<DVEngine>(0x40ADA0, HVEngine);
             GetCurrentLevelName = new GameFunction<DGetCurrentLevelName>(0x404DA0);

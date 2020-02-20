@@ -8,7 +8,7 @@ namespace Ray2Mod.Game.Functions
 {
     public class InputFunctions : FunctionContainer
     {
-        public InputFunctions(EntryPoint entry) : base(entry)
+        public InputFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
         {
             VirtualKeyToAscii = new GameFunction<DVirtualKeyToAscii>(0x496110, HVirtualKeyToAscii);
             VReadInput = new GameFunction<DVReadInput>(0x496510, HVReadInput);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Ray2Mod;
 
 namespace ModRunner
@@ -7,12 +8,13 @@ namespace ModRunner
     {
         public override void Injected(int pid, string modName)
         {
-            Console.WriteLine($"{modName} injected, PID: {pid}");
+            Log($"{modName} injected, PID: {pid}");
         }
 
-        public override void Log(string msgPacket, uint id = 0)
+        public override void Log(string msgPacket, LogType type = LogType.Info)
         {
-            Console.WriteLine(msgPacket);
+            string message = $"{DateTime.Now.ToString(CultureInfo.InvariantCulture)} [{type}] {msgPacket}";
+            Console.WriteLine(message);
         }
 
         public override void HandleError(Exception e)

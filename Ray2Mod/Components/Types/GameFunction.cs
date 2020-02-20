@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using EasyHook;
 
 namespace Ray2Mod.Components.Types
 {
@@ -18,38 +17,10 @@ namespace Ray2Mod.Components.Types
             Hook = hook;
         }
 
-        private string Name { get; }
+        public string Name { get; }
         public IntPtr Pointer { get; }
         public T Call { get; }
-        private T Hook { get; set; }
+        public T Hook { get; set; }
 
-        public bool AttachHook(EntryPoint detour)
-        {
-            if (Hook == null)
-                return false;
-
-            detour.Hooks[Name] = LocalHook.Create(Pointer, Hook, this);
-            detour.Hooks[Name].ThreadACL.SetExclusiveACL(new[] {0});
-            detour.Interface.Log($"Attached hook:\n{typeof(T).Name}");
-
-            return true;
-        }
-
-        public bool DetachHook(EntryPoint detour)
-        {
-            if (!detour.Hooks.ContainsKey(Name))
-                return false;
-
-            detour.Hooks[Name].Dispose();
-            detour.Hooks.Remove(Name);
-
-            return true;
-        }
-
-        public void SetHook(T hook, EntryPoint detour)
-        {
-            DetachHook(detour);
-            Hook = hook;
-        }
     }
 }

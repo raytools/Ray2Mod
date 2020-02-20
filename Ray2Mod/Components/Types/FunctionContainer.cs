@@ -2,9 +2,9 @@
 {
     public class FunctionContainer
     {
-        protected FunctionContainer(EntryPoint entryPoint)
+        protected FunctionContainer(RemoteInterface remoteInterface)
         {
-            Interface = entryPoint.Interface;
+            Interface = remoteInterface;
         }
 
         protected RemoteInterface Interface { get; }

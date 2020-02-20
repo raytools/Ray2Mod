@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Components\HookManager.cs" />
     <Compile Include="Game\Functions\EngineFunctions.cs" />
     <Compile Include="Game\Functions\GfxFunctions.cs" />
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
@@ -54,6 +54,7 @@
     <Compile Include="Components\Menu\Menu.cs" />
     <Compile Include="Components\Menu\MenuItem.cs" />
     <Compile Include="Game\GameFunctions.cs" />
+    <Compile Include="IMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteInterface.cs" />
     <Compile Include="Game\Structs\EngineObject.cs" />

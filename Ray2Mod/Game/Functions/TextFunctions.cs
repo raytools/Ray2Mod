@@ -8,13 +8,12 @@ namespace Ray2Mod.Game.Functions
 {
     public class TextFunctions : FunctionContainer
     {
-        public TextFunctions(EntryPoint entry) : base(entry)
+        public TextFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
         {
             DrawsTexts = new GameFunction<FDrawsTexts>(0x460670, HDrawsTexts);
             DrawText = new GameFunction<FDrawText>(0x4660B0, HDrawText);
         }
 
-        public Dictionary<string, Action> Actions { get; } = new Dictionary<string, Action>();
         public event Action TextLoop;
 
         #region DrawsTexts

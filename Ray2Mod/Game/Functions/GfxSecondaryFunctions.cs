@@ -5,7 +5,7 @@ namespace Ray2Mod.Game.Functions
 {
     public class GfxSecondaryFunctions : FunctionContainer
     {
-        public GfxSecondaryFunctions(EntryPoint entry) : base(entry)
+        public GfxSecondaryFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
         {
             ClearZBufferRegion = new GameFunction<DClearZBufferRegion>(0x421FB0);
             SwapSceneBuffer = new GameFunction<DSwapSceneBuffer>(0x420F50);

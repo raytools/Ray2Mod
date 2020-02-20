@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -13,15 +12,9 @@ namespace ModRunner
 {
     public class HookManager
     {
-        public HookManager(string[] libraryNames, RemoteInterface remote, params string[] processNames)
+        public HookManager(string libraryName, RemoteInterface remote, params string[] processNames)
         {
-            Libraries = new List<string>();
-            foreach (string libraryName in libraryNames)
-            {
-                Libraries.Add(Path.IsPathRooted(libraryName) 
-                    ? libraryName
-                    : Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), libraryName));
-            }
+            Library = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), libraryName);
 
             ProcessNames = processNames;
             Remote = remote;
@@ -31,11 +24,11 @@ namespace ModRunner
         private IpcServerChannel ipc;
         private RemoteInterface Remote { get; }
         private string[] ProcessNames { get; }
-        private List<string> Libraries { get; }
+        private string Library { get; }
 
         public bool IsHookAttached { get; set; }
 
-        public void Inject()
+        public void Inject(string[] dllsToLoad)
         {
             _channelName = null;
 
@@ -54,26 +47,23 @@ namespace ModRunner
 
                     if (processId == 0)
                     {
-                        Remote.Log("Cannot find process, retrying in 5s...");
+                        Remote.Log("Cannot find process, retrying in 5s...", LogType.Warning);
                         Thread.Sleep(5000);
                         continue;
                     }
 
                     try
                     {
-                        foreach (string library in Libraries)
-                        {
-                            RemoteHooking.Inject(processId, InjectionOptions.DoNotRequireStrongName,
-                                library, library, _channelName);
-                        }
+                        RemoteHooking.Inject(processId, InjectionOptions.DoNotRequireStrongName,
+                            Library, Library, _channelName, dllsToLoad);
 
                         IsHookAttached = true;
                         Remote.Log("Injection finished.");
                     }
                     catch (Exception e)
                     {
-                        Remote.Log("Injection error:");
-                        Remote.Log(e.ToString());
+                        Remote.Log("Injection error:", LogType.Error);
+                        Remote.Log(e.ToString(), LogType.Error);
                         Remote.Log("Retrying in 5s...");
 
                         IsHookAttached = false;

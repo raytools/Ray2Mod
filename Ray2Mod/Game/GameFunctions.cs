@@ -4,13 +4,13 @@ namespace Ray2Mod.Game
 {
     public class GameFunctions
     {
-        public GameFunctions(EntryPoint entryPoint)
+        public GameFunctions(RemoteInterface remoteInterface)
         {
-            Engine = new EngineFunctions(entryPoint);
-            Input = new InputFunctions(entryPoint);
-            Text = new TextFunctions(entryPoint);
-            Gfx = new GfxFunctions(entryPoint);
-            Gfx2 = new GfxSecondaryFunctions(entryPoint);
+            Engine = new EngineFunctions(remoteInterface);
+            Input = new InputFunctions(remoteInterface);
+            Text = new TextFunctions(remoteInterface);
+            Gfx = new GfxFunctions(remoteInterface);
+            Gfx2 = new GfxSecondaryFunctions(remoteInterface);
         }
 
         public EngineFunctions Engine { get; }
