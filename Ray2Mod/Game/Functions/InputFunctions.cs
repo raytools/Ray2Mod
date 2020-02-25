@@ -11,7 +11,7 @@ namespace Ray2Mod.Game.Functions
         public InputFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
         {
             VirtualKeyToAscii = new GameFunction<DVirtualKeyToAscii>(0x496110, HVirtualKeyToAscii);
-            VReadInput = new GameFunction<DVReadInput>(0x496510, HVReadInput);
+            VReadInput = new GameFunction<DVReadInput>(0x496510);
         }
 
         public Dictionary<char, Action> Actions { get; } = new Dictionary<char, Action>();
@@ -58,16 +58,6 @@ namespace Ray2Mod.Game.Functions
         public delegate short DVReadInput(int a1);
 
         public GameFunction<DVReadInput> VReadInput { get; }
-
-        private short HVReadInput(int a1)
-        {
-            short result = VReadInput.Call(a1);
-
-            Interface.Log($"VReadInput Output: {result}, Pointer:");
-            Interface.Log($"0x{Convert.ToString(a1, 16)}");
-
-            return result;
-        }
 
         #endregion
 

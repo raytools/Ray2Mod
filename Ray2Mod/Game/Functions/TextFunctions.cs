@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs;
@@ -11,7 +10,7 @@ namespace Ray2Mod.Game.Functions
         public TextFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
         {
             DrawsTexts = new GameFunction<FDrawsTexts>(0x460670, HDrawsTexts);
-            DrawText = new GameFunction<FDrawText>(0x4660B0, HDrawText);
+            DrawText = new GameFunction<FDrawText>(0x4660B0);
         }
 
         public event Action TextLoop;
@@ -45,23 +44,6 @@ namespace Ray2Mod.Game.Functions
         public delegate int FDrawText(int a1, IntPtr textStruct);
 
         public GameFunction<FDrawText> DrawText { get; }
-
-        private int HDrawText(int a1, IntPtr textStruct)
-        {
-            try
-            {
-                Text2D text = Marshal.PtrToStructure<Text2D>(textStruct);
-                Interface.Log($"Text: {text.text} alphaByte: {text.alphaByte} gap11: {text.gap11}");
-                Interface.Log($"highlight: {text.highlight} options: {text.options}");
-                Interface.Log($"dword14: {text.dword14} flag3: {text.flag3}");
-            }
-            catch (Exception e)
-            {
-                Interface.HandleError(e);
-            }
-
-            return DrawText.Call(a1, textStruct);
-        }
 
         #endregion
 
