@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -94,6 +96,7 @@
     <Compile Include="Components\Types\StructPtr.cs" />
     <Compile Include="Game\Types\Texture.cs" />
     <Compile Include="Utils\Memory.cs" />
+    <Compile Include="Utils\ObjectNameUtils.cs" />
     <Compile Include="Utils\OtherUtils.cs" />
     <Compile Include="Utils\Text.cs" />
     <Compile Include="Utils\TextureLoader.cs" />

@@ -6,9 +6,9 @@ namespace Ray2Mod.Game.Structs
     [StructLayout(LayoutKind.Sequential)]
     public struct StandardGame
     {
-        public int field_0;
-        public int field_4;
-        public int personalType;
+        public int familyID;
+        public int modelID;
+        public int instanceID;
         public IntPtr superObjectPtr;
     }
 }
