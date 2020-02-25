@@ -3,7 +3,6 @@ using Ray2Mod.Components.Types;
 using System;
 using System.Collections.Generic;
 using Ray2Mod.Game;
-using Ray2Mod.Game.Functions;
 
 namespace Ray2Mod.Components
 {
