@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ray2Mod.Components.Menu
+namespace Ray2Mod.Components.UI.Menu
 {
     public struct MenuItem
     {
@@ -8,7 +8,6 @@ namespace Ray2Mod.Components.Menu
         {
             Name = name;
             Action = action;
-            IsSubmenu = false;
             Submenu = null;
         }
 
@@ -16,13 +15,11 @@ namespace Ray2Mod.Components.Menu
         {
             Name = name;
             Action = null;
-            IsSubmenu = true;
             Submenu = submenu;
         }
 
         public string Name;
         public Action Action;
-        public bool IsSubmenu;
         public Menu Submenu;
     }
 }

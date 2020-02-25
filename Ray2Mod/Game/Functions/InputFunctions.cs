@@ -30,7 +30,7 @@ namespace Ray2Mod.Game.Functions
         {
             short result = VirtualKeyToAscii.Call(ch, a2);
 
-            Interface.Log($"VirtualKeyToAscii result: {(char)result}, char: {ch}, a2: {a2}");
+            //Interface.Log($"VirtualKeyToAscii result: {(char)result}, char: {ch}, a2: {a2}");
 
             // Prevent custom binds from activating on pause screen
             if (Marshal.ReadByte((IntPtr) 0x500faa) != 0) return result;

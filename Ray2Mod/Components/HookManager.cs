@@ -2,6 +2,8 @@
 using Ray2Mod.Components.Types;
 using System;
 using System.Collections.Generic;
+using Ray2Mod.Game;
+using Ray2Mod.Game.Functions;
 
 namespace Ray2Mod.Components
 {
@@ -29,6 +31,13 @@ namespace Ray2Mod.Components
             Hooks.Remove(function.Name);
 
             return true;
+        }
+
+        public void InitMainLoops(GameFunctions game)
+        {
+            CreateHook(game.Engine.VEngine);
+            CreateHook(game.Input.VirtualKeyToAscii);
+            CreateHook(game.Text.DrawsTexts);
         }
     }
 }
