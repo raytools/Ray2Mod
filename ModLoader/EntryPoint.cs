@@ -29,6 +29,9 @@ namespace ModLoader
                 Loader = new Loader(Interface);
                 Loader.LoadMods(dllsToLoad);
 
+                // Make sure the game has started loading a level
+                while (Marshal.ReadByte((IntPtr)0x500380) < 5) { }
+
                 Interface.Log("Initializing mods...");
                 foreach (IMod mod in Loader.Mods)
                 {
@@ -36,7 +39,7 @@ namespace ModLoader
                     mod.Initialize(Interface);
                 }
 
-                // Make sure the game is fully loaded before initializing hooks
+                // Make sure the game is fully loaded
                 while (Marshal.ReadByte((IntPtr)0x500380) < 9) { }
 
                 Interface.Log("Starting mods...");
