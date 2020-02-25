@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace ModRunner
 {
@@ -29,7 +28,7 @@ namespace ModRunner
                 if (Path.IsPathRooted(path))
                     yield return path;
                 else
-                    yield return Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), path);
+                    yield return Path.Combine(Directory.GetCurrentDirectory(), path);
             }
         }
     }
