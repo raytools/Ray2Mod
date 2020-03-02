@@ -6,9 +6,7 @@ namespace Ray2Mod.Game.Structs
     public struct Matrix
     {
         public int transformationType;
-        public float x;
-        public float y;
-        public float z;
+        public Vector3 position;
         public float scaleX;
         public float skewY1;
         public float skewZ1;

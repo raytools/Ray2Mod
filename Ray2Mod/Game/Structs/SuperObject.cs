@@ -3,14 +3,24 @@ using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs
 {
-    [StructLayout(LayoutKind.Explicit)]
-    public struct SuperObject
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct SuperObject
     {
-        [FieldOffset(0x0)]
         public int type;
-        [FieldOffset(0x4)]
         public IntPtr engineObjectPtr;
-        [FieldOffset(0x24)]
-        public IntPtr matrixPtr;
+
+        //linked list
+        public fixed byte children[12];
+
+        public SuperObject* nextBrother;
+        public SuperObject* previousBrother;
+        public SuperObject* parent;
+        public Matrix* matrixPtr;
+        public Matrix* matrixPtr2;
+
+        private int padding1;
+        private int padding2;
+
+        public int flags;
     }
 }
