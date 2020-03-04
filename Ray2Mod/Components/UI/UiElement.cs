@@ -25,14 +25,14 @@ namespace Ray2Mod.Components.UI
 
             CaptureInput();
 
-            Game.Engine.EngineLoop += DrawGraphics;
-            Game.Text.TextLoop += DrawText;
+            Game.Engine.Actions += DrawGraphics;
+            Game.Text.Actions += DrawText;
         }
 
         public virtual void Hide()
         {
-            Game.Engine.EngineLoop -= DrawGraphics;
-            Game.Text.TextLoop -= DrawText;
+            Game.Engine.Actions -= DrawGraphics;
+            Game.Text.Actions -= DrawText;
 
             ReleaseInput();
         }

@@ -13,7 +13,7 @@ namespace Ray2Mod.Game.Functions
             DrawText = new GameFunction<FDrawText>(0x4660B0);
         }
 
-        public event Action TextLoop;
+        public event Action Actions;
 
         #region DrawsTexts
 
@@ -26,7 +26,7 @@ namespace Ray2Mod.Game.Functions
         {
             try
             {
-                TextLoop?.Invoke();
+                Actions?.Invoke();
             }
             catch (Exception e)
             {

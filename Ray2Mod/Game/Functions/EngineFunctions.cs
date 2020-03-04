@@ -14,7 +14,7 @@ namespace Ray2Mod.Game.Functions
             Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(0x476960);
         }
 
-        public event Action EngineLoop;
+        public event Action Actions;
 
         #region VEngine
 
@@ -29,7 +29,7 @@ namespace Ray2Mod.Game.Functions
 
             try
             {
-                EngineLoop?.Invoke();
+                Actions?.Invoke();
             }
             catch (Exception e)
             {
