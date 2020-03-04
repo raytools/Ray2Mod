@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Ray2Mod.Utils;
 
 namespace ModLoader
 {
@@ -31,6 +32,18 @@ namespace ModLoader
                 
                 if (LoadDll(name, out IMod mod)) Mods.Add(mod);
                 else Interface.Log($"An error occurred. Skipping {shortName}...", LogType.Warning);
+            }
+            
+            Interface.Log($"{Mods.Count}/{modNames.Length} mods successfully loaded.");
+        }
+
+        public void InitMods()
+        {
+            Interface.Log("Initializing mods...");
+            foreach (IMod mod in Mods)
+            {
+                Interface.Log($"{mod.GetType().Assembly.GetName().Name} v{OtherUtils.GetVersionString(mod.GetType().Assembly)}", LogType.Debug);
+                mod.Run(Interface);
             }
         }
 

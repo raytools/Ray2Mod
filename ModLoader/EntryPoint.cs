@@ -29,25 +29,10 @@ namespace ModLoader
                 Loader = new Loader(Interface);
                 Loader.LoadMods(dllsToLoad);
 
-                // Make sure the game has started loading a level
-                while (Marshal.ReadByte((IntPtr)0x500380) < 5) { }
-
-                Interface.Log("Initializing mods...");
-                foreach (IMod mod in Loader.Mods)
-                {
-                    Interface.Log(mod.GetType().FullName, LogType.Debug);
-                    mod.Initialize(Interface);
-                }
-
                 // Make sure the game is fully loaded
                 while (Marshal.ReadByte((IntPtr)0x500380) < 9) { }
 
-                Interface.Log("Starting mods...");
-                foreach (IMod mod in Loader.Mods)
-                {
-                    Interface.Log($"{mod.GetType().Assembly.GetName().Name} v{OtherUtils.GetVersionString(mod.GetType().Assembly)}", LogType.Debug);
-                    mod.Run();
-                }
+                Loader.InitMods();
 
                 stopwatch.Stop();
                 Interface.Log($"Done. ({stopwatch.Elapsed.TotalSeconds:F3}s)");
