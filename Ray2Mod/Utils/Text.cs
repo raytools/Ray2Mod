@@ -6,7 +6,9 @@ namespace Ray2Mod.Utils
     {
         public static string Red(this string s) => "/O200:" + s + "/O0:";
         public static string Yellow(this string s) => "/O400:" + s + "/O0:";
+        public static string Special(this string s) => "/O800:" + s + "/O0:";
 
+        public static string Center(this string s) => "/c:" + s;
         public static string NL(this string s) => s + "/l:";
         public static string Arrow = "\\";
 
