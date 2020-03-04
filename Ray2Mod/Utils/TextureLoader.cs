@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using Ray2Mod.Game.Types;
 
 namespace Ray2Mod.Utils
 {
-    public static class TextureLoader
+    public static unsafe class TextureLoader
     {
         public static List<Texture> GetTextures()
         {
-            IntPtr tPtr = (IntPtr)0x502680;
-            IntPtr tMemChannelsPtr = (IntPtr)0x501660;
+            int* tPtr = (int*)0x502680;
+            int* tMemChannelsPtr = (int*)0x501660;
 
             uint[] tMemChannels = new uint[1024];
             for (int i = 0; i < tMemChannels.Length; i++)
             {
-                tMemChannels[i] = (uint) Marshal.ReadInt32(tMemChannelsPtr + 4 * i);
+                tMemChannels[i] = (uint) *(tMemChannelsPtr + i);
             }
 
             List<Texture> textures = new List<Texture>();
             for (int i = 0; i < tMemChannels.Length; i++)
             {
-                IntPtr textureStructPtr = Marshal.ReadIntPtr(tPtr + 4 * i);
-                if (textureStructPtr != IntPtr.Zero && tMemChannels[i] != 0xC0DE0005)
+                int textureStructPtr = *(tPtr + i);
+                if (textureStructPtr != 0 && tMemChannels[i] != 0xC0DE0005)
                 {
                     Texture texture = new Texture(textureStructPtr);
                     textures.Add(texture);

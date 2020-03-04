@@ -19,7 +19,7 @@ namespace Ray2Mod.Components.Types
             IntPtr = (IntPtr)structPtr;
         }
 
-        private IntPtr IntPtr { get; }
+        public IntPtr IntPtr { get; }
         public T* StructPtr => (T*)IntPtr;
 
         public static implicit operator T*(Pointer<T> ptr) => ptr.StructPtr;
@@ -27,5 +27,6 @@ namespace Ray2Mod.Components.Types
         public static implicit operator int(Pointer<T> ptr) => (int)ptr.IntPtr;
 
         public static implicit operator Pointer<T>(T* structPtr) => new Pointer<T>(structPtr);
+        public static implicit operator Pointer<T>(IntPtr intPtr) => new Pointer<T>(intPtr);
     }
 } 
