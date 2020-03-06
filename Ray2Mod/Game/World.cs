@@ -10,6 +10,31 @@ namespace Ray2Mod.Game
     {
         public Dictionary<ObjectSet, string[]> ObjectNames { get; private set; }
 
+        struct ListItem {
+            public ListItem* next;
+            public ListItem* prev;
+            public int header;
+            public int index;
+            public Perso* data;
+        }
+
+        public Dictionary<string, Pointer<Perso>> GetAlwaysObjects()
+        {
+            int* off_NumAlways = (int*)0x004A6B18;
+            Dictionary<string, Pointer<Perso>> result = new Dictionary<string, Pointer<Perso>>();
+
+            int numAlways = *off_NumAlways;
+            ListItem * currentItem = ((ListItem*)(off_NumAlways+1))->next; // skip the first item, since it's a header
+
+            while(currentItem!=null) {
+                Perso* perso = currentItem->data;
+                result.Add(ObjectNames[ObjectSet.Instance][perso->stdGamePtr->instanceID], perso);
+                currentItem = currentItem->next;
+            }
+            
+            return result;
+        }
+
         public Dictionary<string, Pointer<SuperObject>> GetActiveSuperObjects()
         {
             const int offDynamWorld = 0x0500FD0;
