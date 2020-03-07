@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Utils;
 
@@ -8,7 +11,15 @@ namespace Ray2Mod.Game
 {
     public unsafe class World
     {
+        private RemoteInterface remoteInterface;
+
         public Dictionary<ObjectSet, string[]> ObjectNames { get; private set; }
+
+        public World(RemoteInterface remoteInterface)
+        {
+            this.remoteInterface = remoteInterface;
+        }
+        private World() { }
 
         struct ListItem {
             public ListItem* next;
@@ -103,6 +114,44 @@ namespace Ray2Mod.Game
             }
 
             return names;
+        }
+
+        public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso * alwaysPerso, Vector3 position)
+        {
+
+            if (spawnedBy == null) {
+                throw new NullReferenceException("GenerateAlwaysObject: spawnedBy is not allowed to be null!");
+            }
+
+            int[] interp = {
+                0x00000042, // Func_GenerateObj
+                0x03020000,
+                (int)alwaysPerso, // arg0, Perso to generate
+                0x17030000, // arg1, Vector3
+                0x00000000,
+                0x10030000,
+                BitConverter.ToInt32(BitConverter.GetBytes(position.X),0), // x
+                0x0D040000,
+                BitConverter.ToInt32(BitConverter.GetBytes(position.Y),0), // y
+                0x0D040000,
+                BitConverter.ToInt32(BitConverter.GetBytes(position.Z),0), // z
+                0x0D040000,
+            };
+
+            // TODO: use ArrayPtr()
+
+            IntPtr interpArray = Marshal.AllocHGlobal(interp.Length * 4);
+            for (int i = 0; i < interp.Length; i++) {
+                Marshal.WriteInt32(interpArray, i * 4, interp[i]);
+            }
+
+            IntPtr paramArray = Marshal.AllocHGlobal(0x20 * 4);
+
+            IntPtr interpPtrStart = interpArray + 0x8; // we start at the second node of the interpreter tree
+
+            new EngineFunctions(remoteInterface).MiscFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
+
+            return *(int*)paramArray.ToPointer();
         }
 
     }

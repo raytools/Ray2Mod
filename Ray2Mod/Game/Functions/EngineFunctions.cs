@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs;
 
 namespace Ray2Mod.Game.Functions
 {
@@ -12,6 +13,7 @@ namespace Ray2Mod.Game.Functions
             GetCurrentLevelName = new GameFunction<DGetCurrentLevelName>(0x404DA0);
             AskToChangeLevel = new GameFunction<DAskToChangeLevel>(0x4054D0);
             Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(0x476960);
+            MiscFunction = new GameFunction<DMiscFunction>(0x47CC30);
         }
 
         public event Action Actions;
@@ -67,5 +69,15 @@ namespace Ray2Mod.Game.Functions
         public GameFunction<DCode4PersoLePlusProche> Code4PersoLePlusProche { get; }
 
         #endregion
+
+        #region MiscFunction
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate int DMiscFunction(int superObject, int nodeInterpreter, int getSetParam);
+
+        public GameFunction<DMiscFunction> MiscFunction { get; }
+
+        #endregion
+
     }
 }
