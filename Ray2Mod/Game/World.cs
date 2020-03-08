@@ -127,17 +127,17 @@ namespace Ray2Mod.Game
             {
                 int[] interp = {
                     0x0000009E,             0x1E030000,
-                    (int)newSuperObject,    0x0B040000, // SuperObjectRef
+                    (int)newSuperObject,    0x17040000, // SuperObjectRef
                     (int)alwaysTextObject,  0x17040000, // PersoRef 
                     0x00000000,             0x10040000, // Vector3
                     *(int*)&position.X,     0x0D050000,
                     *(int*)&position.Y,     0x0D050000,
                     *(int*)&position.Z,     0x0D050000,
                     (int)&textArray,        0x14040000, // points to an address, which points to another address, which points to a null-terminated string
-                    0x00000001,             0x4030000   // last argument is an int
+                    0x00000001,             0x0C030000   // last argument is an int
                 };
 
-                fixed (int* interpArray = &interp[0], paramArray = new int[32])
+                fixed (int* interpArray = &interp[0], paramArray = &(new int[32])[0])
                 {
                     int* interpPtrStart = interpArray + 2; // we start at the second node of the interpreter tree
 
