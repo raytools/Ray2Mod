@@ -44,5 +44,13 @@ namespace Ray2Mod.Utils
 
             return bytes;
         }
+
+        public static unsafe void CopyToPtr<T>(this T[] src, T* dest) where T : unmanaged
+        {
+            for (int i = 0; i < src.Length; i++)
+            {
+                dest[i] = src[i];
+            }
+        }
     }
 }

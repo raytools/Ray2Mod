@@ -15,10 +15,13 @@ namespace HelloWorld
         private HookManager Manager { get; set; }
         private GameFunctions Game { get; set; }
 
+        private RemoteInterface Interface { get; set; }
+
         public void Run(RemoteInterface remoteInterface)
         {
             Manager = new HookManager();
             Game = new GameFunctions(remoteInterface);
+            Interface = remoteInterface;
 
             // InitMainLoops creates hooks to 3 functions: VEngine (main engine loop),
             // DrawsTexts (text drawing loop), and VirtualKeyToAscii (input reading function).
@@ -36,6 +39,9 @@ namespace HelloWorld
                 Game.Text.CustomText("Hello World", 10, 5, 5);
                 Game.Text.CustomText("This text is red and transparent".Red(), 10, 5, 30, 180);
             };
+
+            Game.Engine.TextAfficheFunction.Hook = TestHook;
+            Manager.CreateHook(Game.Engine.TextAfficheFunction);
 
             unsafe
             {
@@ -66,12 +72,37 @@ namespace HelloWorld
                         {
                             var raymanSPO = activeSuperObjects["Rayman"];
                             //w.GenerateAlwaysObject(raymanSPO, projectilePerso, raymanSPO.StructPtr->matrixPtr2->position);
+                            
                             SuperObject* newSpo = null;
-                            w.DrawText(raymanSPO, newSpo, alwTexteMenu, raymanSPO.StructPtr->matrixPtr2->position, "test");
+                            Vector3 position = new Vector3(300, 300, 12);
+
+                            int result = w.DrawText(raymanSPO, newSpo, alwTexteMenu, position, "/E1000:/O200:longer text?/E104:/D2000:/P2000:");
+
+                            Interface.Log(result.ToString());
                         }
                     }
                 });
             }
+        }
+
+        public unsafe int TestHook(int a1, int a2, int a3)
+        {
+            Interface.Log("== TextAfficheFunction begin ==");
+
+            Interface.Log("Interpreter array:");
+            int* nodes = (int*)a2;
+            for (int i = 0; i < 8; i++)
+            {
+                Interface.Log($"0x{nodes[2*i]:X8}, 0x{nodes[2*i+1]:X8}");
+            }
+
+            int result = Game.Engine.TextAfficheFunction.Call(a1, a2, a3);
+
+            Interface.Log($"result: {result}, a1: 0x{a1:X}, a2: 0x{a2:X}, a3: 0x{a3:X}");
+
+            Interface.Log("== TextAfficheFunction end ==");
+
+            return result;
         }
     }
 }

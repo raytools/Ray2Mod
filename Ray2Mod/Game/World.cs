@@ -121,33 +121,33 @@ namespace Ray2Mod.Game
         public int DrawText(SuperObject* spawnedBy, SuperObject* newSuperObject, Perso* alwaysTextObject, Vector3 position, string text)
         {
             text += '\0';
+
+            byte* textArrayPtr = (byte*)Marshal.AllocHGlobal(text.Length);
             byte[] textBytes = Encoding.ASCII.GetBytes(text);
+            textBytes.CopyToPtr(textArrayPtr);
 
-            fixed (byte* textArray = &textBytes[0])
+            int[] interp = {
+                0x0000009E,             0x1E030000,
+                (int)newSuperObject,    0x17040000, // SuperObjectRef
+                (int)alwaysTextObject,  0x17040000, // PersoRef 
+                0x00000000,             0x10040000, // Vector3
+                *(int*)&position.X,     0x0D050000,
+                *(int*)&position.Y,     0x0D050000,
+                *(int*)&position.Z,     0x0D050000,
+                (int)textArrayPtr,      0x14040000, // points to an address, which points to another address, which points to a null-terminated string
+                0x00000000,             0xC030000   // last argument is an int
+            };
+
+            fixed (int* interpArray = &interp[0], paramArray = &(new int[32])[0])
             {
-                int[] interp = {
-                    0x0000009E,             0x1E030000,
-                    (int)newSuperObject,    0x17040000, // SuperObjectRef
-                    (int)alwaysTextObject,  0x17040000, // PersoRef 
-                    0x00000000,             0x10040000, // Vector3
-                    *(int*)&position.X,     0x0D050000,
-                    *(int*)&position.Y,     0x0D050000,
-                    *(int*)&position.Z,     0x0D050000,
-                    (int)&textArray,        0x14040000, // points to an address, which points to another address, which points to a null-terminated string
-                    0x00000001,             0x0C030000   // last argument is an int
-                };
+                int* interpPtrStart = interpArray + 2; // we start at the second node of the interpreter tree
 
-                fixed (int* interpArray = &interp[0], paramArray = &(new int[32])[0])
-                {
-                    int* interpPtrStart = interpArray + 2; // we start at the second node of the interpreter tree
+                new EngineFunctions(remoteInterface).TextAfficheFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
 
-                    new EngineFunctions(remoteInterface).TextAfficheFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
-
-                    return *paramArray;
-                }
+                return *paramArray;
             }
-        }
 
+        }
 
         public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso* alwaysPerso, Vector3 position)
         {
