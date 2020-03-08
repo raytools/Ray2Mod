@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ray2Mod.Game.Structs.AI;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs
@@ -9,6 +10,6 @@ namespace Ray2Mod.Game.Structs
         public int p3dData;
         public StandardGame* stdGamePtr;
         public int dynam;
-        public int mind;
+        public Brain * brain;
     }
 }

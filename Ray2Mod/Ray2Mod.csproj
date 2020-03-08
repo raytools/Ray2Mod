@@ -63,6 +63,13 @@
     <Compile Include="Game\Functions\TextFunctions.cs" />
     <Compile Include="Components\UI\Menu\MenuItem.cs" />
     <Compile Include="Game\GameFunctions.cs" />
+    <Compile Include="Game\Structs\AI\AIModel.cs" />
+    <Compile Include="Game\Structs\AI\Behavior.cs" />
+    <Compile Include="Game\Structs\AI\Brain.cs" />
+    <Compile Include="Game\Structs\AI\DsgMem.cs" />
+    <Compile Include="Game\Structs\AI\DsgVar.cs" />
+    <Compile Include="Game\Structs\AI\Intelligence.cs" />
+    <Compile Include="Game\Structs\AI\Mind.cs" />
     <Compile Include="IMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteInterface.cs" />
