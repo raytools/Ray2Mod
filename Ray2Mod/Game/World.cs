@@ -116,51 +116,12 @@ namespace Ray2Mod.Game
             return names;
         }
 
-        public unsafe int DrawText(SuperObject * spawnedBy, SuperObject * newSuperObject, Perso * alwaysTextObject, Vector3 position, string text)
-        {
-            
-            fixed (char* textArray = text+'\0') {
-
-                TextPointer textPointer = new Utils.TextPointer() {
-                    charPointer = textArray
-                };
-
-                int[] interp = {
-                    0x0000009E, 0x1E030000,
-                    (int)newSuperObject, 0x0B040000, // SuperObjectRef
-                    (int)alwaysTextObject, 0x17040000, // PersoRef 
-                    0x00000000, 0x10040000, // Vector3 
-                    BitConverter.ToInt32(BitConverter.GetBytes(position.X),0), 0x0D050000,
-                    BitConverter.ToInt32(BitConverter.GetBytes(position.Y),0), 0x0D050000,
-                    BitConverter.ToInt32(BitConverter.GetBytes(position.Z),0), 0x0D050000,
-                    (int)&textPointer, 0x14040000,// points to an address, which points to another address, which points to a null-terminated string
-                    0x00000001, 0x4030000, // last argument is an int
-                };
-
-                IntPtr interpArray = Marshal.AllocHGlobal(interp.Length * 4);
-                for (int i = 0; i < interp.Length; i++) {
-                    Marshal.WriteInt32(interpArray, i * 4, interp[i]);
-                }
-
-                IntPtr paramArray = Marshal.AllocHGlobal(0x20 * 4);
-
-                IntPtr interpPtrStart = interpArray + 0x8; // we start at the second node of the interpreter tree
-
-                new EngineFunctions(remoteInterface).TextAfficheFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
-
-                return *(int*)paramArray.ToPointer();
-            }
-
-        }
-
-
-        public int GenerateAlwaysObject(SuperObject * spawnedBy, Perso * alwaysPerso, Vector3 position)
+        public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso * alwaysPerso, Vector3 position)
         {
 
             if (spawnedBy == null) {
                 throw new NullReferenceException("GenerateAlwaysObject: spawnedBy is not allowed to be null!");
             }
-
 
             int[] interp = {
                 0x00000042, // Func_GenerateObj

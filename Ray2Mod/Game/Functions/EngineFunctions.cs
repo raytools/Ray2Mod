@@ -14,7 +14,6 @@ namespace Ray2Mod.Game.Functions
             AskToChangeLevel = new GameFunction<DAskToChangeLevel>(0x4054D0);
             Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(0x476960);
             MiscFunction = new GameFunction<DMiscFunction>(0x47CC30);
-            TextAfficheFunction = new GameFunction<DTextAfficheFunction>(0x475680);
         }
 
         public event Action Actions;
@@ -77,15 +76,6 @@ namespace Ray2Mod.Game.Functions
         public delegate int DMiscFunction(int superObject, int nodeInterpreter, int getSetParam);
 
         public GameFunction<DMiscFunction> MiscFunction { get; }
-
-        #endregion
-
-        #region TextAfficheFunction
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate int DTextAfficheFunction(int superObject, int nodeInterpreter, int getSetParam);
-
-        public GameFunction<DTextAfficheFunction> TextAfficheFunction { get; }
 
         #endregion
 
