@@ -1,6 +1,9 @@
-﻿using Ray2Mod;
+﻿using System.Collections.Generic;
+using Ray2Mod;
 using Ray2Mod.Components;
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game;
+using Ray2Mod.Game.Structs;
 using Ray2Mod.Utils;
 
 namespace HelloWorld
@@ -33,6 +36,42 @@ namespace HelloWorld
                 Game.Text.CustomText("Hello World", 10, 5, 5);
                 Game.Text.CustomText("This text is red and transparent".Red(), 10, 5, 30, 180);
             };
+
+            unsafe
+            {
+                Game.Input.Actions.Add(('h'), () =>
+                {
+                    World w = new World(remoteInterface);
+                    w.ReadObjectNames();
+
+                    Dictionary<string, Pointer<SuperObject>> activeSuperObjects = w.GetActiveSuperObjects();
+                    Dictionary<string, Pointer<Perso>> always = w.GetAlwaysObjects();
+                    foreach (var a in always)
+                    {
+                        remoteInterface.Log(a.Key + ", " + (int)a.Value);
+                    }
+                    foreach (var a in activeSuperObjects)
+                    {
+                        remoteInterface.Log(a.Key + ", " + (int)a.Value);
+                    }
+
+                    // Alw_Projectile_Rayman
+                    // ALW_TexteMenu
+                    // ALW_FaisceauGrappin
+
+                    if (always.ContainsKey("ALW_TexteMenu"))
+                    {
+                        var alwTexteMenu = always["ALW_TexteMenu"].StructPtr;
+                        if (activeSuperObjects.ContainsKey("Rayman"))
+                        {
+                            var raymanSPO = activeSuperObjects["Rayman"];
+                            //w.GenerateAlwaysObject(raymanSPO, projectilePerso, raymanSPO.StructPtr->matrixPtr2->position);
+                            SuperObject* newSpo = null;
+                            w.DrawText(raymanSPO, newSpo, alwTexteMenu, raymanSPO.StructPtr->matrixPtr2->position, "test");
+                        }
+                    }
+                });
+            }
         }
     }
 }

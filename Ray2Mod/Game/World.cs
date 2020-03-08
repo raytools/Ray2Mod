@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
-using Ray2Mod.Components.Types;
+﻿using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Utils;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Ray2Mod.Game
 {
@@ -21,7 +21,8 @@ namespace Ray2Mod.Game
         }
         private World() { }
 
-        struct ListItem {
+        struct ListItem
+        {
             public ListItem* next;
             public ListItem* prev;
             public int header;
@@ -35,14 +36,15 @@ namespace Ray2Mod.Game
             Dictionary<string, Pointer<Perso>> result = new Dictionary<string, Pointer<Perso>>();
 
             int numAlways = *off_NumAlways;
-            ListItem * currentItem = ((ListItem*)(off_NumAlways+1))->next; // skip the first item, since it's a header
+            ListItem* currentItem = ((ListItem*)(off_NumAlways + 1))->next; // skip the first item, since it's a header
 
-            while(currentItem!=null) {
+            while (currentItem != null)
+            {
                 Perso* perso = currentItem->data;
                 result.Add(ObjectNames[ObjectSet.Instance][perso->stdGamePtr->instanceID], perso);
                 currentItem = currentItem->next;
             }
-            
+
             return result;
         }
 
@@ -116,48 +118,42 @@ namespace Ray2Mod.Game
             return names;
         }
 
-        public unsafe int DrawText(SuperObject * spawnedBy, SuperObject * newSuperObject, Perso * alwaysTextObject, Vector3 position, string text)
+        public int DrawText(SuperObject* spawnedBy, SuperObject* newSuperObject, Perso* alwaysTextObject, Vector3 position, string text)
         {
-            
-            fixed (char* textArray = text+'\0') {
+            text += '\0';
+            byte[] textBytes = Encoding.ASCII.GetBytes(text);
 
-                TextPointer textPointer = new Utils.TextPointer() {
-                    charPointer = textArray
-                };
-
+            fixed (byte* textArray = &textBytes[0])
+            {
                 int[] interp = {
-                    0x0000009E, 0x1E030000,
-                    (int)newSuperObject, 0x0B040000, // SuperObjectRef
-                    (int)alwaysTextObject, 0x17040000, // PersoRef 
-                    0x00000000, 0x10040000, // Vector3 
-                    BitConverter.ToInt32(BitConverter.GetBytes(position.X),0), 0x0D050000,
-                    BitConverter.ToInt32(BitConverter.GetBytes(position.Y),0), 0x0D050000,
-                    BitConverter.ToInt32(BitConverter.GetBytes(position.Z),0), 0x0D050000,
-                    (int)&textPointer, 0x14040000,// points to an address, which points to another address, which points to a null-terminated string
-                    0x00000001, 0x4030000, // last argument is an int
+                    0x0000009E,             0x1E030000,
+                    (int)newSuperObject,    0x0B040000, // SuperObjectRef
+                    (int)alwaysTextObject,  0x17040000, // PersoRef 
+                    0x00000000,             0x10040000, // Vector3
+                    *(int*)&position.X,     0x0D050000,
+                    *(int*)&position.Y,     0x0D050000,
+                    *(int*)&position.Z,     0x0D050000,
+                    (int)&textArray,        0x14040000, // points to an address, which points to another address, which points to a null-terminated string
+                    0x00000001,             0x4030000   // last argument is an int
                 };
 
-                IntPtr interpArray = Marshal.AllocHGlobal(interp.Length * 4);
-                for (int i = 0; i < interp.Length; i++) {
-                    Marshal.WriteInt32(interpArray, i * 4, interp[i]);
+                fixed (int* interpArray = &interp[0], paramArray = new int[32])
+                {
+                    int* interpPtrStart = interpArray + 2; // we start at the second node of the interpreter tree
+
+                    new EngineFunctions(remoteInterface).TextAfficheFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
+
+                    return *paramArray;
                 }
-
-                IntPtr paramArray = Marshal.AllocHGlobal(0x20 * 4);
-
-                IntPtr interpPtrStart = interpArray + 0x8; // we start at the second node of the interpreter tree
-
-                new EngineFunctions(remoteInterface).TextAfficheFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
-
-                return *(int*)paramArray.ToPointer();
             }
-
         }
 
 
-        public int GenerateAlwaysObject(SuperObject * spawnedBy, Perso * alwaysPerso, Vector3 position)
+        public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso* alwaysPerso, Vector3 position)
         {
 
-            if (spawnedBy == null) {
+            if (spawnedBy == null)
+            {
                 throw new NullReferenceException("GenerateAlwaysObject: spawnedBy is not allowed to be null!");
             }
 
@@ -180,7 +176,8 @@ namespace Ray2Mod.Game
             // TODO: use ArrayPtr()
 
             IntPtr interpArray = Marshal.AllocHGlobal(interp.Length * 4);
-            for (int i = 0; i < interp.Length; i++) {
+            for (int i = 0; i < interp.Length; i++)
+            {
                 Marshal.WriteInt32(interpArray, i * 4, interp[i]);
             }
 
