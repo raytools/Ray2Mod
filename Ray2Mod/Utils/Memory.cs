@@ -45,4 +45,9 @@ namespace Ray2Mod.Utils
             return bytes;
         }
     }
+
+
+    unsafe struct TextPointer {
+        public char* charPointer;
+    }
 }
