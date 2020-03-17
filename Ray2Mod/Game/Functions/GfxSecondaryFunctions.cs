@@ -1,11 +1,11 @@
-﻿using System.Runtime.InteropServices;
-using Ray2Mod.Components.Types;
+﻿using Ray2Mod.Components.Types;
+using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Functions
 {
-    public class GfxSecondaryFunctions : FunctionContainer
+    public static class GfxSecondaryFunctions
     {
-        public GfxSecondaryFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
+        static GfxSecondaryFunctions()
         {
             ClearZBufferRegion = new GameFunction<DClearZBufferRegion>(0x421FB0);
             SwapSceneBuffer = new GameFunction<DSwapSceneBuffer>(0x420F50);
@@ -17,7 +17,7 @@ namespace Ray2Mod.Game.Functions
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int DClearZBufferRegion(int unk1, int unk2, int unk3, int unk4);
 
-        public GameFunction<DClearZBufferRegion> ClearZBufferRegion { get; }
+        public static GameFunction<DClearZBufferRegion> ClearZBufferRegion { get; }
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace Ray2Mod.Game.Functions
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int DSwapSceneBuffer();
 
-        public GameFunction<DSwapSceneBuffer> SwapSceneBuffer { get; }
+        public static GameFunction<DSwapSceneBuffer> SwapSceneBuffer { get; }
 
         #endregion
 
@@ -35,7 +35,7 @@ namespace Ray2Mod.Game.Functions
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int DWriteToViewportFinished(int _, short word5004D0);
 
-        public GameFunction<DWriteToViewportFinished> WriteToViewportFinished;
+        public static GameFunction<DWriteToViewportFinished> WriteToViewportFinished;
 
         #endregion
     }

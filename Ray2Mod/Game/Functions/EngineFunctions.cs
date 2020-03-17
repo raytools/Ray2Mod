@@ -1,45 +1,25 @@
-﻿using System;
+﻿using Ray2Mod.Components.Types;
 using System.Runtime.InteropServices;
-using Ray2Mod.Components.Types;
-using Ray2Mod.Game.Structs;
 
 namespace Ray2Mod.Game.Functions
 {
-    public class EngineFunctions : FunctionContainer
+    public static class EngineFunctions
     {
-        public EngineFunctions(RemoteInterface remoteInterface) : base(remoteInterface)
+        static EngineFunctions()
         {
-            VEngine = new GameFunction<DVEngine>(0x40ADA0, HVEngine);
+            VEngine = new GameFunction<DVEngine>(0x40ADA0);
             GetCurrentLevelName = new GameFunction<DGetCurrentLevelName>(0x404DA0);
             AskToChangeLevel = new GameFunction<DAskToChangeLevel>(0x4054D0);
             Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(0x476960);
             MiscFunction = new GameFunction<DMiscFunction>(0x47CC30);
         }
 
-        public event Action Actions;
-
         #region VEngine
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate byte DVEngine();
 
-        public GameFunction<DVEngine> VEngine { get; }
-
-        private byte HVEngine()
-        {
-            byte engine = VEngine.Call();
-
-            try
-            {
-                Actions?.Invoke();
-            }
-            catch (Exception e)
-            {
-                Interface.HandleError(e);
-            }
-
-            return engine;
-        }
+        public static GameFunction<DVEngine> VEngine { get; }
 
         #endregion
 
@@ -48,7 +28,7 @@ namespace Ray2Mod.Game.Functions
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate string DGetCurrentLevelName();
 
-        public GameFunction<DGetCurrentLevelName> GetCurrentLevelName { get; }
+        public static GameFunction<DGetCurrentLevelName> GetCurrentLevelName { get; }
 
         #endregion
 
@@ -57,7 +37,7 @@ namespace Ray2Mod.Game.Functions
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void DAskToChangeLevel(string levelName, byte save);
 
-        public GameFunction<DAskToChangeLevel> AskToChangeLevel { get; }
+        public static GameFunction<DAskToChangeLevel> AskToChangeLevel { get; }
 
         #endregion
 
@@ -66,7 +46,7 @@ namespace Ray2Mod.Game.Functions
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int DCode4PersoLePlusProche(int a, int b, int c);
 
-        public GameFunction<DCode4PersoLePlusProche> Code4PersoLePlusProche { get; }
+        public static GameFunction<DCode4PersoLePlusProche> Code4PersoLePlusProche { get; }
 
         #endregion
 
@@ -75,7 +55,7 @@ namespace Ray2Mod.Game.Functions
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int DMiscFunction(int superObject, int nodeInterpreter, int getSetParam);
 
-        public GameFunction<DMiscFunction> MiscFunction { get; }
+        public static GameFunction<DMiscFunction> MiscFunction { get; }
 
         #endregion
 

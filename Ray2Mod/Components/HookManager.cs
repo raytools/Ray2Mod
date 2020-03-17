@@ -8,35 +8,28 @@ namespace Ray2Mod.Components
 {
     public class HookManager
     {
-        public Dictionary<string, LocalHook> Hooks { get; } = new Dictionary<string, LocalHook>();
+        private Dictionary<Delegate, LocalHook> Hooks { get; } = new Dictionary<Delegate, LocalHook>();
 
-        public bool CreateHook<T>(GameFunction<T> function) where T : Delegate
+        public bool CreateHook<T>(GameFunction<T> function, T hook) where T : Delegate
         {
-            if (function.Hook == null)
+            if (hook == null)
                 return false;
 
-            Hooks[function.Name] = LocalHook.Create(function.Pointer, function.Hook, function);
-            Hooks[function.Name].ThreadACL.SetExclusiveACL(new[] { 0 });
+            Hooks[hook] = LocalHook.Create(function.Pointer, hook, function);
+            Hooks[hook].ThreadACL.SetExclusiveACL(new[] { 0 });
 
             return true;
         }
 
-        public bool RemoveHook<T>(GameFunction<T> function) where T : Delegate
+        public bool RemoveHook<T>(GameFunction<T> function, T hook) where T : Delegate
         {
-            if (!Hooks.ContainsKey(function.Name))
+            if (!Hooks.ContainsKey(hook))
                 return false;
 
-            Hooks[function.Name].Dispose();
-            Hooks.Remove(function.Name);
+            Hooks[hook].Dispose();
+            Hooks.Remove(hook);
 
             return true;
-        }
-
-        public void InitMainLoops(GameFunctions game)
-        {
-            CreateHook(game.Engine.VEngine);
-            CreateHook(game.Input.VirtualKeyToAscii);
-            CreateHook(game.Text.DrawsTexts);
         }
     }
 }

@@ -148,8 +148,8 @@ namespace Ray2Mod.Game
             IntPtr paramArray = Marshal.AllocHGlobal(0x20 * 4);
 
             IntPtr interpPtrStart = interpArray + 0x8; // we start at the second node of the interpreter tree
-
-            new EngineFunctions(remoteInterface).MiscFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
+            
+            EngineFunctions.MiscFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
 
             return *(int*)paramArray.ToPointer();
         }

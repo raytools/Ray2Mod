@@ -1,5 +1,6 @@
 ﻿using EasyHook;
 using Ray2Mod;
+using Ray2Mod.Components;
 using Ray2Mod.Utils;
 using System;
 using System.Diagnostics;
@@ -25,6 +26,9 @@ namespace ModLoader
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 Interface.Log($"== {OtherUtils.GetAssemblyProductName()} v{OtherUtils.GetAssemblyVersion()} ==");
+                Interface.Log($"Using {OtherUtils.ApiProductName} v{OtherUtils.ApiVersion}");
+
+                GlobalHooks.InitGlobalHooks(Interface);
 
                 Loader = new Loader(Interface);
                 Loader.LoadMods(dllsToLoad);

@@ -7,15 +7,13 @@ namespace Ray2Mod.Components.UI
 {
     public abstract class UiElement
     {
-        protected UiElement(GameFunctions game, Vector3 position)
+        protected UiElement(Vector3 position)
         {
-            Game = game;
             Position = position;
         }
 
         protected string Id { get; } = Guid.NewGuid().ToString();
 
-        protected GameFunctions Game { get; }
         protected Vector3 Position { get; set; }
         protected UiElement Parent { get; set; }
 
@@ -25,14 +23,14 @@ namespace Ray2Mod.Components.UI
 
             CaptureInput();
 
-            Game.Engine.Actions += DrawGraphics;
-            Game.Text.Actions += DrawText;
+            GlobalActions.Engine += DrawGraphics;
+            GlobalActions.Text += DrawText;
         }
 
         public virtual void Hide()
         {
-            Game.Engine.Actions -= DrawGraphics;
-            Game.Text.Actions -= DrawText;
+            GlobalActions.Engine -= DrawGraphics;
+            GlobalActions.Text -= DrawText;
 
             ReleaseInput();
         }
@@ -45,14 +43,12 @@ namespace Ray2Mod.Components.UI
 
         protected void CaptureInput()
         {
-            Game.Input.DisableGameInput();
-            Game.Input.ExclusiveInput = ProcessInput;
+            GlobalInput.SetExclusiveInput(ProcessInput);
         }
 
         protected void ReleaseInput()
         {
-            Game.Input.ExclusiveInput = null;
-            Game.Input.EnableGameInput();
+            GlobalInput.ReleaseExclusiveInput();
         }
 
         protected abstract void ProcessInput(char ch, KeyCode code);

@@ -23,7 +23,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\bin\Debug\Ray2Mod.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\bin\Release\</OutputPath>
@@ -52,17 +53,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\GlobalActions.cs" />
+    <Compile Include="Components\GlobalHooks.cs" />
+    <Compile Include="Components\GlobalInput.cs" />
     <Compile Include="Components\Types\Pointer.cs" />
     <Compile Include="Components\HookManager.cs" />
     <Compile Include="Components\UI\Menu\Menu.cs" />
+    <Compile Include="Components\UI\Menu\MenuItem.cs" />
     <Compile Include="Components\UI\UiElement.cs" />
     <Compile Include="Game\Functions\EngineFunctions.cs" />
     <Compile Include="Game\Functions\GfxFunctions.cs" />
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
-    <Compile Include="Components\UI\Menu\MenuItem.cs" />
-    <Compile Include="Game\GameFunctions.cs" />
     <Compile Include="IMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteInterface.cs" />
@@ -74,7 +77,6 @@
     <Compile Include="Game\Structs\TextureData.cs" />
     <Compile Include="Game\Structs\Vector3.cs" />
     <Compile Include="Components\Types\ArrayPtr.cs" />
-    <Compile Include="Components\Types\FunctionContainer.cs" />
     <Compile Include="Components\Types\GameFunction.cs" />
     <Compile Include="Game\Types\KeyCode.cs" />
     <Compile Include="Components\Types\StructPtr.cs" />
@@ -82,7 +84,7 @@
     <Compile Include="Utils\Memory.cs" />
     <Compile Include="Utils\OtherUtils.cs" />
     <Compile Include="Game\World.cs" />
-    <Compile Include="Utils\Text.cs" />
+    <Compile Include="Utils\TextUtils.cs" />
     <Compile Include="Utils\TextureLoader.cs" />
     <Compile Include="Utils\TexturePointers.cs" />
   </ItemGroup>
@@ -111,4 +113,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)baverinc.exe /b $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+  </PropertyGroup>
 </Project>
