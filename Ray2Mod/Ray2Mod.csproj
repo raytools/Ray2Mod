@@ -56,6 +56,7 @@
     <Compile Include="Components\GlobalActions.cs" />
     <Compile Include="Components\GlobalHooks.cs" />
     <Compile Include="Components\GlobalInput.cs" />
+    <Compile Include="Components\Text\TextOverlay.cs" />
     <Compile Include="Components\Types\Pointer.cs" />
     <Compile Include="Components\HookManager.cs" />
     <Compile Include="Components\UI\Menu\Menu.cs" />

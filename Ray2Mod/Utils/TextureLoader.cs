@@ -3,6 +3,7 @@ using Ray2Mod.Game.Types;
 
 namespace Ray2Mod.Utils
 {
+    //TODO: do something, anything, about this. it can't just be an util
     public static unsafe class TextureLoader
     {
         public static List<Texture> GetTextures()

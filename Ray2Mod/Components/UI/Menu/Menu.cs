@@ -23,7 +23,7 @@ namespace Ray2Mod.Components.UI.Menu
         private List<MenuItem> Items { get; }
 
         private int _selected;
-        public int Selected
+        private int Selected
         {
             get => _selected;
             set

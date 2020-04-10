@@ -23,7 +23,8 @@ namespace Ray2Mod.Utils
 
         #endregion
 
-        public static void TextOverlay(string text, float size, float x, float y, byte alpha = 255)
+        //TODO: phase these out, use TextOverlay class instead?
+        internal static void TextOverlay(string text, float size, float x, float y, byte alpha = 255)
         {
             Text2D textStruct = new Text2D
             {
@@ -37,7 +38,7 @@ namespace Ray2Mod.Utils
             TextOverlay(textStruct);
         }
 
-        public static void TextOverlay(Text2D textStruct)
+        internal static void TextOverlay(Text2D textStruct)
         {
             using (StructPtr textPtr = new StructPtr(textStruct))
             {
