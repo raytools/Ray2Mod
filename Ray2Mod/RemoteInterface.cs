@@ -9,6 +9,11 @@ namespace Ray2Mod
         public abstract void Log(string msgPacket, LogType type = LogType.Info);
 
         public abstract void HandleError(Exception e);
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
     }
 
     public enum LogType : uint
