@@ -19,7 +19,7 @@ namespace ModRunner
 
         public override void HandleError(Exception e)
         {
-            Console.WriteLine(e.ToString());
+            Log(e.ToString(), LogType.Error);
         }
     }
 }
