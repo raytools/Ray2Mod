@@ -44,5 +44,15 @@ namespace Ray2Mod.Utils
 
             return bytes;
         }
+
+        public static unsafe T[] GetLPArray<T>(T* array, int length) where T : unmanaged
+        {
+            T[] result = new T[length];
+            for (int i = 0; i < length; i++) {
+                result[i] = array[i];
+            }
+
+            return result;
+        }
     }
 }

@@ -67,6 +67,14 @@
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
+    <Compile Include="Game\Structs\AIModel.cs" />
+    <Compile Include="Game\Structs\Behavior.cs" />
+    <Compile Include="Game\Structs\DsgMem.cs" />
+    <Compile Include="Game\Structs\DsgVar.cs" />
+    <Compile Include="Game\Structs\DsgVarInfo.cs" />
+    <Compile Include="Game\Structs\DsgVarType.cs" />
+    <Compile Include="Game\Structs\Mind.cs" />
+    <Compile Include="Game\Structs\Brain.cs" />
     <Compile Include="IMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteInterface.cs" />

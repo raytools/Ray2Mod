@@ -9,6 +9,6 @@ namespace Ray2Mod.Game.Structs
         public int p3dData;
         public StandardGame* stdGamePtr;
         public int dynam;
-        public int mind;
-    }
+        public Brain * brain;
+    } 
 }
