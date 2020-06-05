@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs {
 
@@ -12,5 +13,11 @@ namespace Ray2Mod.Game.Structs {
         public byte padding_D;
         public byte padding_E;
         public byte padding_F;
+    }
+
+    public struct DsgVarInfoAndValues {
+        public DsgVarInfo info;
+        public IntPtr valuePtrCurrent;
+        public IntPtr valuePtrInitial;
     }
 }
