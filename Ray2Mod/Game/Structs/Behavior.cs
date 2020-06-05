@@ -1,9 +1,10 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs {
+namespace Ray2Mod.Game.Structs
+{
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct Behavior {
+    public unsafe struct Behavior
+    {
         public int scriptsPointer;
         public int firstScript;
         public byte numScripts;
@@ -12,7 +13,8 @@ namespace Ray2Mod.Game.Structs {
         public byte field_C;
     }
 
-    public unsafe struct BehaviorArray {
+    public unsafe struct BehaviorArray
+    {
         public Behavior* Array;
         public int Length;
     }

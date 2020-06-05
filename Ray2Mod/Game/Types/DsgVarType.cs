@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Ray2Mod.Game.Structs {
-    public enum DsgVarType {
-
+namespace Ray2Mod.Game.Structs
+{
+    public enum DsgVarType
+    {
         Boolean,
         Byte,
         UByte,
@@ -34,9 +32,10 @@ namespace Ray2Mod.Game.Structs {
         SuperObject
     }
 
-    public static class DsgVarTypeMap {
+    public static class DsgVarTypes
+    {
 
-        public static Dictionary<DsgVarType, Type> typeMap = new Dictionary<DsgVarType, Type>()
+        public static Dictionary<DsgVarType, Type> Map = new Dictionary<DsgVarType, Type>()
         {
             {DsgVarType.Boolean,        typeof(bool) },
             {DsgVarType.Byte,           typeof(sbyte) },
@@ -66,5 +65,5 @@ namespace Ray2Mod.Game.Structs {
         };
     }
 
-    
+
 }

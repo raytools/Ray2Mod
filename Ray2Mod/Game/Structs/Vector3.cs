@@ -58,5 +58,6 @@ namespace Ray2Mod.Game.Structs
             return new Vector3(X / length, Y / length, Z / length);
         }
 
+        public override string ToString() => $"{X:F3}, {Y:F3}, {Z:F3}";
     }
 }

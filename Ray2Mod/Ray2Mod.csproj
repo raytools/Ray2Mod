@@ -72,7 +72,7 @@
     <Compile Include="Game\Structs\DsgMem.cs" />
     <Compile Include="Game\Structs\DsgVar.cs" />
     <Compile Include="Game\Structs\DsgVarInfo.cs" />
-    <Compile Include="Game\Structs\DsgVarType.cs" />
+    <Compile Include="Game\Types\DsgVarType.cs" />
     <Compile Include="Game\Structs\Mind.cs" />
     <Compile Include="Game\Structs\Brain.cs" />
     <Compile Include="IMod.cs" />
@@ -91,6 +91,7 @@
     <Compile Include="Components\Types\StructPtr.cs" />
     <Compile Include="Game\Types\Texture.cs" />
     <Compile Include="Utils\Memory.cs" />
+    <Compile Include="Utils\ObjectUtils.cs" />
     <Compile Include="Utils\OtherUtils.cs" />
     <Compile Include="Game\World.cs" />
     <Compile Include="Utils\TextUtils.cs" />

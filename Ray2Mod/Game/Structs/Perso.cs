@@ -10,7 +10,7 @@ namespace Ray2Mod.Game.Structs
         public int p3dData;
         public StandardGame* stdGamePtr;
         public int dynam;
-        public Brain * brain;
+        public Brain* brain;
 
         public List<DsgVarInfoAndValues> GetDsgVarList()
         {
