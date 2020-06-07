@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ray2Mod.Game.Structs.LinkedLists;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs
@@ -10,7 +11,7 @@ namespace Ray2Mod.Game.Structs
         public IntPtr engineObjectPtr;
 
         //linked list
-        public fixed byte children[12];
+        public LinkedList.SuperObjectList children;
 
         public SuperObject* nextBrother;
         public SuperObject* previousBrother;
