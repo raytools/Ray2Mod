@@ -1,5 +1,6 @@
 ﻿using Ray2Mod;
 using Ray2Mod.Components.Text;
+using Ray2Mod.Game;
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Utils;
 
@@ -10,7 +11,7 @@ namespace Pointers
         public void Run(RemoteInterface remoteInterface)
         {
             // Static addresses can be directly assigned to an unsafe pointer.
-            byte* engineState = (byte*)0x500380;
+            byte* engineState = (byte*)Offsets.EngineState;
 
             // Pointer/offset paths can be read at runtime using Memory.GetPointerAtOffset.
             Vector3* position = (Vector3*)Memory.GetPointerAtOffset(0x500560, 0x224, 0x310, 0x34, 0x0, 0x1ac);

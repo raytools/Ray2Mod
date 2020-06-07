@@ -7,9 +7,9 @@ namespace Ray2Mod.Game.Functions
     {
         static GfxSecondaryFunctions()
         {
-            ClearZBufferRegion = new GameFunction<DClearZBufferRegion>(0x421FB0);
-            SwapSceneBuffer = new GameFunction<DSwapSceneBuffer>(0x420F50);
-            WriteToViewportFinished = new GameFunction<DWriteToViewportFinished>(0x420BB0);
+            ClearZBufferRegion = new GameFunction<DClearZBufferRegion>(Offsets.GfxSecondaryFunctions.ClearZBufferRegion);
+            SwapSceneBuffer = new GameFunction<DSwapSceneBuffer>(Offsets.GfxSecondaryFunctions.SwapSceneBuffer);
+            WriteToViewportFinished = new GameFunction<DWriteToViewportFinished>(Offsets.GfxSecondaryFunctions.WriteToViewportFinished);
         }
 
         #region ClearZBufferRegion

@@ -1,6 +1,7 @@
 ﻿using EasyHook;
 using Ray2Mod;
 using Ray2Mod.Components;
+using Ray2Mod.Game;
 using Ray2Mod.Utils;
 using System;
 using System.Diagnostics;
@@ -34,7 +35,7 @@ namespace ModLoader
                 Loader.LoadMods(dllsToLoad);
 
                 // Make sure the game is fully loaded
-                while (Marshal.ReadByte((IntPtr)0x500380) < 9) { }
+                while (Marshal.ReadByte((IntPtr)Offsets.EngineState) < 9) { }
 
                 Loader.InitMods();
 

@@ -6,7 +6,7 @@ namespace Ray2Mod.Game.Structs
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct SuperObject
     {
-        public int type;
+        public SuperObjectType type;
         public IntPtr engineObjectPtr;
 
         //linked list
@@ -22,5 +22,17 @@ namespace Ray2Mod.Game.Structs
         private int padding2;
 
         public int flags;
+    }
+
+    public enum SuperObjectType {
+        Unknown,
+        World,
+        IPO,
+        IPO_2,
+        Perso,
+        Sector,
+        PhysicalObject,
+        GeometricObject, // Geometric Object
+        GeometricShadowObject, // Instantiated Geometric Object
     }
 }

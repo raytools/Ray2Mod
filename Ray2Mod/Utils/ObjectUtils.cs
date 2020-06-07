@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Ray2Mod.Game;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Ray2Mod.Utils
 {
     public static unsafe class ObjectNameUtils
     {
-        public const int off_objectTypes = 0x005013E0;
+        public const int off_objectTypes = Offsets.ObjectTypes;
 
         public static Dictionary<int, string[]> ReadObjectTypes()
         {

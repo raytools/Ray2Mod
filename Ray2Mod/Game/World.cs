@@ -31,7 +31,7 @@ namespace Ray2Mod.Game
 
         public Dictionary<string, Pointer<Perso>> GetAlwaysObjects()
         {
-            int* off_NumAlways = (int*)0x004A6B18;
+            int* off_NumAlways = (int*)Offsets.NumAlways;
             Dictionary<string, Pointer<Perso>> result = new Dictionary<string, Pointer<Perso>>();
 
             int numAlways = *off_NumAlways;
@@ -48,10 +48,20 @@ namespace Ray2Mod.Game
 
         public Dictionary<string, Pointer<SuperObject>> GetActiveSuperObjects()
         {
-            const int offDynamWorld = 0x0500FD0;
+            return GetSuperObjects(Offsets.ActiveDynamicWorld);
+        }
+
+        public Dictionary<string, Pointer<SuperObject>> GetInactiveSuperObjects()
+        {
+            return GetSuperObjects(Offsets.InactiveDynamicWorld);
+        }
+
+        private Dictionary<string, Pointer<SuperObject>> GetSuperObjects(int offsetWorld)
+        {
+            
             Dictionary<string, Pointer<SuperObject>> result = new Dictionary<string, Pointer<SuperObject>>();
 
-            SuperObject* superObject = (SuperObject*)Memory.GetPointerAtOffset(offDynamWorld, 0x8, 0x0);
+            SuperObject* superObject = (SuperObject*)Memory.GetPointerAtOffset(offsetWorld, 0x8, 0x0);
 
             while (superObject != null)
             {
@@ -77,7 +87,7 @@ namespace Ray2Mod.Game
 
         public void ReadObjectNames()
         {
-            const int offObjectTypes = 0x005013E0;
+            const int offObjectTypes = Offsets.ObjectTypes;
             ObjectNames = new Dictionary<ObjectSet, string[]>();
 
             for (int i = 0; i < 3; i++)

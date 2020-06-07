@@ -7,8 +7,8 @@ namespace Ray2Mod.Game.Functions
     {
         static InputFunctions()
         {
-            VirtualKeyToAscii = new GameFunction<DVirtualKeyToAscii>(0x496110);
-            VReadInput = new GameFunction<DVReadInput>(0x496510);
+            VirtualKeyToAscii = new GameFunction<DVirtualKeyToAscii>(Offsets.InputFunctions.VirtualKeyToAscii);
+            VReadInput = new GameFunction<DVReadInput>(Offsets.InputFunctions.VReadInput);
         }
 
         #region VirtualKeyToAscii

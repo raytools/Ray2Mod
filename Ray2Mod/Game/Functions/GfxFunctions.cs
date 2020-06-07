@@ -8,8 +8,8 @@ namespace Ray2Mod.Game.Functions
     {
         static GfxFunctions()
         {
-            VAddParticle = new GameFunction<DVAddParticle>(0x463390);
-            VCreatePart = new GameFunction<DVCreatePart>(0x4600C0);
+            VAddParticle = new GameFunction<DVAddParticle>(Offsets.ParticleFunctions.VAddParticle);
+            VCreatePart = new GameFunction<DVCreatePart>(Offsets.ParticleFunctions.VCreatePart);
         }
 
         #region VAddParticle

@@ -8,8 +8,8 @@ namespace Ray2Mod.Game.Functions
     {
         static TextFunctions()
         {
-            DrawsTexts = new GameFunction<FDrawsTexts>(0x460670);
-            DrawText = new GameFunction<FDrawText>(0x4660B0);
+            DrawsTexts = new GameFunction<FDrawsTexts>(Offsets.TextFunctions.DrawsTexts);
+            DrawText = new GameFunction<FDrawText>(Offsets.TextFunctions.DrawText);
         }
 
         #region DrawsTexts

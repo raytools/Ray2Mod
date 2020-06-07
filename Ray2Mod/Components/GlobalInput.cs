@@ -1,4 +1,5 @@
-﻿using Ray2Mod.Game.Functions;
+﻿using Ray2Mod.Game;
+using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Types;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Ray2Mod.Components
             short result = InputFunctions.VirtualKeyToAscii.Call(ch, a2);
 
             // Prevent custom binds from activating on pause screen
-            if (Marshal.ReadByte((IntPtr)0x500faa) != 0) return result;
+            if (Marshal.ReadByte((IntPtr)Offsets.PauseScreen) != 0) return result;
 
             if (_exclusiveInput == null)
             {
@@ -51,7 +52,7 @@ namespace Ray2Mod.Components
             EnableGameInput();
         }
 
-        private static IntPtr _inputState = (IntPtr)0x50A560;
+        private static IntPtr _inputState = (IntPtr)Offsets.InputState;
         private static int _previousInputState;
 
         public static void DisableGameInput()

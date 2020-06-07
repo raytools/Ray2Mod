@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ray2Mod.Game;
 using Ray2Mod.Game.Types;
 
 namespace Ray2Mod.Utils
@@ -8,8 +9,8 @@ namespace Ray2Mod.Utils
     {
         public static List<Texture> GetTextures()
         {
-            int* tPtr = (int*)0x502680;
-            int* tMemChannelsPtr = (int*)0x501660;
+            int* tPtr = (int*)Offsets.TexturePointer;
+            int* tMemChannelsPtr = (int*)Offsets.MemChannelsPointer;
 
             uint[] tMemChannels = new uint[1024];
             for (int i = 0; i < tMemChannels.Length; i++)

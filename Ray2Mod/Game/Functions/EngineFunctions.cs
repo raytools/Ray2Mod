@@ -7,11 +7,11 @@ namespace Ray2Mod.Game.Functions
     {
         static EngineFunctions()
         {
-            VEngine = new GameFunction<DVEngine>(0x40ADA0);
-            GetCurrentLevelName = new GameFunction<DGetCurrentLevelName>(0x404DA0);
-            AskToChangeLevel = new GameFunction<DAskToChangeLevel>(0x4054D0);
-            Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(0x476960);
-            MiscFunction = new GameFunction<DMiscFunction>(0x47CC30);
+            VEngine = new GameFunction<DVEngine>(Offsets.EngineFunctions.VEngine);
+            GetCurrentLevelName = new GameFunction<DGetCurrentLevelName>(Offsets.EngineFunctions.GetCurrentLevelName);
+            AskToChangeLevel = new GameFunction<DAskToChangeLevel>(Offsets.EngineFunctions.AskToChangeLevel);
+            Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(Offsets.EngineFunctions.Code4PersoLePlusProche);
+            MiscFunction = new GameFunction<DMiscFunction>(Offsets.EngineFunctions.MiscFunction);
         }
 
         #region VEngine

@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
 using System.Globalization;
@@ -42,7 +43,7 @@ namespace Ray2Mod.Utils
         {
             using (StructPtr textPtr = new StructPtr(textStruct))
             {
-                TextFunctions.DrawText.Call(0x5004D4, textPtr);
+                TextFunctions.DrawText.Call(Offsets.GlobalGraphicsContext, textPtr);
             }
         }
     }
