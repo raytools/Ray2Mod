@@ -59,6 +59,7 @@
     <Compile Include="Components\Text\TextOverlay.cs" />
     <Compile Include="Components\Types\Pointer.cs" />
     <Compile Include="Components\HookManager.cs" />
+    <Compile Include="Components\Types\PointerUtils.cs" />
     <Compile Include="Components\UI\Menu\Menu.cs" />
     <Compile Include="Components\UI\Menu\MenuItem.cs" />
     <Compile Include="Components\UI\UiElement.cs" />
@@ -68,11 +69,14 @@
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
+    <Compile Include="Game\Structs\Object\PhysicalObject.cs" />
     <Compile Include="Game\Structs\AIModel.cs" />
     <Compile Include="Game\Structs\Behavior.cs" />
     <Compile Include="Game\Structs\DsgMem.cs" />
     <Compile Include="Game\Structs\DsgVar.cs" />
     <Compile Include="Game\Structs\DsgVarInfo.cs" />
+    <Compile Include="Game\Structs\Geometry\GeometricObject.cs" />
+    <Compile Include="Game\Structs\Object\IPO.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\HasHeaderPointers_ElementPointerFirst.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ReadAtPointer.cs" />
@@ -84,6 +88,8 @@
     <Compile Include="Game\Structs\NeighborSector.cs" />
     <Compile Include="Game\Structs\Sector.cs" />
     <Compile Include="Game\Structs\StructExtensions.cs" />
+    <Compile Include="Game\Structs\SuperObjectExtensions.cs" />
+    <Compile Include="Game\Structs\VisualSet.cs" />
     <Compile Include="Game\Types\DsgVarType.cs" />
     <Compile Include="Game\Structs\Mind.cs" />
     <Compile Include="Game\Structs\Brain.cs" />

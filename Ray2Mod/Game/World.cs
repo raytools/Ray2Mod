@@ -184,10 +184,9 @@ namespace Ray2Mod.Game
             return *(int*)paramArray.ToPointer();
         }
 
-        public List<Pointer<SuperObject>> GetSectors()
+        public SuperObject*[] GetSectors()
         {
-            var list = Pointer<SuperObject>.WrapPointerArray(WorldSector->children.Read());
-            return new List<Pointer<SuperObject>>(list);
+            return WorldSector->children.Read();
         }
 
     }
