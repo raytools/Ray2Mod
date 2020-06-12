@@ -5,17 +5,16 @@ namespace Ray2Mod.Game.Structs {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Sector {
 
-        [LinkedList.Type(typeof(Perso))]
-        public LinkedList.HasHeaderPointers linkedListPerso;
+        public LinkedList.HasHeaderPointers_ElementPointerFirst<SuperObject> persoSPOList;
 
-        public LinkedList.HasHeaderPointers linkedListStaticLights;
-        public LinkedList.HasHeaderPointers linkedListDynamicLights;
+        public LinkedList.HasHeaderPointers<int> staticLightsList;
+        public LinkedList.HasHeaderPointers<int> dynamicLightsList;
 
         public LinkedList.NeighborSectorList linkedListGraphicSectors;
         public LinkedList.NeighborSectorList linkedListCollisionSector;
-        public LinkedList.NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer linkedListActivitySector;
-        public LinkedList.HasHeaderPointers linkedListSoundSectors;
-        public LinkedList.HasHeaderPointers placeholder;
+        public LinkedList.NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer<int> linkedListActivitySector;
+        public LinkedList.HasHeaderPointers<int> linkedListSoundSectors;
+        public LinkedList.HasHeaderPointers<int> placeholder;
 
     }
 }

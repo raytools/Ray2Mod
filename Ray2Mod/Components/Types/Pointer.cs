@@ -28,5 +28,21 @@ namespace Ray2Mod.Components.Types
 
         public static implicit operator Pointer<T>(T* structPtr) => new Pointer<T>(structPtr);
         public static implicit operator Pointer<T>(IntPtr intPtr) => new Pointer<T>(intPtr);
+
+        public static Pointer<T>[] WrapPointerArray(T*[] ptrArray)
+        {
+            Pointer<T>[] results = new Pointer<T>[ptrArray.Length];
+            for(int i=0;i<ptrArray.Length;i++) {
+                results[i] = (Pointer<T>)ptrArray[i];
+            }
+
+            return results;
+        }
+
+        public override string ToString()
+        {
+            return $"Pointer<{typeof(T)}> @0x{(int)this:X}";
+        }
+
     }
 } 

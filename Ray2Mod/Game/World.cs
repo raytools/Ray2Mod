@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using Ray2Mod.Components.Types;
@@ -13,7 +14,15 @@ namespace Ray2Mod.Game
     {
         private RemoteInterface remoteInterface;
 
-        public Dictionary<ObjectSet, string[]> ObjectNames { get; private set; }
+        private Dictionary<ObjectSet, string[]> ObjectNames = null;
+
+        public SuperObject* WorldSector
+        {
+            get
+            {
+                return *((SuperObject**)(Offsets.FatherSector));
+            }
+        }
 
         public World(RemoteInterface remoteInterface)
         {
@@ -31,6 +40,8 @@ namespace Ray2Mod.Game
 
         public Dictionary<string, Pointer<Perso>> GetAlwaysObjects()
         {
+            ReadObjectNames();
+
             int* off_NumAlways = (int*)Offsets.NumAlways;
             Dictionary<string, Pointer<Perso>> result = new Dictionary<string, Pointer<Perso>>();
 
@@ -85,7 +96,16 @@ namespace Ray2Mod.Game
             return result;
         }
 
-        public void ReadObjectNames()
+        public Dictionary<ObjectSet, string[]> GetObjectNames(bool refresh = false)
+        {
+            if (ObjectNames == null || refresh) {
+                ReadObjectNames();
+            }
+
+            return ObjectNames;
+        }
+
+        private void ReadObjectNames()
         {
             const int offObjectTypes = Offsets.ObjectTypes;
             ObjectNames = new Dictionary<ObjectSet, string[]>();
@@ -162,6 +182,12 @@ namespace Ray2Mod.Game
             EngineFunctions.MiscFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
 
             return *(int*)paramArray.ToPointer();
+        }
+
+        public List<Pointer<SuperObject>> GetSectors()
+        {
+            var list = Pointer<SuperObject>.WrapPointerArray(WorldSector->children.Read());
+            return new List<Pointer<SuperObject>>(list);
         }
 
     }

@@ -19,7 +19,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -32,7 +32,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -62,6 +62,7 @@
     <Compile Include="Components\UI\Menu\Menu.cs" />
     <Compile Include="Components\UI\Menu\MenuItem.cs" />
     <Compile Include="Components\UI\UiElement.cs" />
+    <Compile Include="Game\Offsets.cs" />
     <Compile Include="Game\Functions\EngineFunctions.cs" />
     <Compile Include="Game\Functions\GfxFunctions.cs" />
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
@@ -72,6 +73,17 @@
     <Compile Include="Game\Structs\DsgMem.cs" />
     <Compile Include="Game\Structs\DsgVar.cs" />
     <Compile Include="Game\Structs\DsgVarInfo.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\HasHeaderPointers_ElementPointerFirst.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ReadAtPointer.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\ElementPointerFirst.cs" />
+    <Compile Include="Game\Structs\LinkedLists\LinkedListType.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Non-Generic\NeighborSectorList.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Non-Generic\SuperObjectList.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\HasHeaderPointers.cs" />
+    <Compile Include="Game\Structs\NeighborSector.cs" />
+    <Compile Include="Game\Structs\Sector.cs" />
+    <Compile Include="Game\Structs\StructExtensions.cs" />
     <Compile Include="Game\Types\DsgVarType.cs" />
     <Compile Include="Game\Structs\Mind.cs" />
     <Compile Include="Game\Structs\Brain.cs" />

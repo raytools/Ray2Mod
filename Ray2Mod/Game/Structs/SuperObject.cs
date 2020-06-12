@@ -1,4 +1,5 @@
-﻿using Ray2Mod.Game.Structs.LinkedLists;
+﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs.LinkedLists;
 using System;
 using System.Runtime.InteropServices;
 
@@ -8,7 +9,7 @@ namespace Ray2Mod.Game.Structs
     public unsafe struct SuperObject
     {
         public SuperObjectType type;
-        public IntPtr engineObjectPtr;
+        public int* engineObjectPtr;
 
         //linked list
         public LinkedList.SuperObjectList children;
@@ -26,14 +27,14 @@ namespace Ray2Mod.Game.Structs
     }
 
     public enum SuperObjectType {
-        Unknown,
-        World,
-        IPO,
-        IPO_2,
-        Perso,
-        Sector,
-        PhysicalObject,
-        GeometricObject, // Geometric Object
-        GeometricShadowObject, // Instantiated Geometric Object
+        Unknown = 0x0,
+        World = 0x1,
+        Perso = 0x2,
+        Sector = 0x4,
+        PhysicalObject = 0x8,
+        IPO = 0x20,
+        IPO_2 = 0x40,
+        GeometricObject = 0x400, // Geometric Object
+        GeometricShadowObject = 0x80000, // Instantiated Geometric Object
     }
 }

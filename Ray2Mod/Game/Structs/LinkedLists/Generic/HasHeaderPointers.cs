@@ -6,12 +6,12 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
     public abstract unsafe partial class LinkedList {
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct HasHeaderPointers {
+        public unsafe struct HasHeaderPointers<T> where T : unmanaged {
             public int* Head;
             public int* Tail;
             public int Count;
 
-            public unsafe T*[] Read<T>() where T : unmanaged
+            public unsafe T*[] Read()
             {
                 T*[] results = new T*[Count];
 
@@ -19,10 +19,11 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
 
                 for (int i = 0; i < Count; i++) {
                     int* LinkedListElement = Next;
+
                     Next = (int*)(*LinkedListElement);
                     int* Previous = (int*)(*(LinkedListElement + 1));
                     int* Header = (int*)(*(LinkedListElement + 2));
-                    int* Element = (int*)((LinkedListElement + 3)); // don't dereference pointer
+                    int* Element = (int*)(*(LinkedListElement + 3));
 
                     results[i] = (T*)((int)(Element));
                 }
