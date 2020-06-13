@@ -25,9 +25,9 @@ namespace Pointers
                 // The second line of the string is equivalent to:
                 // "/O200:X/O0:\\" + (position->X).ToString("0.000", CultureInfo.InvariantCulture) + "/l:"
                 string text = "Coordinates=".NL() +
-                              "X".KeyValue(position->X.D3()).NL() +
-                              "Y".KeyValue(position->Y.D3()).NL() +
-                              "Z".KeyValue(position->Z.D3()).NL();
+                              "X".KeyValue(position->x.D3()).NL() +
+                              "Y".KeyValue(position->y.D3()).NL() +
+                              "Z".KeyValue(position->z.D3()).NL();
                 return text;
             }, 10, 5, 5).Show();
         }

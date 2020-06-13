@@ -160,11 +160,11 @@ namespace Ray2Mod.Game
                 0x17030000, // arg1, Vector3
                 0x00000000,
                 0x10030000,
-                BitConverter.ToInt32(BitConverter.GetBytes(position.X),0), // x
+                BitConverter.ToInt32(BitConverter.GetBytes(position.x),0), // x
                 0x0D040000,
-                BitConverter.ToInt32(BitConverter.GetBytes(position.Y),0), // y
+                BitConverter.ToInt32(BitConverter.GetBytes(position.y),0), // y
                 0x0D040000,
-                BitConverter.ToInt32(BitConverter.GetBytes(position.Z),0), // z
+                BitConverter.ToInt32(BitConverter.GetBytes(position.z),0), // z
                 0x0D040000,
             };
 

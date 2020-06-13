@@ -57,7 +57,7 @@ namespace Ray2Mod.Components.UI.Menu
 
         protected override void DrawGraphics()
         {
-            Vector3 vpos2 = new Vector3(Position.X + Width + 2, Position.Y + 2 + Items.Count * 4, 0);
+            Vector3 vpos2 = new Vector3(Position.x + Width + 2, Position.y + 2 + Items.Count * 4, 0);
 
             using (StructPtr pos1 = new StructPtr(Position), pos2 = new StructPtr(vpos2))
                 GfxFunctions.VAddParticle.Call(110, pos1, pos2, TexturePointers.blueSparkTexture, 190);
@@ -68,8 +68,8 @@ namespace Ray2Mod.Components.UI.Menu
             for (int i = 0; i < Items.Count; i++)
             {
                 string name = i == Selected ? Items[i].Name.Yellow() : Items[i].Name;
-                float posX = (Position.X + 1) * 10;
-                float posY = (Position.Y + 2 + i * 4) * 10;
+                float posX = (Position.x + 1) * 10;
+                float posY = (Position.y + 2 + i * 4) * 10;
 
                 TextUtils.TextOverlay(name, 9, posX, posY);
             }
