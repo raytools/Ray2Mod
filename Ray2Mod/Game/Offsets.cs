@@ -28,6 +28,7 @@ namespace Ray2Mod.Game {
             public const int AskToChangeLevel = 0x4054D0;
             public const int Code4PersoLePlusProche = 0x476960;
             public const int MiscFunction = 0x47CC30;
+            public const int GEO_vEndModifyObject = 0x41D1A0;
         }
 
         public class ParticleFunctions {

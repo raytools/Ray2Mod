@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
 using System;
 using System.Runtime.InteropServices;
@@ -20,10 +21,71 @@ namespace Ray2Mod.Game.Structs
         public Matrix* matrixPtr;
         public Matrix* matrixPtr2;
 
-        private int padding1;
-        private int padding2;
+        public int globalMatrix;
+        public int drawFlags;
+        public SuperObjectFlags flags;
+        public int* boundingVolume;
 
-        public int flags;
+        public Perso* PersoData {
+            get
+            {
+                AssertType(SuperObjectType.Perso);
+                return (Perso*)engineObjectPtr;
+            }
+        }
+
+        public Sector* SectorData {
+            get
+            {
+                AssertType(SuperObjectType.Sector);
+                return (Sector*)engineObjectPtr;
+            }
+        }
+
+        public PhysicalObject* PhysicalObjectData {
+            get
+            {
+                AssertType(SuperObjectType.PhysicalObject);
+                return (PhysicalObject*)engineObjectPtr;
+            }
+        }
+
+        public IPO* IPOData {
+            get
+            {
+                AssertType(SuperObjectType.IPO);
+                return (IPO*)engineObjectPtr;
+            }
+        }
+
+        private void AssertType(SuperObjectType wantedType)
+        {
+            if (type != wantedType) {
+                throw new InvalidCastException($"Trying to cast SuperObject of type {type} to {wantedType}");
+            }
+        }
+
+        public BoundingVolumeBox * BoundingVolumeAsBox {
+            get
+            {
+                if (flags.HasFlag(SuperObjectFlags.Flags.BoundingBoxInsteadOfSphere)) {
+                    return (BoundingVolumeBox*)boundingVolume;
+                } else {
+                    throw new InvalidCastException($"Bounding volume is a sphere, unless flag BoundingBoxInsteadOfSphere is set");
+                }
+            }
+        }
+
+        public BoundingVolumeSphere* BoundingVolumeAsSphere {
+            get
+            {
+                if (!flags.HasFlag(SuperObjectFlags.Flags.BoundingBoxInsteadOfSphere)) {
+                    return (BoundingVolumeSphere*)boundingVolume;
+                } else {
+                    throw new InvalidCastException($"Bounding volume is a box instead of a sphere, because flag BoundingBoxInsteadOfSphere is set");
+                }
+            }
+        }
     }
 
     public enum SuperObjectType {

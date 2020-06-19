@@ -69,6 +69,7 @@
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
+    <Compile Include="Game\Structs\Geometry\BoundingVolume.cs" />
     <Compile Include="Game\Structs\Geometry\GeometricElement.cs" />
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />
     <Compile Include="Game\Structs\Object\PhysicalObject.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Game\Structs\StructExtensions.cs" />
     <Compile Include="Game\Structs\SuperObjectExtensions.cs" />
     <Compile Include="Game\Structs\Geometry\VisualSet.cs" />
+    <Compile Include="Game\Structs\SuperObjectFlags.cs" />
     <Compile Include="Game\Types\DsgVarType.cs" />
     <Compile Include="Game\Structs\Mind.cs" />
     <Compile Include="Game\Structs\Brain.cs" />

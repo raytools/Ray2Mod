@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Functions
@@ -12,6 +13,7 @@ namespace Ray2Mod.Game.Functions
             AskToChangeLevel = new GameFunction<DAskToChangeLevel>(Offsets.EngineFunctions.AskToChangeLevel);
             Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(Offsets.EngineFunctions.Code4PersoLePlusProche);
             MiscFunction = new GameFunction<DMiscFunction>(Offsets.EngineFunctions.MiscFunction);
+            GEO_vEndModifyObject = new GameFunction<D_GEO_vEndModifyObject>(Offsets.EngineFunctions.GEO_vEndModifyObject);
         }
 
         #region VEngine
@@ -56,6 +58,15 @@ namespace Ray2Mod.Game.Functions
         public delegate int DMiscFunction(int superObject, int nodeInterpreter, int getSetParam);
 
         public static GameFunction<DMiscFunction> MiscFunction { get; }
+
+        #endregion
+
+        #region GEO_vEndModifyObject
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int D_GEO_vEndModifyObject(GeometricObject * geometricObject);
+
+        public static GameFunction<D_GEO_vEndModifyObject> GEO_vEndModifyObject { get; }
 
         #endregion
 

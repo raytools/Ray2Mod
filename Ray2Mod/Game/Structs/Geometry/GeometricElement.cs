@@ -18,63 +18,54 @@ namespace Ray2Mod.Game.Structs.Geometry {
         public ushort parallelBox;
         public int unknown0;
 
-
-        public UVMapping[] MappingUVS {
-            get
-            {
-                var uvMappingsArray = new UVMapping[numTriangles];
-                for (int i = 0; i < numTriangles; i++) {
-                    uvMappingsArray[i] = uvMappings[i];
-                }
-
-                return uvMappingsArray;
+        public UVMapping[] GetMappingUVS()
+        {
+            var uvMappingsArray = new UVMapping[numTriangles];
+            for (int i = 0; i < numTriangles; i++) {
+                uvMappingsArray[i] = uvMappings[i];
             }
+
+            return uvMappingsArray;
         }
 
-        public UV[] UVs {
-            get
-            {
-                var uvsArray = new UV[numTriangles];
-                for (int i = 0; i < numTriangles; i++) {
-                    uvsArray[i] = uvs[i];
-                }
-
-                return uvsArray; 
+        public UV[] GetUVs()
+        {
+            var uvsArray = new UV[numTriangles];
+            for (int i = 0; i < numTriangles; i++) {
+                uvsArray[i] = uvs[i];
             }
+
+            return uvsArray;
         }
 
-        public Triangle[] Triangles{
-            get
-            {
-                var trianglesArray = new Triangle[numTriangles];
-                for (int i = 0; i < numTriangles; i++) {
-                    trianglesArray[i] = triangles[i];
-                }
-
-                return trianglesArray;
+        public Triangle[] GetTriangles()
+        {
+            var trianglesArray = new Triangle[numTriangles];
+            for (int i = 0; i < numTriangles; i++) {
+                trianglesArray[i] = triangles[i];
             }
+
+            return trianglesArray;
         }
 
-        public Vector3[] Normals{
-            get
-            {
-                var normalsArray = new Vector3[numTriangles];
-                for (int i = 0; i < numTriangles; i++) {
-                    normalsArray[i] = normals[i];
-                }
-
-                return normalsArray;
+        public Vector3[] GetNormals()
+        {
+            var normalsArray = new Vector3[numTriangles];
+            for (int i = 0; i < numTriangles; i++) {
+                normalsArray[i] = normals[i];
             }
 
-            set
-            {
-                if (value.Length > ushort.MaxValue) {
-                    throw new OverflowException($"Maximum number of normals (vertices) for GeometricObject is {ushort.MaxValue}, array length was {value.Length}");
-                }
-                numTriangles = (ushort)value.Length;
-                for (int i = 0; i < value.Length; i++) {
-                    normals[i] = value[i];
-                }
+            return normalsArray;
+        }
+
+        public void SetNormals(Vector3[] value)
+        {
+            if (value.Length > ushort.MaxValue) {
+                throw new OverflowException($"Maximum number of normals (vertices) for GeometricObject is {ushort.MaxValue}, array length was {value.Length}");
+            }
+            numTriangles = (ushort)value.Length;
+            for (int i = 0; i < value.Length; i++) {
+                normals[i] = value[i];
             }
         }
     }
