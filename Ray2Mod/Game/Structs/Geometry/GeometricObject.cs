@@ -1,17 +1,19 @@
 ﻿using Ray2Mod.Game.Structs.Geometry;
+using Ray2Mod.Utils;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs {
-    
+namespace Ray2Mod.Game.Structs
+{
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct GeometricObject {
+    public unsafe struct GeometricObject
+    {
         public Vector3* off_vertices; // 0x0
         public Vector3* off_normals; // 0x4
         public int* off_materials; // 0x8
         public int unknown0; // 0xC
-        public ElementType* off_element_types; // 0x10
+        public short* off_element_types; // 0x10
         public int* off_elements; // 0x14
         public int* unknown1; // 0x18
         public int unknown2; // 0x1C
@@ -24,7 +26,8 @@ namespace Ray2Mod.Game.Structs {
         public float boundingSphereRadius; // 0x34
         public Vector3 boundingSphereCenter; // x, y, z
 
-        public enum ElementType : short {
+        public enum ElementType : short
+        {
             Triangles = 1,
             Sprite = 3,
             Bones1 = 13,
@@ -38,7 +41,8 @@ namespace Ray2Mod.Game.Structs {
         public Vector3[] GetVertices()
         {
             Vector3[] verts = new Vector3[numVertices];
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++)
+            {
                 verts[i] = off_vertices[i];
             }
             return verts;
@@ -50,13 +54,8 @@ namespace Ray2Mod.Game.Structs {
         /// <param name="value">The array of vertices (maximum length of 2^16)</param>
         public void SetVertices(Vector3[] value)
         {
-            if (value.Length > ushort.MaxValue) {
-                throw new OverflowException($"Maximum number of vertices for GeometricObject is {ushort.MaxValue}, array length was {value.Length}");
-            }
-            numVertices = (ushort)value.Length;
-            for (int i = 0; i < value.Length; i++) {
-                off_vertices[i] = value[i];
-            }
+            numVertices = checked((ushort)value.Length);
+            off_vertices = Memory.ToUnmanagedArray(value);
         }
 
         /// <summary>
@@ -66,7 +65,8 @@ namespace Ray2Mod.Game.Structs {
         public Vector3[] GetNormals()
         {
             Vector3[] normals = new Vector3[numVertices];
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++)
+            {
                 normals[i] = off_normals[i];
             }
             return normals;
@@ -78,75 +78,52 @@ namespace Ray2Mod.Game.Structs {
         /// <param name="value">The array of normals (maximum length of 2^16)</param>
         public void SetNormals(Vector3[] value)
         {
-            if (value.Length > ushort.MaxValue) {
-                throw new OverflowException($"Maximum number of normals (vertices) for GeometricObject is {ushort.MaxValue}, array length was {value.Length}");
-            }
-            numVertices = (ushort)value.Length;
-            for (int i = 0; i < value.Length; i++) {
-                off_normals[i] = value[i];
-            }
+            numVertices = checked((ushort)value.Length);
+            off_normals = Memory.ToUnmanagedArray(value);
         }
 
-        public ElementType[] GeometricElementTypes
+        public ElementType[] GetGeometricElementTypes()
         {
-            get
+            ElementType[] types = new ElementType[numElements];
+            for (int i = 0; i < numElements; i++)
             {
-                ElementType[] types = new ElementType[numElements];
-                for (int i=0;i<numElements;i++) {
-                    types[i] = off_element_types[i];
-                }
-
-                return types;
+                types[i] = (ElementType)off_element_types[i];
             }
-        }
 
-        public GeometricElementTriangles[] GeometricElementsAsTriangles {
-            get
-            {
-                GeometricElementTriangles[] result = new GeometricElementTriangles[numElements];
-
-                for(int i=0;i<numElements;i++) {
-                    GeometricElementTriangles data = (GeometricElementTriangles)Marshal.PtrToStructure((IntPtr)off_elements[i], typeof(GeometricElementTriangles));
-                    result[i] = data;
-                }
-
-                return result;
-            }
+            return types;
         }
 
         /// <summary>
-        /// R
+        /// Return an array containing pointers to Geometric Elements
         /// </summary>
-        public void RecalculateNormals()
+        /// <returns>An array of pointers (ints) to Geometric Elements. Typecast them to their respective types.</returns>
+        public int[] GetGeometricElements()
         {
-            var types = GeometricElementTypes;
-            var vertices = GetVertices();
+            int[] result = new int[numElements];
 
-            for (int i = 0; i < numElements; i++) {
-
-                if (types[i]!=ElementType.Triangles) {
-                    continue;
-                }
-
-                var tris = GeometricElementsAsTriangles[i];
-                var normals = tris.GetNormals();
-
-                for (int j = 0; j < tris.numTriangles; j++) {
-
-                    Triangle triangle = tris.triangles[j];
-
-                    Vector3 pointA = vertices[triangle.v0];
-                    Vector3 pointB = vertices[triangle.v1];
-                    Vector3 pointC = vertices[triangle.v2];
-
-                    Vector3 oldNormal = tris.normals[j];
-                    Vector3 autoNormal = (pointB - pointA).Cross(pointC - pointA).Normalized();
-
-                    normals[j] = autoNormal;
-                }
-
-                tris.SetNormals(normals);
+            for (int i = 0; i < numElements; i++)
+            {
+                result[i] = off_elements[i];
             }
+
+            return result;
+        }
+
+        public void SetGeometricElementTypes(ElementType[] value)
+        {
+            numElements = checked((ushort)value.Length);
+            short[] convertedArray = new short[value.Length];
+            for (int i = 0; i < value.Length; i++)
+            {
+                convertedArray[i] = (short)value[i];
+            }
+            off_element_types = Memory.ToUnmanagedArray(convertedArray);
+        }
+
+        public void SetGeometricElements(int[] value)
+        {
+            numElements = checked((ushort)value.Length);
+            off_elements = Memory.ToUnmanagedArray(value);
         }
 
         /// <summary>
@@ -164,10 +141,47 @@ namespace Ray2Mod.Game.Structs {
             float maxY = vertices.Select(v => v.y).Max();
             float maxZ = vertices.Select(v => v.z).Max();
 
-            return new BoundingVolumeBox() {
+            return new BoundingVolumeBox()
+            {
                 boxMin = new Vector3(minX, minY, minZ),
                 boxMax = new Vector3(maxX, maxY, maxZ),
             };
+        }
+
+        /// <summary>
+        /// Recalculate all normals
+        /// </summary>
+        public void RecalculateNormals(RemoteInterface ri)
+        {
+            var types = GetGeometricElementTypes();
+            var vertices = GetVertices();
+
+            for (int i = 0; i < numElements; i++)
+            {
+                if (types[i] != ElementType.Triangles)
+                {
+                    continue;
+                }
+
+                var tris = (GeometricElementTriangles*)off_elements[i];
+
+                for (int j = 0; j < tris->numTriangles; j++)
+                {
+                    Triangle triangle = tris->triangles[j];
+
+                    Vector3 pointA = vertices[triangle.v0];
+                    Vector3 pointB = vertices[triangle.v1];
+                    Vector3 pointC = vertices[triangle.v2];
+
+                    Vector3 oldNormal = tris->normals[j];
+                    Vector3 autoNormal = (pointB - pointA).Cross(pointC - pointA).Normalized();
+
+                    ri.Log($"Old normal: {oldNormal}");
+                    ri.Log($"Auto normal: {autoNormal}");
+
+                    tris->normals[j] = autoNormal;
+                }
+            }
         }
 
         public void RecalculateBoundingSphere()
@@ -176,7 +190,5 @@ namespace Ray2Mod.Game.Structs {
             boundingSphereCenter = sphere.center;
             boundingSphereRadius = sphere.radius;
         }
-
     }
-
 }

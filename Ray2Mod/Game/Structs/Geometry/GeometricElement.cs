@@ -1,4 +1,6 @@
 ﻿using Ray2Mod.Game.Structs;
+using Ray2Mod.Game.Structs.Material;
+using Ray2Mod.Utils;
 using System;
 using System.Runtime.InteropServices;
 
@@ -6,11 +8,11 @@ namespace Ray2Mod.Game.Structs.Geometry {
 
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct GeometricElementTriangles {
-        public int* material;
+        public GameMaterial* material;
         public ushort numTriangles;
         public ushort numUVs;
         public Triangle* triangles;
-        public UVMapping* uvMappings;
+        public int uvMappings;
         public Vector3* normals;
         public UV* uvs;
         public int* offVertexIndices;
@@ -18,20 +20,10 @@ namespace Ray2Mod.Game.Structs.Geometry {
         public ushort parallelBox;
         public int unknown0;
 
-        public UVMapping[] GetMappingUVS()
-        {
-            var uvMappingsArray = new UVMapping[numTriangles];
-            for (int i = 0; i < numTriangles; i++) {
-                uvMappingsArray[i] = uvMappings[i];
-            }
-
-            return uvMappingsArray;
-        }
-
         public UV[] GetUVs()
         {
-            var uvsArray = new UV[numTriangles];
-            for (int i = 0; i < numTriangles; i++) {
+            var uvsArray = new UV[numUVs];
+            for (int i = 0; i < numUVs; i++) {
                 uvsArray[i] = uvs[i];
             }
 
@@ -60,13 +52,20 @@ namespace Ray2Mod.Game.Structs.Geometry {
 
         public void SetNormals(Vector3[] value)
         {
-            if (value.Length > ushort.MaxValue) {
-                throw new OverflowException($"Maximum number of normals (vertices) for GeometricObject is {ushort.MaxValue}, array length was {value.Length}");
-            }
-            numTriangles = (ushort)value.Length;
-            for (int i = 0; i < value.Length; i++) {
-                normals[i] = value[i];
-            }
+            numTriangles = checked((ushort)value.Length);
+            normals = Memory.ToUnmanagedArray(value);
+        }
+
+        public void SetTriangles(Triangle[] value)
+        {
+            numTriangles = checked((ushort)value.Length);
+            triangles = Memory.ToUnmanagedArray(value);
+        }
+
+        public void SetUVS(UV[] value)
+        {
+            numUVs = checked((ushort)value.Length);
+            uvs = Memory.ToUnmanagedArray(value);
         }
     }
 
@@ -77,13 +76,6 @@ namespace Ray2Mod.Game.Structs.Geometry {
 
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Triangle {
-        public ushort v0;
-        public ushort v1;
-        public ushort v2;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct UVMapping {
         public ushort v0;
         public ushort v1;
         public ushort v2;

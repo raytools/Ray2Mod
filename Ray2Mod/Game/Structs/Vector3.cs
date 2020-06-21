@@ -13,6 +13,13 @@ namespace Ray2Mod.Game.Structs {
 
         public Vector3(Vector3 o) : this(o.x, o.y, o.z) { }
 
+        public void Set(Vector3 newVec)
+        {
+            this.x = newVec.x;
+            this.y = newVec.y;
+            this.z = newVec.z;
+        }
+
         public float x;
         public float y;
         public float z;

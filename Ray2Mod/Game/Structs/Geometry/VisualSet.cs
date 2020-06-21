@@ -12,7 +12,7 @@ namespace Ray2Mod.Game.Structs {
         public int alwaysZero1;
         public int alwaysZero2;
 
-        public readonly VisualSetLOD[] VisualSetLODS {
+        public VisualSetLOD[] VisualSetLODS {
             get
             {
                 VisualSetLOD[] visualSetLODs = new VisualSetLOD[numberOfLOD];
