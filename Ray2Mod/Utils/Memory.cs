@@ -78,5 +78,14 @@ namespace Ray2Mod.Utils
             return ptr;
         }
 
+        public static T* ToUnmanaged<T>(this T obj) where T : unmanaged
+        {
+            T* ptr = Malloc<T>(Marshal.SizeOf(obj)); 
+            // This causes a memory leak if not freed after using. Too bad!
+            Marshal.StructureToPtr(obj, (IntPtr)ptr, false);
+
+            return ptr;
+        }
+
     }
 }
