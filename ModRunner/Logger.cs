@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Ray2Mod;
+using System;
 using System.Globalization;
-using Ray2Mod;
 
 namespace ModRunner
 {

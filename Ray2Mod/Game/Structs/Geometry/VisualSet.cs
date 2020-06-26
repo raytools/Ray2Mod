@@ -1,9 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs {
+namespace Ray2Mod.Game.Structs
+{
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct VisualSet {
+    public unsafe struct VisualSet
+    {
         public int field0;
         public short numberOfLOD;
         public short visualSetType;
@@ -12,11 +14,13 @@ namespace Ray2Mod.Game.Structs {
         public int alwaysZero1;
         public int alwaysZero2;
 
-        public VisualSetLOD[] VisualSetLODS {
+        public VisualSetLOD[] VisualSetLODS
+        {
             get
             {
                 VisualSetLOD[] visualSetLODs = new VisualSetLOD[numberOfLOD];
-                for (uint i = 0; i < numberOfLOD; i++) {
+                for (uint i = 0; i < numberOfLOD; i++)
+                {
                     visualSetLODs[i] = new VisualSetLOD();
                     visualSetLODs[i].LODdistance = off_LODDistances[i];
                     visualSetLODs[i].off_data = off_LODDataOffsets[i];
@@ -28,7 +32,8 @@ namespace Ray2Mod.Game.Structs {
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct VisualSetLOD {
+    public unsafe struct VisualSetLOD
+    {
         public float LODdistance;
         public GeometricObject* off_data;
     }

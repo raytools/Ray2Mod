@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Ray2Mod.Game;
+﻿using Ray2Mod.Game;
 using Ray2Mod.Game.Types;
+using System.Collections.Generic;
 
 namespace Ray2Mod.Utils
 {
@@ -15,7 +15,7 @@ namespace Ray2Mod.Utils
             uint[] tMemChannels = new uint[1024];
             for (int i = 0; i < tMemChannels.Length; i++)
             {
-                tMemChannels[i] = (uint) *(tMemChannelsPtr + i);
+                tMemChannels[i] = (uint)*(tMemChannelsPtr + i);
             }
 
             List<Texture> textures = new List<Texture>();

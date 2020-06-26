@@ -1,20 +1,26 @@
-﻿using Ray2Mod.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs {
-
+namespace Ray2Mod.Game.Structs
+{
     [StructLayout(LayoutKind.Sequential)]
-    public struct SuperObjectFlags {
+    public unsafe struct SuperObjectFlags
+    {
+        public ushort rawFlags;
 
-        public Flags flags;
+        public EnumSuperObjectFlags Flags
+        {
+            get
+            {
+                return (EnumSuperObjectFlags)rawFlags;
+            }
+            set
+            {
+                rawFlags = (ushort)value;
+            }
+        }
 
-        [Flags]
-        public enum Flags : int{
+        public enum EnumSuperObjectFlags : int
+        {
             NoCollision = 1 << 0,
             Invisible = 1 << 1,
             NoTransformMatrix = 1 << 2, // No scale, no rotation
@@ -49,17 +55,20 @@ namespace Ray2Mod.Game.Structs {
             Flag31 = 1 << 31
         }
 
-        public bool HasFlag(Flags flag)
+        public bool HasFlag(EnumSuperObjectFlags flag)
         {
-            return (flags & flag) == flag;
+            return (Flags & flag) == flag;
         }
 
-        public void SetFlag(Flags flag, bool set)
+        public void SetFlag(EnumSuperObjectFlags flag, bool set)
         {
-            if (set) {
-                flags = flags | flag;
-            } else {
-                flags = flags & ~flag;
+            if (set)
+            {
+                Flags = Flags | flag;
+            }
+            else
+            {
+                Flags = Flags & ~flag;
             }
         }
     }

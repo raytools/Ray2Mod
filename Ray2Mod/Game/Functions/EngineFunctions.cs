@@ -14,6 +14,9 @@ namespace Ray2Mod.Game.Functions
             Code4PersoLePlusProche = new GameFunction<DCode4PersoLePlusProche>(Offsets.EngineFunctions.Code4PersoLePlusProche);
             MiscFunction = new GameFunction<DMiscFunction>(Offsets.EngineFunctions.MiscFunction);
             GEO_vEndModifyObject = new GameFunction<D_GEO_vEndModifyObject>(Offsets.EngineFunctions.GEO_vEndModifyObject);
+            COL_fn_bCollideStaticSphereWithStaticIndexedTriangle = new GameFunction<D_COL_fn_bCollideStaticSphereWithStaticIndexedTriangle>(Offsets.EngineFunctions.COL_fn_bCollideStaticSphereWithStaticIndexedTriangle);
+            COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 = new GameFunction<D_COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2>(Offsets.EngineFunctions.COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2);
+            AllocateMem = new GameFunction<D_AllocateMem>(Offsets.EngineFunctions.AllocateMem);
         }
 
         #region VEngine
@@ -64,11 +67,42 @@ namespace Ray2Mod.Game.Functions
         #region GEO_vEndModifyObject
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate int D_GEO_vEndModifyObject(GeometricObject * geometricObject);
+        public unsafe delegate int D_GEO_vEndModifyObject(GeometricObject* geometricObject);
 
         public static GameFunction<D_GEO_vEndModifyObject> GEO_vEndModifyObject { get; }
 
         #endregion
 
+
+
+
+        #region COL_fn_bCollideStaticSphereWithStaticIndexedTriangle
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate char D_COL_fn_bCollideStaticSphereWithStaticIndexedTriangle(int a);
+
+        public static GameFunction<D_COL_fn_bCollideStaticSphereWithStaticIndexedTriangle> COL_fn_bCollideStaticSphereWithStaticIndexedTriangle { get; }
+
+        #endregion
+
+        #region COL_fn_bCollideStaticSphereWithStaticIndexedTriangle
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int* D_COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2(int a1, int a2, int a3, int a4, int a5, int a6, short a7, char gvForCollision, char a9);
+
+        public static GameFunction<D_COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2> COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 { get; }
+
+        #endregion
+
+
+        #region AllocateMemory
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_AllocateMem(byte a1, int a2, int a3, uint dwBytes, int a5, char a6, char a7);
+
+        public static GameFunction<D_AllocateMem> AllocateMem { get; }
+
+
+        #endregion
     }
 }

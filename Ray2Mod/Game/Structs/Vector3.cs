@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs {
+namespace Ray2Mod.Game.Structs
+{
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector3 {
+    public struct Vector3
+    {
         public Vector3(float x, float y, float z)
         {
             this.x = x;
@@ -35,6 +37,15 @@ namespace Ray2Mod.Game.Structs {
         public static Vector3 operator -(Vector3 a, Vector3 b)
         {
             return new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+        }
+
+        /// <summary>
+        /// Returns true if all components of this vector are a floating point number that's not NaN or an infinity.
+        /// </summary>
+        /// <returns>true for vectors with valid components, false otherwise</returns>
+        public bool IsValid()
+        {
+            return !(float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsInfinity(x) || float.IsInfinity(y) || float.IsInfinity(z));
         }
 
         public static Vector3 operator *(Vector3 a, float magnitude)

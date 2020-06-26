@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Ray2Mod.Utils;
+using System;
 using System.Runtime.InteropServices;
-using Ray2Mod.Utils;
 
 namespace Ray2Mod.Components.Types
 {

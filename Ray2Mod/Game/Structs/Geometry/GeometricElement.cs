@@ -1,13 +1,13 @@
-﻿using Ray2Mod.Game.Structs;
-using Ray2Mod.Game.Structs.Material;
+﻿using Ray2Mod.Game.Structs.Material;
 using Ray2Mod.Utils;
-using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.Geometry {
+namespace Ray2Mod.Game.Structs.Geometry
+{
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct GeometricElementTriangles {
+    public unsafe struct GeometricElementTriangles
+    {
         public GameMaterial* material;
         public ushort numTriangles;
         public ushort numUVs;
@@ -23,7 +23,8 @@ namespace Ray2Mod.Game.Structs.Geometry {
         public UV[] GetUVs()
         {
             var uvsArray = new UV[numUVs];
-            for (int i = 0; i < numUVs; i++) {
+            for (int i = 0; i < numUVs; i++)
+            {
                 uvsArray[i] = uvs[i];
             }
 
@@ -33,7 +34,8 @@ namespace Ray2Mod.Game.Structs.Geometry {
         public Triangle[] GetTriangles()
         {
             var trianglesArray = new Triangle[numTriangles];
-            for (int i = 0; i < numTriangles; i++) {
+            for (int i = 0; i < numTriangles; i++)
+            {
                 trianglesArray[i] = triangles[i];
             }
 
@@ -42,8 +44,9 @@ namespace Ray2Mod.Game.Structs.Geometry {
 
         public Vector3[] GetNormals()
         {
-            var normalsArray = new Vector3[numTriangles];
-            for (int i = 0; i < numTriangles; i++) {
+            var normalsArray = new Vector3[numTriangles * 3];
+            for (int i = 0; i < numTriangles * 3; i++)
+            {
                 normalsArray[i] = normals[i];
             }
 
@@ -52,7 +55,6 @@ namespace Ray2Mod.Game.Structs.Geometry {
 
         public void SetNormals(Vector3[] value)
         {
-            numTriangles = checked((ushort)value.Length);
             normals = Memory.ToUnmanagedArray(value);
         }
 
@@ -70,12 +72,14 @@ namespace Ray2Mod.Game.Structs.Geometry {
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct UV {
+    public unsafe struct UV
+    {
         public float u, v;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct Triangle {
+    public unsafe struct Triangle
+    {
         public ushort v0;
         public ushort v1;
         public ushort v2;

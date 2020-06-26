@@ -11,18 +11,25 @@ namespace Ray2Mod.Game.Structs
         public StandardGame* stdGamePtr;
         public int dynam;
         public Brain* brain;
+        public int* off_camera;
+        public int* off_collSet;
+        public int* off_msWay;
+        public int* off_msLight;
+        public SectInfo* sectInfo;
 
         public List<DsgVarInfoAndValues> GetDsgVarList()
         {
             var result = new List<DsgVarInfoAndValues>();
-            if (brain == null || brain->mind == null || brain->mind->dsgMem == null || brain->mind->dsgMem->dsgVar == null) {
+            if (brain == null || brain->mind == null || brain->mind->dsgMem == null || brain->mind->dsgMem->dsgVar == null)
+            {
                 return result;
             }
 
             DsgMem* dsgMem = brain->mind->dsgMem;
             DsgVar* dsgVar = *(dsgMem->dsgVar);
 
-            for(int i=0;i<dsgVar->dsgVarInfosLength;i++) {
+            for (int i = 0; i < dsgVar->dsgVarInfosLength; i++)
+            {
                 var info = dsgVar->dsgVarInfos[i];
                 result.Add(new DsgVarInfoAndValues()
                 {
@@ -34,5 +41,5 @@ namespace Ray2Mod.Game.Structs
 
             return result;
         }
-    } 
+    }
 }

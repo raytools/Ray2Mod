@@ -1,20 +1,26 @@
-﻿using Ray2Mod.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.Material {
-
+namespace Ray2Mod.Game.Structs.Material
+{
     [StructLayout(LayoutKind.Sequential)]
-    public struct CollisionFlags {
+    public unsafe struct CollisionFlags
+    {
+        public ushort rawFlags;
 
-        public Flags flags;
+        public EnumCollisionFlags Flags
+        {
+            get
+            {
+                return (EnumCollisionFlags)rawFlags;
+            }
+            set
+            {
+                rawFlags = (ushort)value;
+            }
+        }
 
-        [Flags]
-        public enum Flags : ushort{
+        public enum EnumCollisionFlags : ushort
+        {
             None = 0,
             Slide = 1 << 0,
             Trampoline = 1 << 1,
@@ -35,17 +41,20 @@ namespace Ray2Mod.Game.Structs.Material {
             All = 0xFFFF
         }
 
-        public bool HasFlag(Flags flag)
+        public bool HasFlag(EnumCollisionFlags flag)
         {
-            return (flags & flag) == flag;
+            return (Flags & flag) == flag;
         }
 
-        public void SetFlag(Flags flag, bool set)
+        public void SetFlag(EnumCollisionFlags flag, bool set)
         {
-            if (set) {
-                flags = flags | flag;
-            } else {
-                flags = flags & ~flag;
+            if (set)
+            {
+                Flags = Flags | flag;
+            }
+            else
+            {
+                Flags = Flags & ~flag;
             }
         }
     }

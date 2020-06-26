@@ -1,5 +1,4 @@
-﻿using Ray2Mod.Components.Types;
-using Ray2Mod.Game.Structs.Geometry;
+﻿using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
 using System;
 using System.Runtime.InteropServices;
@@ -26,69 +25,107 @@ namespace Ray2Mod.Game.Structs
         public SuperObjectFlags flags;
         public int* boundingVolume;
 
-        public Perso* PersoData {
+        public Perso* PersoData
+        {
             get
             {
                 AssertType(SuperObjectType.Perso);
                 return (Perso*)engineObjectPtr;
             }
+
+            set
+            {
+                AssertType(SuperObjectType.Perso);
+                engineObjectPtr = (int*)value;
+            }
         }
 
-        public Sector* SectorData {
+        public Sector* SectorData
+        {
             get
             {
                 AssertType(SuperObjectType.Sector);
                 return (Sector*)engineObjectPtr;
             }
+
+            set
+            {
+                AssertType(SuperObjectType.Sector);
+                engineObjectPtr = (int*)value;
+            }
         }
 
-        public PhysicalObject* PhysicalObjectData {
+        public PhysicalObject* PhysicalObjectData
+        {
             get
             {
                 AssertType(SuperObjectType.PhysicalObject);
                 return (PhysicalObject*)engineObjectPtr;
             }
+
+            set
+            {
+                AssertType(SuperObjectType.PhysicalObject);
+                engineObjectPtr = (int*)value;
+            }
         }
 
-        public IPO* IPOData {
+        public IPO* IPOData
+        {
             get
             {
                 AssertType(SuperObjectType.IPO);
                 return (IPO*)engineObjectPtr;
             }
+
+            set
+            {
+                AssertType(SuperObjectType.IPO);
+                engineObjectPtr = (int*)value;
+            }
         }
 
         private void AssertType(SuperObjectType wantedType)
         {
-            if (type != wantedType) {
+            if (type != wantedType)
+            {
                 throw new InvalidCastException($"Trying to cast SuperObject of type {type} to {wantedType}");
             }
         }
 
-        public BoundingVolumeBox * BoundingVolumeAsBox {
+        public BoundingVolumeBox* BoundingVolumeAsBox
+        {
             get
             {
-                if (flags.HasFlag(SuperObjectFlags.Flags.BoundingBoxInsteadOfSphere)) {
+                if (flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                {
                     return (BoundingVolumeBox*)boundingVolume;
-                } else {
+                }
+                else
+                {
                     throw new InvalidCastException($"Bounding volume is a sphere, unless flag BoundingBoxInsteadOfSphere is set");
                 }
             }
         }
 
-        public BoundingVolumeSphere* BoundingVolumeAsSphere {
+        public BoundingVolumeSphere* BoundingVolumeAsSphere
+        {
             get
             {
-                if (!flags.HasFlag(SuperObjectFlags.Flags.BoundingBoxInsteadOfSphere)) {
+                if (!flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                {
                     return (BoundingVolumeSphere*)boundingVolume;
-                } else {
+                }
+                else
+                {
                     throw new InvalidCastException($"Bounding volume is a box instead of a sphere, because flag BoundingBoxInsteadOfSphere is set");
                 }
             }
         }
     }
 
-    public enum SuperObjectType {
+    public enum SuperObjectType
+    {
         Unknown = 0x0,
         World = 0x1,
         Perso = 0x2,

@@ -1,12 +1,14 @@
-﻿using Ray2Mod.Components.Types;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.LinkedLists {
+namespace Ray2Mod.Game.Structs.LinkedLists
+{
 
-    public abstract unsafe partial class LinkedList {
+    public abstract unsafe partial class LinkedList
+    {
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer<T> where T : unmanaged {
+        public unsafe struct NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer<T> where T : unmanaged
+        {
             public int* Head;
             public int* Tail;
             public int Count;
@@ -17,7 +19,8 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
 
                 int* Next = Head;
 
-                for (int i = 0; i < Count; i++) {
+                for (int i = 0; i < Count; i++)
+                {
                     int* LinkedListElement = Next;
 
                     int* Element = (int*)(*LinkedListElement);

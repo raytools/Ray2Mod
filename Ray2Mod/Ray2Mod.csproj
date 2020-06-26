@@ -73,6 +73,7 @@
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
+    <Compile Include="Game\Structs\ActiveSectorStruct.cs" />
     <Compile Include="Game\Structs\Geometry\BoundingVolume.cs" />
     <Compile Include="Game\Structs\Geometry\GeometricElement.cs" />
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />
@@ -80,14 +81,14 @@
     <Compile Include="Game\Structs\Material\CollideMaterial.cs" />
     <Compile Include="Game\Structs\Material\VisualMaterial.cs" />
     <Compile Include="Game\Structs\Material\GameMaterial.cs" />
-    <Compile Include="Game\Structs\Object\PhysicalObject.cs" />
+    <Compile Include="Game\Structs\EngineObject\PhysicalObject.cs" />
     <Compile Include="Game\Structs\AIModel.cs" />
     <Compile Include="Game\Structs\Behavior.cs" />
     <Compile Include="Game\Structs\DsgMem.cs" />
     <Compile Include="Game\Structs\DsgVar.cs" />
     <Compile Include="Game\Structs\DsgVarInfo.cs" />
     <Compile Include="Game\Structs\Geometry\GeometricObject.cs" />
-    <Compile Include="Game\Structs\Object\IPO.cs" />
+    <Compile Include="Game\Structs\EngineObject\IPO.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\HasHeaderPointers_ElementPointerFirst.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ReadAtPointer.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Game\Structs\LinkedLists\Non-Generic\SuperObjectList.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\HasHeaderPointers.cs" />
     <Compile Include="Game\Structs\NeighborSector.cs" />
-    <Compile Include="Game\Structs\Sector.cs" />
+    <Compile Include="Game\Structs\EngineObject\Sector.cs" />
     <Compile Include="Game\Structs\StructExtensions.cs" />
     <Compile Include="Game\Structs\SuperObjectExtensions.cs" />
     <Compile Include="Game\Structs\Geometry\VisualSet.cs" />
@@ -110,7 +111,7 @@
     <Compile Include="IMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteInterface.cs" />
-    <Compile Include="Game\Structs\Perso.cs" />
+    <Compile Include="Game\Structs\EngineObject\Perso.cs" />
     <Compile Include="Game\Structs\Matrix.cs" />
     <Compile Include="Game\Structs\StandardGame.cs" />
     <Compile Include="Game\Structs\SuperObject.cs" />

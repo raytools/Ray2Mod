@@ -13,7 +13,7 @@ namespace TextOverlays
 
             // Regular, static text.
             // The X and Y values are coordinates on the screen space, mapped to a 1000x1000 area.
-            TextOverlay plain = new TextOverlay("Regular text", 10, 5 ,5).Show();
+            TextOverlay plain = new TextOverlay("Regular text", 10, 5, 5).Show();
 
             // Dynamically updating text.
             // The delegate TextOverlay.UpdateText is evaluated on every frame (if assigned).
@@ -24,7 +24,7 @@ namespace TextOverlays
                 string newText = $"Frame counter={frames}";
                 frames++;
                 return newText;
-            }, 10, 5 ,35).Show();
+            }, 10, 5, 35).Show();
 
             // Previous text is passed to the UpdateText method as a parameter.
             // This example appends 1 dot to the text every 10 frames, up to a total of 20.

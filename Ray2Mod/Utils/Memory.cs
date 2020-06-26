@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ray2Mod.Components.Types;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Utils
@@ -52,7 +53,8 @@ namespace Ray2Mod.Utils
         public static T[] GetLPArray<T>(T* array, int length) where T : unmanaged
         {
             T[] result = new T[length];
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < length; i++)
+            {
                 result[i] = array[i];
             }
 
@@ -80,12 +82,13 @@ namespace Ray2Mod.Utils
 
         public static T* ToUnmanaged<T>(this T obj) where T : unmanaged
         {
-            T* ptr = Malloc<T>(Marshal.SizeOf(obj)); 
+            T* ptr = Malloc<T>(Marshal.SizeOf(obj));
             // This causes a memory leak if not freed after using. Too bad!
             Marshal.StructureToPtr(obj, (IntPtr)ptr, false);
 
             return ptr;
         }
 
+        public static bool IsNull<T>(T* ptr) where T : unmanaged => ptr == null || ptr == (T*)0xFFFFFFFF;
     }
 }

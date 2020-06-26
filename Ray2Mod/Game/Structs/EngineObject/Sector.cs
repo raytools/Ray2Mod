@@ -1,10 +1,13 @@
 ﻿using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
+using Ray2Mod.Utils;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs {
+namespace Ray2Mod.Game.Structs
+{
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct Sector {
+    public unsafe struct Sector
+    {
 
         public LinkedList.HasHeaderPointers_ElementPointerFirst<SuperObject> persoSPOList;
 
@@ -25,5 +28,14 @@ namespace Ray2Mod.Game.Structs {
         public int* skyMaterial;
         public byte unknown3;
 
+        public static SuperObject* CreateSectorSuperObject()
+        {
+            var spo = new SuperObject().ToUnmanaged();
+            var spoData = new Sector().ToUnmanaged();
+
+            spo->SectorData = spoData;
+
+            return spo;
+        }
     }
 }

@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.Geometry {
+namespace Ray2Mod.Game.Structs.Geometry
+{
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct BoundingVolumeBox {
+    public unsafe struct BoundingVolumeBox
+    {
         public Vector3 boxMin;
         public Vector3 boxMax;
 
-        public Vector3 BoxSize {
+        public Vector3 BoxSize
+        {
             get
             {
                 return boxMax - boxMin; ;
             }
         }
 
-        public Vector3 BoxCenter {
+        public Vector3 BoxCenter
+        {
             get
             {
                 return boxMin + (BoxSize * 0.5f);
@@ -29,6 +33,16 @@ namespace Ray2Mod.Game.Structs.Geometry {
         /// <returns>A new bounding box that contains both bounding boxes</returns>
         public BoundingVolumeBox Combine(BoundingVolumeBox other)
         {
+            if (!(boxMin.IsValid() && boxMax.IsValid()))
+            {
+                return other;
+            }
+
+            if (!(other.boxMin.IsValid() && other.boxMax.IsValid()))
+            {
+                return this;
+            }
+
             float minX = Math.Min(boxMin.x, other.boxMin.x);
             float minY = Math.Min(boxMin.y, other.boxMin.y);
             float minZ = Math.Min(boxMin.z, other.boxMin.z);
@@ -43,7 +57,7 @@ namespace Ray2Mod.Game.Structs.Geometry {
                 boxMax = new Vector3(maxX, maxY, maxZ),
             };
         }
-    
+
         public void Set(BoundingVolumeBox newBox)
         {
             this.boxMin = newBox.boxMin;
@@ -71,7 +85,8 @@ namespace Ray2Mod.Game.Structs.Geometry {
         }
     }
 
-    public unsafe struct BoundingVolumeSphere {
+    public unsafe struct BoundingVolumeSphere
+    {
         public Vector3 center;
         public float radius;
     }

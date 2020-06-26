@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs {
+namespace Ray2Mod.Game.Structs
+{
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector4 {
+    public struct Vector4
+    {
 
         public float x;
         public float y;

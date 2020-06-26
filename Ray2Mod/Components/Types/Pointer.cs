@@ -23,16 +23,20 @@ namespace Ray2Mod.Components.Types
         public T* StructPtr => (T*)IntPtr;
 
         public static implicit operator T*(Pointer<T> ptr) => ptr.StructPtr;
+
         public static implicit operator IntPtr(Pointer<T> ptr) => ptr.IntPtr;
+
         public static implicit operator int(Pointer<T> ptr) => (int)ptr.IntPtr;
 
         public static implicit operator Pointer<T>(T* structPtr) => new Pointer<T>(structPtr);
+
         public static implicit operator Pointer<T>(IntPtr intPtr) => new Pointer<T>(intPtr);
 
         public static Pointer<T>[] WrapPointerArray(T*[] ptrArray)
         {
             Pointer<T>[] results = new Pointer<T>[ptrArray.Length];
-            for(int i=0;i<ptrArray.Length;i++) {
+            for (int i = 0; i < ptrArray.Length; i++)
+            {
                 results[i] = (Pointer<T>)ptrArray[i];
             }
 
@@ -43,6 +47,5 @@ namespace Ray2Mod.Components.Types
         {
             return $"Pointer<{typeof(T)}> @0x{(int)this:X}";
         }
-
     }
-} 
+}

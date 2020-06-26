@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.Material
 {
@@ -28,6 +23,5 @@ namespace Ray2Mod.Game.Structs.Material
         public ushort numAnimTextures;
         public ushort field_0x70;
         public uint field_0x74;
-
     }
 }

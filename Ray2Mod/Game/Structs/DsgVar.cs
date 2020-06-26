@@ -19,7 +19,8 @@ namespace Ray2Mod.Game.Structs
 
     }
 
-    public struct DsgVarInfoAndValues {
+    public struct DsgVarInfoAndValues
+    {
         public DsgVarInfo info;
         public IntPtr valuePtrCurrent;
         public IntPtr valuePtrInitial;

@@ -1,6 +1,5 @@
 ﻿using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Utils;
-using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -156,6 +155,16 @@ namespace Ray2Mod.Game.Structs
             var types = GetGeometricElementTypes();
             var vertices = GetVertices();
 
+            ri.Log("Recalculate normals");
+            ri.Log("Vertices");
+            int iv = 0;
+            foreach (var v in vertices)
+            {
+                ri.Log($"v{iv}: {v}");
+                iv++;
+            }
+
+
             for (int i = 0; i < numElements; i++)
             {
                 if (types[i] != ElementType.Triangles)
@@ -169,15 +178,14 @@ namespace Ray2Mod.Game.Structs
                 {
                     Triangle triangle = tris->triangles[j];
 
+                    ri.Log($"triangle{j}: {triangle.v0}, {triangle.v1}, {triangle.v2}");
+
                     Vector3 pointA = vertices[triangle.v0];
                     Vector3 pointB = vertices[triangle.v1];
                     Vector3 pointC = vertices[triangle.v2];
 
                     Vector3 oldNormal = tris->normals[j];
                     Vector3 autoNormal = (pointB - pointA).Cross(pointC - pointA).Normalized();
-
-                    ri.Log($"Old normal: {oldNormal}");
-                    ri.Log($"Auto normal: {autoNormal}");
 
                     tris->normals[j] = autoNormal;
                 }

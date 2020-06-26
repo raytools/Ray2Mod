@@ -8,7 +8,7 @@ namespace Ray2Mod.Components.Types
         public GameFunction(int pointer)
         {
             Guid = System.Guid.NewGuid().ToString();
-            Pointer = (IntPtr) pointer;
+            Pointer = (IntPtr)pointer;
             Call = Marshal.GetDelegateForFunctionPointer<T>(Pointer);
         }
 

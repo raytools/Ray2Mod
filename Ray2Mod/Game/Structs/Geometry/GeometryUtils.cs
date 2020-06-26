@@ -1,13 +1,8 @@
 ﻿using JeremyAnsel.Media.WavefrontObj;
-using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs.Material;
-using Ray2Mod.Utils;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ray2Mod.Game.Structs.Geometry
 {
@@ -18,10 +13,11 @@ namespace Ray2Mod.Game.Structs.Geometry
         /// </summary>
         /// <param name="objPath">The file path to the .obj file</param>
         /// <returns></returns>
-        public static GeometricObject * ImportObj(string objPath, GameMaterial * material, RemoteInterface ri)
+        public static GeometricObject* ImportObj(string objPath, GeometricObject* original, GameMaterial* material, RemoteInterface ri)
         {
-            GeometricObject * go = new StructPtr<GeometricObject>(new GeometricObject());
-            GeometricElementTriangles * gt = new StructPtr<GeometricElementTriangles>(new GeometricElementTriangles());
+            GeometricObject* go = original;
+
+            GeometricElementTriangles* gt = (GeometricElementTriangles*)go->off_elements[0];// new GeometricElementTriangles().ToUnmanaged();
 
             gt->material = material;
 
@@ -36,14 +32,14 @@ namespace Ray2Mod.Game.Structs.Geometry
             List<Vector3> normals = new List<Vector3>();
 
             List<Triangle> triangles = new List<Triangle>();
-            foreach(var f in  file.Faces)
+            foreach (var f in file.Faces)
             {
-                if (f.Vertices.Count>3)
+                if (f.Vertices.Count > 3)
                 {
                     throw new InvalidDataException("Quad or N-gon detected while importing .obj, make sure to triangulate the mesh before importing.");
                 }
 
-                if (f.Vertices.Count<3)
+                if (f.Vertices.Count < 3)
                 {
                     throw new InvalidDataException("Face with less than 3 vertices detected while importing .obj, make sure all faces are triangles!");
                 }
@@ -67,8 +63,30 @@ namespace Ray2Mod.Game.Structs.Geometry
             var vertsArray = verts.ToArray();
             var normalArray = normals.ToArray();
 
+            var triArray = triangles.ToArray();
+
+            var oldTriangles = gt->GetTriangles();
+
+            ri.Log("Old triangles:");
+            for (int i = 0; i < oldTriangles.Length; i++)
+            {
+                ri.Log($"{i}: {oldTriangles[i].v0}, {oldTriangles[i].v1}, {oldTriangles[i].v2}");
+            }
+
+            ri.Log("New triangles:");
+
+            for (int i = 0; i < triArray.Length; i++)
+            {
+                ri.Log($"{i}: {triArray[i].v0}, {triArray[i].v1}, {triArray[i].v2}");
+            }
+
+            gt->SetTriangles(triArray); // causes crash
+
+            //gt->SetTriangles(triArray);
+            gt->SetNormals(normalArray);
+
             go->SetVertices(vertsArray);
-            go->SetNormals(normalArray);
+            go->SetNormals(new Vector3[vertsArray.Length]); // empty normals for geometric object
 
             var types = new GeometricObject.ElementType[]
             {
@@ -82,8 +100,6 @@ namespace Ray2Mod.Game.Structs.Geometry
             };
 
             go->SetGeometricElements(elements);
-
-            ri.Log("3. go->numVertices: " + go->numVertices); // DEBUG
 
             return go;
         }

@@ -1,11 +1,14 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.LinkedLists {
+namespace Ray2Mod.Game.Structs.LinkedLists
+{
 
-    public abstract unsafe partial class LinkedList {
+    public abstract unsafe partial class LinkedList
+    {
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct NeighborSectorList {
+        public unsafe struct NeighborSectorList
+        {
             public NeighborSector* Head;
             public NeighborSector* Tail;
             public int Count;
@@ -16,7 +19,8 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
 
                 NeighborSector* Next = Head;
 
-                for (int i = 0; i < Count; i++) {
+                for (int i = 0; i < Count; i++)
+                {
                     NeighborSector* Element = Next;
                     Next = Next->off_next;
                     // Previous pointer is ignored

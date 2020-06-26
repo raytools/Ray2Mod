@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using Ray2Mod.Components.Types;
+﻿using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Utils;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Ray2Mod.Game
 {
@@ -30,7 +29,8 @@ namespace Ray2Mod.Game
         }
         private World() { }
 
-        struct ListItem {
+        struct ListItem
+        {
             public ListItem* next;
             public ListItem* prev;
             public int header;
@@ -46,14 +46,15 @@ namespace Ray2Mod.Game
             Dictionary<string, Pointer<Perso>> result = new Dictionary<string, Pointer<Perso>>();
 
             int numAlways = *off_NumAlways;
-            ListItem * currentItem = ((ListItem*)(off_NumAlways+1))->next; // skip the first item, since it's a header
+            ListItem* currentItem = ((ListItem*)(off_NumAlways + 1))->next; // skip the first item, since it's a header
 
-            while(currentItem!=null) {
+            while (currentItem != null)
+            {
                 Perso* perso = currentItem->data;
                 result.Add(ObjectNames[ObjectSet.Instance][perso->stdGamePtr->instanceID], perso);
                 currentItem = currentItem->next;
             }
-            
+
             return result;
         }
 
@@ -69,7 +70,7 @@ namespace Ray2Mod.Game
 
         private Dictionary<string, Pointer<SuperObject>> GetSuperObjects(int offsetWorld)
         {
-            
+
             Dictionary<string, Pointer<SuperObject>> result = new Dictionary<string, Pointer<SuperObject>>();
 
             SuperObject* superObject = (SuperObject*)Memory.GetPointerAtOffset(offsetWorld, 0x8, 0x0);
@@ -98,7 +99,8 @@ namespace Ray2Mod.Game
 
         public Dictionary<ObjectSet, string[]> GetObjectNames(bool refresh = false)
         {
-            if (ObjectNames == null || refresh) {
+            if (ObjectNames == null || refresh)
+            {
                 ReadObjectNames();
             }
 
@@ -146,10 +148,11 @@ namespace Ray2Mod.Game
             return names;
         }
 
-        public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso * alwaysPerso, Vector3 position)
+        public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso* alwaysPerso, Vector3 position)
         {
 
-            if (spawnedBy == null) {
+            if (spawnedBy == null)
+            {
                 throw new NullReferenceException("GenerateAlwaysObject: spawnedBy is not allowed to be null!");
             }
 
@@ -171,14 +174,15 @@ namespace Ray2Mod.Game
             // TODO: use ArrayPtr()
 
             IntPtr interpArray = Marshal.AllocHGlobal(interp.Length * 4);
-            for (int i = 0; i < interp.Length; i++) {
+            for (int i = 0; i < interp.Length; i++)
+            {
                 Marshal.WriteInt32(interpArray, i * 4, interp[i]);
             }
 
             IntPtr paramArray = Marshal.AllocHGlobal(0x20 * 4);
 
             IntPtr interpPtrStart = interpArray + 0x8; // we start at the second node of the interpreter tree
-            
+
             EngineFunctions.MiscFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
 
             return *(int*)paramArray.ToPointer();

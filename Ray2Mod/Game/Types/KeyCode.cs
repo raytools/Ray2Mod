@@ -7,7 +7,7 @@
         Backspace = 14,
         Up = 200,
         Down = 208,
-        Left = 203, 
+        Left = 203,
         Right = 205,
     }
 }

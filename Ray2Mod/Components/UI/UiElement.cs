@@ -1,5 +1,4 @@
-﻿using Ray2Mod.Game;
-using Ray2Mod.Game.Structs;
+﻿using Ray2Mod.Game.Structs;
 using Ray2Mod.Game.Types;
 using System;
 

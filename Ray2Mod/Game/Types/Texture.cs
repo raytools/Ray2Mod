@@ -1,13 +1,13 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using Ray2Mod.Game.Structs;
+﻿using Ray2Mod.Game.Structs;
 using Ray2Mod.Utils;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Types
 {
     public class Texture
     {
-        public Texture(int ptr) : this((IntPtr) ptr) { }
+        public Texture(int ptr) : this((IntPtr)ptr) { }
 
         public Texture(IntPtr ptr)
         {

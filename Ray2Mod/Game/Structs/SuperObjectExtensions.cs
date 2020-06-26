@@ -1,12 +1,10 @@
 ﻿using Ray2Mod.Components.Types;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Ray2Mod.Game.Structs {
-    public static class SuperObjectExtensions {
+namespace Ray2Mod.Game.Structs
+{
+    public static class SuperObjectExtensions
+    {
 
         public unsafe static Pointer<Sector>[] GetSectorArray(this SuperObject*[] array) => GetSectorArray(Pointer<SuperObject>.WrapPointerArray(array));
         public unsafe static Pointer<Perso>[] GetPersoArray(this SuperObject*[] array) => GetPersoArray(Pointer<SuperObject>.WrapPointerArray(array));
@@ -16,7 +14,8 @@ namespace Ray2Mod.Game.Structs {
         {
             return array.Select(p =>
             {
-                if (p.StructPtr->type != SuperObjectType.Sector) {
+                if (p.StructPtr->type != SuperObjectType.Sector)
+                {
                     return null;
                 }
 
@@ -28,7 +27,8 @@ namespace Ray2Mod.Game.Structs {
         {
             return array.Select(p =>
             {
-                if (p.StructPtr->type != SuperObjectType.Perso) {
+                if (p.StructPtr->type != SuperObjectType.Perso)
+                {
                     return null;
                 }
 
@@ -40,7 +40,8 @@ namespace Ray2Mod.Game.Structs {
         {
             return array.Select(p =>
             {
-                if (p.StructPtr->type != SuperObjectType.IPO) {
+                if (p.StructPtr->type != SuperObjectType.IPO)
+                {
                     return null;
                 }
 
