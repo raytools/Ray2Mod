@@ -5,14 +5,14 @@ using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Types
 {
-    public class Texture
+    public unsafe class Texture
     {
         public Texture(int ptr) : this((IntPtr)ptr) { }
 
         public Texture(IntPtr ptr)
         {
             Name = Marshal.PtrToStringAnsi(ptr + 0x46);
-            Data = Marshal.PtrToStructure<TextureData>(ptr);
+            TexData = (TextureData*) ptr;
 
             byte[] ptrBytes = Memory.GetBytes(ptr - 0x8, 4);
 
@@ -32,7 +32,7 @@ namespace Ray2Mod.Game.Types
 
         public string Name { get; }
         public IntPtr Pointer { get; }
-        public TextureData Data { get; }
+        public TextureData* TexData { get; }
         public bool Animated { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.Material
 {
@@ -19,6 +20,7 @@ namespace Ray2Mod.Game.Structs.Material
             }
         }
 
+        [Flags]
         public enum EnumCollisionFlags : ushort
         {
             None = 0,

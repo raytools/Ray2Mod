@@ -11,7 +11,7 @@ namespace Ray2Mod.Game.Structs.Material
         public Vector4 specularCoef;
         public Vector4 color;
         public uint field_0x48;
-        public uint off_texture;
+        public TextureData* off_texture;
         public float currentScrollX;
         public float currentScrollY;
         public float scrollX;

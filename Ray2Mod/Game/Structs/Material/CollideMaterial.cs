@@ -6,7 +6,7 @@ namespace Ray2Mod.Game.Structs.Material
     public unsafe struct CollideMaterial
     {
         public ushort type;
-        public CollisionFlags identifier;
+        public CollisionFlags.EnumCollisionFlags identifier;
         public uint typeForAI;
     }
 }
