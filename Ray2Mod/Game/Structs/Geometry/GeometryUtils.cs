@@ -30,8 +30,11 @@ namespace Ray2Mod.Game.Structs.Geometry
 
             // We want the normals to have the same indices as the vertices, so generate a new list.
             List<Vector3> normals = new List<Vector3>();
-
             List<Triangle> triangles = new List<Triangle>();
+            List<UV> uvs = new List<UV>();
+            List<UvMapping> uvMappings = new List<UvMapping>();
+
+            short i = 0;
             foreach (var f in file.Faces)
             {
                 if (f.Vertices.Count > 3)
@@ -52,37 +55,39 @@ namespace Ray2Mod.Game.Structs.Geometry
                 normals.Add(new Vector3(normal_1.X, normal_1.Y, normal_1.Z));
                 normals.Add(new Vector3(normal_2.X, normal_2.Y, normal_2.Z));
 
+                var textureVertex_0 = file.TextureVertices[f.Vertices[0].Texture - 1];
+                var textureVertex_1 = file.TextureVertices[f.Vertices[1].Texture - 1];
+                var textureVertex_2 = file.TextureVertices[f.Vertices[2].Texture - 1];
+
+                uvs.Add(new UV() { u = textureVertex_0.X, v = textureVertex_0.Y });
+                uvs.Add(new UV() { u = textureVertex_1.X, v = textureVertex_1.Y });
+                uvs.Add(new UV() { u = textureVertex_2.X, v = textureVertex_2.Y });
+
+                uvMappings.Add(new UvMapping()
+                {
+                    mapping_0 = (short)(i + 0),
+                    mapping_1 = (short)(i + 1),
+                    mapping_2 = (short)(i + 2),
+                });
+
                 triangles.Add(new Triangle()
                 {
                     v0 = (ushort)(f.Vertices[0].Vertex - 1),
                     v1 = (ushort)(f.Vertices[1].Vertex - 1),
                     v2 = (ushort)(f.Vertices[2].Vertex - 1)
                 });
+
+                i += 3;
             };
 
             var vertsArray = verts.ToArray();
             var normalArray = normals.ToArray();
-
             var triArray = triangles.ToArray();
-
-            var oldTriangles = gt->GetTriangles();
-
-            ri.Log("Old triangles:");
-            for (int i = 0; i < oldTriangles.Length; i++)
-            {
-                ri.Log($"{i}: {oldTriangles[i].v0}, {oldTriangles[i].v1}, {oldTriangles[i].v2}");
-            }
-
-            ri.Log("New triangles:");
-
-            for (int i = 0; i < triArray.Length; i++)
-            {
-                ri.Log($"{i}: {triArray[i].v0}, {triArray[i].v1}, {triArray[i].v2}");
-            }
+            var uvArray = uvs.ToArray();
 
             gt->SetTriangles(triArray);
-            gt->SetUVS(new UV[triArray.Length * 3]); // No uv's for now
-            gt->SetUVMappings(new int[triArray.Length * 3]); // No uv's for now
+            gt->SetUVS(uvArray);
+            gt->SetUVMappings(uvMappings.ToArray());
             gt->SetNormals(normalArray);
             go->SetVertices(vertsArray);
             go->SetNormals(new Vector3[vertsArray.Length]); // empty normals for geometric object

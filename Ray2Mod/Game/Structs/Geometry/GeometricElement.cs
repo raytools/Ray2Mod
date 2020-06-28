@@ -53,12 +53,12 @@ namespace Ray2Mod.Game.Structs.Geometry
             return normalsArray;
         }
 
-        public int[] GetUVMappings()
+        public UvMapping[] GetUVMappings()
         {
-            var uvMappingsArray = new int[numTriangles * 3];
-            for (int i = 0; i < numTriangles * 3; i++)
+            var uvMappingsArray = new UvMapping[numTriangles];
+            for (int i = 0; i < numTriangles; i++)
             {
-                uvMappingsArray[i] = uvMappings[0].items[i];
+                uvMappingsArray[i] = uvMappings[i];
             }
 
             return uvMappingsArray;
@@ -85,13 +85,14 @@ namespace Ray2Mod.Game.Structs.Geometry
             uvs = Memory.ToUnmanagedArray(value);
         }
 
-        public void SetUVMappings(int[] value)
+        public void SetUVMappings(UvMapping[] value)
         {
-            if (value.Length != numTriangles * 3)
+            if (value.Length != numTriangles)
             {
-                throw new Exception("Error while setting UV Mappings, the array length was not equal to the amount of vertices (tris*3). Please call SetTriangles first to change the amount of triangles.");
+                throw new Exception("Error while setting UV Mappings, the array length was not equal to the amount of triangles. Please call SetTriangles first to change the amount of triangles.");
             }
-            uvMappings[0].items = Memory.ToUnmanagedArray(value);
+
+            uvMappings = Memory.ToUnmanagedArray(value);
         }
     }
 
