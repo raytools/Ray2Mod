@@ -80,11 +80,10 @@ namespace Ray2Mod.Game.Structs.Geometry
                 ri.Log($"{i}: {triArray[i].v0}, {triArray[i].v1}, {triArray[i].v2}");
             }
 
-            gt->SetTriangles(triArray); // causes crash
-
-            //gt->SetTriangles(triArray);
+            gt->SetTriangles(triArray);
+            gt->SetUVS(new UV[triArray.Length * 3]); // No uv's for now
+            gt->SetUVMappings(new int[triArray.Length * 3]); // No uv's for now
             gt->SetNormals(normalArray);
-
             go->SetVertices(vertsArray);
             go->SetNormals(new Vector3[vertsArray.Length]); // empty normals for geometric object
 

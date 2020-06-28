@@ -1,10 +1,10 @@
 ﻿using Ray2Mod.Game.Structs.Material;
 using Ray2Mod.Utils;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.Geometry
 {
-
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct GeometricElementTriangles
     {
@@ -12,7 +12,7 @@ namespace Ray2Mod.Game.Structs.Geometry
         public ushort numTriangles;
         public ushort numUVs;
         public Triangle* triangles;
-        public int uvMappings;
+        public UvMapping* uvMappings;
         public Vector3* normals;
         public UV* uvs;
         public int* offVertexIndices;
@@ -53,8 +53,23 @@ namespace Ray2Mod.Game.Structs.Geometry
             return normalsArray;
         }
 
+        public int[] GetUVMappings()
+        {
+            var uvMappingsArray = new int[numTriangles * 3];
+            for (int i = 0; i < numTriangles * 3; i++)
+            {
+                uvMappingsArray[i] = uvMappings[0].items[i];
+            }
+
+            return uvMappingsArray;
+        }
+
         public void SetNormals(Vector3[] value)
         {
+            if (value.Length != numTriangles * 3)
+            {
+                throw new Exception("Error while setting Normals, the array length was not equal to the amount of vertices (tris*3). Please call SetTriangles first to change the amount of triangles.");
+            }
             normals = Memory.ToUnmanagedArray(value);
         }
 
@@ -68,6 +83,15 @@ namespace Ray2Mod.Game.Structs.Geometry
         {
             numUVs = checked((ushort)value.Length);
             uvs = Memory.ToUnmanagedArray(value);
+        }
+
+        public void SetUVMappings(int[] value)
+        {
+            if (value.Length != numTriangles * 3)
+            {
+                throw new Exception("Error while setting UV Mappings, the array length was not equal to the amount of vertices (tris*3). Please call SetTriangles first to change the amount of triangles.");
+            }
+            uvMappings[0].items = Memory.ToUnmanagedArray(value);
         }
     }
 
