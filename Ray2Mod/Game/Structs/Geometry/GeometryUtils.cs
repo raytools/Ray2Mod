@@ -1,5 +1,6 @@
 ﻿using JeremyAnsel.Media.WavefrontObj;
 using Ray2Mod.Game.Structs.Material;
+using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Types;
 using Ray2Mod.Utils;
 using System.Collections.Generic;

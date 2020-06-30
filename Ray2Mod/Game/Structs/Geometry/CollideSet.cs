@@ -1,8 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.Geometry
 {
-
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct CollideSet
     {
@@ -10,6 +9,5 @@ namespace Ray2Mod.Game.Structs
         public int collisionZoneDetection;
         public int collisionZoneEvent;
         public GeometricObject* collisionZoneReact;
-
     }
 }

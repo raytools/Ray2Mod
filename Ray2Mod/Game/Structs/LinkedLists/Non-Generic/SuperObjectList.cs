@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs.SPO;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.LinkedLists
@@ -33,8 +34,10 @@ namespace Ray2Mod.Game.Structs.LinkedLists
             public unsafe void Append(SuperObject* newSuperObject)
             {
                 newSuperObject->previousBrother = Tail;
+                newSuperObject->parent = Tail->parent;
                 Tail->nextBrother = newSuperObject;
                 Tail = newSuperObject;
+                Count++;
             }
 
             public unsafe void Remove(SuperObject* superObjectToRemove)

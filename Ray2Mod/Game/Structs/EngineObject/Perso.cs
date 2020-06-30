@@ -1,11 +1,13 @@
 ﻿using Ray2Mod.Game.Functions;
+using Ray2Mod.Game.Structs.AI;
+using Ray2Mod.Game.Structs.SPO;
 using Ray2Mod.Game.Structs.Dynamics;
 using Ray2Mod.Utils;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.EngineObject
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Perso
@@ -45,9 +47,9 @@ namespace Ray2Mod.Game.Structs
             return result;
         }
 
-        public string GetFamilyName(World w) => GetName(ObjectSet.Instance, stdGamePtr->familyID, w);
+        public string GetFamilyName(World w) => GetName(ObjectSet.Family, stdGamePtr->familyID, w);
 
-        public string GetModelName(World w) => GetName(ObjectSet.Instance, stdGamePtr->modelID, w);
+        public string GetModelName(World w) => GetName(ObjectSet.Model, stdGamePtr->modelID, w);
 
         public string GetInstanceName(World w) => GetName(ObjectSet.Instance, stdGamePtr->instanceID, w);
 
@@ -66,9 +68,17 @@ namespace Ray2Mod.Game.Structs
         {
             SuperObject* newSPO = new SuperObject().ToUnmanaged();
             newSPO->type = SuperObjectType.Perso;
-            newSPO->PersoData = Perso.CopyPerso(newSPO->PersoData, newSPO);
+            newSPO->PersoData = Perso.CopyPerso(ogSPO->PersoData, newSPO);
+
+            var ogMatrix1 = (*ogSPO->matrixPtr);
+            var ogMatrix2 = (*ogSPO->matrixPtr2);
+
             newSPO->matrixPtr = (*ogSPO->matrixPtr).ToUnmanaged(); // Copy
             newSPO->matrixPtr2 = (*ogSPO->matrixPtr2).ToUnmanaged(); // Copy
+
+            var newMatrix1 = (*newSPO->matrixPtr);
+            var newMatrix2 = (*newSPO->matrixPtr2);
+
             newSPO->boundingVolume = (*ogSPO->boundingVolume).ToUnmanaged(); // Copy
 
             return newSPO;
@@ -77,14 +87,15 @@ namespace Ray2Mod.Game.Structs
         public static Perso* CopyPerso(Perso* ogPerso, SuperObject* newSuperObject)
         {
             Perso* newPerso = new Perso().ToUnmanaged();
-
-            EngineFunctions.fn_vInitOneObject.Call(newPerso, 0);
+            newSuperObject->PersoData = newPerso;
 
             newPerso->p3dData = ogPerso->p3dData;
             var standardGame = (*ogPerso->stdGamePtr).ToUnmanaged(); ;  // Copy StandardGame
             standardGame->superObjectPtr = newSuperObject;
             standardGame->instanceID = 99999;
             newPerso->stdGamePtr = standardGame;
+
+            EngineFunctions.fn_vInitOneObject.Call(newPerso, 0);
 
             return newPerso;
         }

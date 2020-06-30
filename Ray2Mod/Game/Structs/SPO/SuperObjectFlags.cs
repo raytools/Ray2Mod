@@ -1,6 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.SPO
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct SuperObjectFlags
@@ -19,6 +20,7 @@ namespace Ray2Mod.Game.Structs
             }
         }
 
+        [Flags]
         public enum EnumSuperObjectFlags : int
         {
             NoCollision = 1 << 0,

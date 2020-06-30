@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Ray2Mod.Game.Structs.AI;
+using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.AI
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Mind
@@ -23,10 +24,8 @@ namespace Ray2Mod.Game.Structs
 
             if (DsgVarTypes.Map[info.type].IsArray)
             {
-
                 arraySize = *(buffer + info.offsetInBuffer + 4);
                 return (T*)(buffer + info.offsetInBuffer + 8);
-
             }
             else
             {

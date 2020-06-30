@@ -1,14 +1,16 @@
 ﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs.EngineObject;
 using System.Linq;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.SPO
 {
     public static class SuperObjectExtensions
     {
+        public unsafe static Pointer<Sector>[] GetSectorArray(this SuperObject*[] array) => Pointer<SuperObject>.WrapPointerArray(array).GetSectorArray();
 
-        public unsafe static Pointer<Sector>[] GetSectorArray(this SuperObject*[] array) => GetSectorArray(Pointer<SuperObject>.WrapPointerArray(array));
-        public unsafe static Pointer<Perso>[] GetPersoArray(this SuperObject*[] array) => GetPersoArray(Pointer<SuperObject>.WrapPointerArray(array));
-        public unsafe static Pointer<IPO>[] GetIPOArray(this SuperObject*[] array) => GetIPOArray(Pointer<SuperObject>.WrapPointerArray(array));
+        public unsafe static Pointer<Perso>[] GetPersoArray(this SuperObject*[] array) => Pointer<SuperObject>.WrapPointerArray(array).GetPersoArray();
+
+        public unsafe static Pointer<IPO>[] GetIPOArray(this SuperObject*[] array) => Pointer<SuperObject>.WrapPointerArray(array).GetIPOArray();
 
         public unsafe static Pointer<Sector>[] GetSectorArray(this Pointer<SuperObject>[] array)
         {
@@ -48,6 +50,5 @@ namespace Ray2Mod.Game.Structs
                 return (Pointer<int>)p.StructPtr->engineObjectPtr;
             }).Where(p => p != null).ToArray().CastPointerArray<int, IPO>();
         }
-
     }
 }

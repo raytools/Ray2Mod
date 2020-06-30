@@ -1,5 +1,7 @@
 ﻿using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs;
+using Ray2Mod.Game.Structs.EngineObject;
+using Ray2Mod.Game.Structs.Geometry;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Functions

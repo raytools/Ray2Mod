@@ -1,8 +1,6 @@
 ﻿using Ray2Mod.Components.Types;
 using Ray2Mod.Utils;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.LinkedLists

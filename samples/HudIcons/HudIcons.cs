@@ -3,6 +3,7 @@ using Ray2Mod.Components;
 using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
+using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Utils;
 
 namespace HudIcons
@@ -31,7 +32,6 @@ namespace HudIcons
                     // with the same index, only the last one will be displayed.
                     GfxFunctions.VAddParticle.Call(125, pos1, pos2, TexturePointers.rayIcon, 11);
                 }
-
             };
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
+using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Types;
 using Ray2Mod.Utils;
 using System.Collections.Generic;
@@ -9,9 +10,13 @@ namespace Ray2Mod.Components.UI.Menu
 {
     public class Menu : UiElement
     {
-        public Menu(params MenuItem[] items) : this(new Vector3(3, 13, 0), items) { }
+        public Menu(params MenuItem[] items) : this(new Vector3(3, 13, 0), items)
+        {
+        }
 
-        public Menu(Vector3 position, params MenuItem[] items) : this(position, 0, items) { }
+        public Menu(Vector3 position, params MenuItem[] items) : this(position, 0, items)
+        {
+        }
 
         public Menu(Vector3 position, float width = 0, params MenuItem[] items) : base(position)
         {
@@ -23,6 +28,7 @@ namespace Ray2Mod.Components.UI.Menu
         private List<MenuItem> Items { get; }
 
         private int _selected;
+
         private int Selected
         {
             get => _selected;

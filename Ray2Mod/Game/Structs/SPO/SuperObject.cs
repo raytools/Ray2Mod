@@ -1,9 +1,11 @@
-﻿using Ray2Mod.Game.Structs.Geometry;
+﻿using Ray2Mod.Game.Structs.EngineObject;
+using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
+using Ray2Mod.Game.Structs.MathStructs;
 using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.SPO
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct SuperObject

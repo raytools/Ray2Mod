@@ -1,8 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.AI
 {
-
     [StructLayout(LayoutKind.Sequential)]
     public struct DsgVarInfo
     {

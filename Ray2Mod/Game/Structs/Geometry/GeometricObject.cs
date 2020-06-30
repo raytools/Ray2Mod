@@ -1,9 +1,10 @@
 ﻿using Ray2Mod.Game.Structs.Geometry;
+using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Utils;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.Geometry
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct GeometricObject
@@ -163,7 +164,6 @@ namespace Ray2Mod.Game.Structs
                 ri.Log($"v{iv}: {v}");
                 iv++;
             }
-
 
             for (int i = 0; i < numElements; i++)
             {
