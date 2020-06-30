@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Ray2Mod.Game.Structs.AI;
+using Ray2Mod.Game.Structs.EngineObject;
+using Ray2Mod.Game.Structs.MathStructs;
+using Ray2Mod.Game.Structs.SPO;
+using System;
 using System.Collections.Generic;
 
 namespace Ray2Mod.Game.Structs
@@ -34,7 +38,6 @@ namespace Ray2Mod.Game.Structs
 
     public static class DsgVarTypes
     {
-
         public static Dictionary<DsgVarType, Type> Map = new Dictionary<DsgVarType, Type>()
         {
             {DsgVarType.Boolean,        typeof(bool) },
@@ -64,6 +67,4 @@ namespace Ray2Mod.Game.Structs
             {DsgVarType.SuperObject,    typeof(SuperObject*) },
         };
     }
-
-
 }

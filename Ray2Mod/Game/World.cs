@@ -2,6 +2,9 @@
 using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
+using Ray2Mod.Game.Structs.EngineObject;
+using Ray2Mod.Game.Structs.MathStructs;
+using Ray2Mod.Game.Structs.SPO;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

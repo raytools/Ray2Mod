@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Game.Structs;
+using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Types;
 using System;
 
@@ -55,6 +56,5 @@ namespace Ray2Mod.Components.UI
         protected abstract void DrawGraphics();
 
         protected abstract void DrawText();
-
     }
 }
