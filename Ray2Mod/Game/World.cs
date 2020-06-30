@@ -1,4 +1,5 @@
-﻿using Ray2Mod.Components.Types;
+﻿using Ray2Mod.Components;
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Utils;
@@ -13,7 +14,7 @@ namespace Ray2Mod.Game
     {
         private RemoteInterface remoteInterface;
 
-        private Dictionary<ObjectSet, string[]> ObjectNames = null;
+        public Dictionary<ObjectSet, string[]> ObjectNames { get; private set; } = null;
 
         public SuperObject* WorldSector
         {
@@ -23,11 +24,33 @@ namespace Ray2Mod.Game
             }
         }
 
+        public SuperObject* ActiveDynamicWorld
+        {
+            get
+            {
+                return *((SuperObject**)(Offsets.ActiveDynamicWorld));
+            }
+        }
+
+        public SuperObject* InactiveDynamicWorld
+        {
+            get
+            {
+                return *((SuperObject**)(Offsets.InactiveDynamicWorld));
+            }
+        }
+
         public World(RemoteInterface remoteInterface)
         {
             this.remoteInterface = remoteInterface;
+
+            // Read Object Names every frame
+            GlobalActions.Engine += ReadObjectNames;
         }
-        private World() { }
+
+        private World()
+        {
+        }
 
         struct ListItem
         {
@@ -40,8 +63,6 @@ namespace Ray2Mod.Game
 
         public Dictionary<string, Pointer<Perso>> GetAlwaysObjects()
         {
-            ReadObjectNames();
-
             int* off_NumAlways = (int*)Offsets.NumAlways;
             Dictionary<string, Pointer<Perso>> result = new Dictionary<string, Pointer<Perso>>();
 
@@ -58,24 +79,18 @@ namespace Ray2Mod.Game
             return result;
         }
 
-        public Dictionary<string, Pointer<SuperObject>> GetActiveSuperObjects()
+        /// <summary>
+        /// Returns a dictionary of Perso-type SuperObjects with their instance name as their key.
+        /// </summary>
+        /// <param name="world">The world, either ActiveDynamicWorld or InactiveDynamicWorld</param>
+        /// <returns></returns>
+        public Dictionary<string, Pointer<SuperObject>> GetSuperObjectsWithNames(SuperObject* world)
         {
-            return GetSuperObjects(Offsets.ActiveDynamicWorld);
-        }
-
-        public Dictionary<string, Pointer<SuperObject>> GetInactiveSuperObjects()
-        {
-            return GetSuperObjects(Offsets.InactiveDynamicWorld);
-        }
-
-        private Dictionary<string, Pointer<SuperObject>> GetSuperObjects(int offsetWorld)
-        {
-
             Dictionary<string, Pointer<SuperObject>> result = new Dictionary<string, Pointer<SuperObject>>();
 
-            SuperObject* superObject = (SuperObject*)Memory.GetPointerAtOffset(offsetWorld, 0x8, 0x0);
+            SuperObject*[] superObjects = world->children.Read();
 
-            while (superObject != null)
+            foreach (SuperObject* superObject in superObjects)
             {
                 Perso* perso = (Perso*)superObject->engineObjectPtr;
                 if (perso != null)
@@ -90,25 +105,20 @@ namespace Ray2Mod.Game
                     if (!result.ContainsKey(name))
                         result.Add(name, superObject);
                 }
-
-                superObject = superObject->nextBrother;
             }
 
             return result;
         }
 
-        public Dictionary<ObjectSet, string[]> GetObjectNames(bool refresh = false)
-        {
-            if (ObjectNames == null || refresh)
-            {
-                ReadObjectNames();
-            }
-
-            return ObjectNames;
-        }
-
         private void ReadObjectNames()
         {
+            byte engineState = *(byte*)Offsets.EngineState;
+
+            if (engineState != 9)
+            {
+                return;
+            }
+
             const int offObjectTypes = Offsets.ObjectTypes;
             ObjectNames = new Dictionary<ObjectSet, string[]>();
 
@@ -130,7 +140,6 @@ namespace Ray2Mod.Game
 
             for (int j = 0; j < numNames; j++)
             {
-
                 int* offNamesNext = (int*)*currentOffset;
                 byte* offName = (byte*)*(currentOffset + 3);
 
@@ -150,7 +159,6 @@ namespace Ray2Mod.Game
 
         public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso* alwaysPerso, Vector3 position)
         {
-
             if (spawnedBy == null)
             {
                 throw new NullReferenceException("GenerateAlwaysObject: spawnedBy is not allowed to be null!");
@@ -192,7 +200,6 @@ namespace Ray2Mod.Game
         {
             return WorldSector->children.Read();
         }
-
     }
 
     public enum ObjectSet

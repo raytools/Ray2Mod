@@ -1,5 +1,4 @@
-﻿using Ray2Mod.Components.Types;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Utils

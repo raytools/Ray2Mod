@@ -12,7 +12,7 @@ namespace Ray2Mod.Game.Types
         public Texture(IntPtr ptr)
         {
             Name = Marshal.PtrToStringAnsi(ptr + 0x46);
-            TexData = (TextureData*) ptr;
+            TexData = (TextureData*)ptr;
 
             byte[] ptrBytes = Memory.GetBytes(ptr - 0x8, 4);
 

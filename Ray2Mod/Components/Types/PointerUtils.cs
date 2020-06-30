@@ -5,7 +5,6 @@ namespace Ray2Mod.Components.Types
 {
     public static unsafe class PointerUtils
     {
-
         // Very dirty Linq-like extension method because pointers as generics aren't allowed...
         public static T*[] Where<T>(this T*[] array, Func<Pointer<T>, bool> filter) where T : unmanaged
         {

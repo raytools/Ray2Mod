@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Ray2Mod.Utils
 {
+    // TODO: Check if still necessary, World.cs does this now, maybe move it back here?
     public static unsafe class ObjectNameUtils
     {
         public const int off_objectTypes = Offsets.ObjectTypes;
@@ -31,7 +32,6 @@ namespace Ray2Mod.Utils
 
             for (int j = 0; j < num_names; j++)
             {
-
                 int* off_names_next = (int*)*currentOffset;
                 byte* off_name = (byte*)*(currentOffset + 3);
 

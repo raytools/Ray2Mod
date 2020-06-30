@@ -1,6 +1,5 @@
 ﻿namespace Ray2Mod.Game
 {
-
     // Based on Rayman 2 GOG.com version
 
     public static class Offsets
@@ -29,6 +28,7 @@
             public const int COL_fn_bCollideStaticSphereWithStaticIndexedTriangle = 0x00499440;
             public const int COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 = 0x04990F0;
             public const int AllocateMem = 0x442420;
+            public const int fn_vInitOneObject = 0x405E50;
         }
 
         public class ParticleFunctions

@@ -74,6 +74,12 @@
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
     <Compile Include="Game\Structs\ActiveSectorStruct.cs" />
+    <Compile Include="Game\Structs\Dynamics\Dynam.cs" />
+    <Compile Include="Game\Structs\Dynamics\Dynamics.cs" />
+    <Compile Include="Game\Structs\Dynamics\DynamicsMedium.cs" />
+    <Compile Include="Game\Structs\Dynamics\DynamicsSmall.cs" />
+    <Compile Include="Game\Structs\Dynamics\DynamicsBig.cs" />
+    <Compile Include="Game\Structs\Dynamics\MatrixDynamics.cs" />
     <Compile Include="Game\Structs\Geometry\BoundingVolume.cs" />
     <Compile Include="Game\Structs\Geometry\GeometricElement.cs" />
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />

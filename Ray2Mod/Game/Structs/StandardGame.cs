@@ -2,6 +2,7 @@
 
 namespace Ray2Mod.Game.Structs
 {
+    // Size = 0x34
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct StandardGame
     {
@@ -9,20 +10,22 @@ namespace Ray2Mod.Game.Structs
         public int modelID;
         public int instanceID;
         public SuperObject* superObjectPtr;
-        public int gap1;
-        public int gap2;
-        public int gap3;
-        public int gap4;
+        public int field_0x10;
+        public int field_0x14_someInitializeSetting;
+        public int field_0x18;
+        public int field_0x1C;
         public byte hitpoints;
-        public byte gap5;
+        public byte field_21;
         public byte hitpointsMax;
-        public byte gap6;
+        public byte field_23;
         public int customBits;
         public byte isAPlatform;
         public byte updateCheckByte;
         public byte transparencyZoneMin;
         public byte transparencyZoneMax;
         public int customBitsInitial;
+        public int field_2E;
+        public short field_32;
 
         public void SetCustomBit(int bitNum)
         {
@@ -38,8 +41,5 @@ namespace Ray2Mod.Game.Structs
         {
             customBits = customBitsInitial;
         }
-
     }
-
-
 }

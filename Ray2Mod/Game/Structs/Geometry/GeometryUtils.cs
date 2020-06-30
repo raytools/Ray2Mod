@@ -1,5 +1,4 @@
-﻿using System;
-using JeremyAnsel.Media.WavefrontObj;
+﻿using JeremyAnsel.Media.WavefrontObj;
 using Ray2Mod.Game.Structs.Material;
 using Ray2Mod.Game.Types;
 using Ray2Mod.Utils;
@@ -43,7 +42,6 @@ namespace Ray2Mod.Game.Structs.Geometry
 
             ri.Log($"MATERIAL CHANGED NEW PTR 0x{(int)gt->material:X}, VIS 0x{(int)(gt->material->visualMaterial):X}, TEX 0x{(int)(gt->material->visualMaterial->off_texture):X}");
             */
-
 
             var file = ObjFile.FromFile(objPath);
 
@@ -123,14 +121,14 @@ namespace Ray2Mod.Game.Structs.Geometry
                 if (!Memory.IsNull(newMtl.collideMaterial))
                 {
                     CollideMaterial cm = *newMtl.collideMaterial;
-                    string[] nameSplit = objGroup.Name.Split(new[] {':'}, 2);
+                    string[] nameSplit = objGroup.Name.Split(new[] { ':' }, 2);
                     if (nameSplit.Length > 1)
                     {
                         string flagStr = nameSplit[1];
                         if (!string.IsNullOrEmpty(flagStr))
                         {
                             ushort flag = ushort.Parse(flagStr);
-                            cm.identifier = (CollisionFlags.EnumCollisionFlags) flag;
+                            cm.identifier = (CollisionFlags.EnumCollisionFlags)flag;
                         }
                         ri.Log($"OBJ {objGroup.Name} FLAGS {cm.identifier:F}");
                     }
@@ -162,7 +160,6 @@ namespace Ray2Mod.Game.Structs.Geometry
             {
                 return new Vector3(v.Position.X, v.Position.Y, v.Position.Z);
             });
-
 
             var vertsArray = verts.ToArray();
 

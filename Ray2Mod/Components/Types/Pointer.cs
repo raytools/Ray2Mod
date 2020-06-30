@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ray2Mod.Components.Types
 {
@@ -41,6 +42,34 @@ namespace Ray2Mod.Components.Types
             }
 
             return results;
+        }
+
+        public static T*[] PointerListToArray(List<Pointer<T>> ptrList)
+        {
+            T*[] results = new T*[ptrList.Count];
+            for (int i = 0; i < ptrList.Count; i++)
+            {
+                results[i] = ptrList[i];
+            }
+
+            return results;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Pointer<T>)
+            {
+                return IntPtr == ((Pointer<T>)obj).IntPtr;
+            }
+            if (obj is IntPtr)
+            {
+                return IntPtr == (IntPtr)obj;
+            }
+            if (obj is int)
+            {
+                return IntPtr.ToInt32() == ((int)obj);
+            }
+            return false;
         }
 
         public override string ToString()

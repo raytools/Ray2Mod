@@ -17,6 +17,7 @@ namespace Ray2Mod.Game.Functions
             COL_fn_bCollideStaticSphereWithStaticIndexedTriangle = new GameFunction<D_COL_fn_bCollideStaticSphereWithStaticIndexedTriangle>(Offsets.EngineFunctions.COL_fn_bCollideStaticSphereWithStaticIndexedTriangle);
             COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 = new GameFunction<D_COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2>(Offsets.EngineFunctions.COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2);
             AllocateMem = new GameFunction<D_AllocateMem>(Offsets.EngineFunctions.AllocateMem);
+            fn_vInitOneObject = new GameFunction<D_fn_vInitOneObject>(Offsets.EngineFunctions.fn_vInitOneObject);
         }
 
         #region VEngine
@@ -26,7 +27,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<DVEngine> VEngine { get; }
 
-        #endregion
+        #endregion VEngine
 
         #region GetCurrentLevelName
 
@@ -35,7 +36,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<DGetCurrentLevelName> GetCurrentLevelName { get; }
 
-        #endregion
+        #endregion GetCurrentLevelName
 
         #region AskToChangeLevel
 
@@ -44,7 +45,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<DAskToChangeLevel> AskToChangeLevel { get; }
 
-        #endregion
+        #endregion AskToChangeLevel
 
         #region Code4PersoLePlusProche
 
@@ -53,7 +54,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<DCode4PersoLePlusProche> Code4PersoLePlusProche { get; }
 
-        #endregion
+        #endregion Code4PersoLePlusProche
 
         #region MiscFunction
 
@@ -62,7 +63,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<DMiscFunction> MiscFunction { get; }
 
-        #endregion
+        #endregion MiscFunction
 
         #region GEO_vEndModifyObject
 
@@ -71,10 +72,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<D_GEO_vEndModifyObject> GEO_vEndModifyObject { get; }
 
-        #endregion
-
-
-
+        #endregion GEO_vEndModifyObject
 
         #region COL_fn_bCollideStaticSphereWithStaticIndexedTriangle
 
@@ -83,7 +81,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<D_COL_fn_bCollideStaticSphereWithStaticIndexedTriangle> COL_fn_bCollideStaticSphereWithStaticIndexedTriangle { get; }
 
-        #endregion
+        #endregion COL_fn_bCollideStaticSphereWithStaticIndexedTriangle
 
         #region COL_fn_bCollideStaticSphereWithStaticIndexedTriangle
 
@@ -92,8 +90,7 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<D_COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2> COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 { get; }
 
-        #endregion
-
+        #endregion COL_fn_bCollideStaticSphereWithStaticIndexedTriangle
 
         #region AllocateMemory
 
@@ -102,7 +99,20 @@ namespace Ray2Mod.Game.Functions
 
         public static GameFunction<D_AllocateMem> AllocateMem { get; }
 
+        #endregion AllocateMemory
 
-        #endregion
+        #region fn_vInitOneObject
+
+        /// <summary>
+        /// Initialize one EngineObject of type Perso
+        /// </summary>
+        /// <param name="perso">The Perso</param>
+        /// <param name="initializeMode">0 for normal initialization, 1 for always objects</param>
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_fn_vInitOneObject(Perso* perso, int initializeMode);
+
+        public static GameFunction<D_fn_vInitOneObject> fn_vInitOneObject { get; }
+
+        #endregion fn_vInitOneObject
     }
 }
