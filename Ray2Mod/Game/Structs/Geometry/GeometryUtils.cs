@@ -128,13 +128,13 @@ namespace Ray2Mod.Game.Structs.Geometry
                         if (!string.IsNullOrEmpty(flagStr))
                         {
                             ushort flag = ushort.Parse(flagStr);
-                            cm.identifier = (CollisionFlags.EnumCollisionFlags)flag;
+                            cm.identifier = (CollisionFlags)flag;
                         }
                         ri.Log($"OBJ {objGroup.Name} FLAGS {cm.identifier:F}");
                     }
                     else
                     {
-                        cm.identifier = CollisionFlags.EnumCollisionFlags.GrabbableLedge;
+                        cm.identifier = CollisionFlags.GrabbableLedge;
                     }
                     newMtl.collideMaterial = cm.ToUnmanaged();
                 }
