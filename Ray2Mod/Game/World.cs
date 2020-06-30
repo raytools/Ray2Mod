@@ -12,44 +12,17 @@ namespace Ray2Mod.Game
 {
     public unsafe class World
     {
-        private RemoteInterface remoteInterface;
+        public Dictionary<ObjectSet, string[]> ObjectNames { get; private set; }
 
-        public Dictionary<ObjectSet, string[]> ObjectNames { get; private set; } = null;
+        public SuperObject* WorldSector => *((SuperObject**)(Offsets.FatherSector));
 
-        public SuperObject* WorldSector
+        public SuperObject* ActiveDynamicWorld => *((SuperObject**)(Offsets.ActiveDynamicWorld));
+
+        public SuperObject* InactiveDynamicWorld => *((SuperObject**)(Offsets.InactiveDynamicWorld));
+
+        public World()
         {
-            get
-            {
-                return *((SuperObject**)(Offsets.FatherSector));
-            }
-        }
-
-        public SuperObject* ActiveDynamicWorld
-        {
-            get
-            {
-                return *((SuperObject**)(Offsets.ActiveDynamicWorld));
-            }
-        }
-
-        public SuperObject* InactiveDynamicWorld
-        {
-            get
-            {
-                return *((SuperObject**)(Offsets.InactiveDynamicWorld));
-            }
-        }
-
-        public World(RemoteInterface remoteInterface)
-        {
-            this.remoteInterface = remoteInterface;
-
-            // Read Object Names every frame
-            GlobalActions.Engine += ReadObjectNames;
-        }
-
-        private World()
-        {
+            GlobalActions.EngineStateChanged += ReadObjectNames;
         }
 
         struct ListItem
@@ -110,14 +83,9 @@ namespace Ray2Mod.Game
             return result;
         }
 
-        private void ReadObjectNames()
+        private void ReadObjectNames(byte previous, byte current)
         {
-            byte engineState = *(byte*)Offsets.EngineState;
-
-            if (engineState != 9)
-            {
-                return;
-            }
+            if (current != 9 || previous >= 9) return;
 
             const int offObjectTypes = Offsets.ObjectTypes;
             ObjectNames = new Dictionary<ObjectSet, string[]>();

@@ -30,6 +30,7 @@ namespace ModLoader
                 Interface.Log($"Using {OtherUtils.ApiProductName} v{OtherUtils.ApiVersion}");
 
                 GlobalHooks.InitGlobalHooks(Interface);
+                GlobalActions.EngineStateChanged += OnGameExit;
 
                 Loader = new Loader(Interface);
                 Loader.LoadMods(dllsToLoad);
@@ -49,6 +50,14 @@ namespace ModLoader
             catch (Exception e)
             {
                 Interface.HandleError(e);
+            }
+        }
+
+        private void OnGameExit(byte previous, byte current)
+        {
+            if (current == 2)
+            {
+                Interface.ProcessExit();
             }
         }
     }

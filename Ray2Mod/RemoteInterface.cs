@@ -10,6 +10,8 @@ namespace Ray2Mod
 
         public abstract void HandleError(Exception e);
 
+        public abstract void ProcessExit();
+
         public override object InitializeLifetimeService()
         {
             return null;

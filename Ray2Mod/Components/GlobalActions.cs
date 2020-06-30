@@ -1,5 +1,8 @@
 ﻿using Ray2Mod.Game.Functions;
 using System;
+using System.Threading.Tasks;
+using Ray2Mod.Components.Text;
+using Ray2Mod.Game;
 
 namespace Ray2Mod.Components
 {
@@ -7,9 +10,34 @@ namespace Ray2Mod.Components
     {
         static GlobalActions()
         {
+            Task.Run(PollEngineState);
         }
 
         internal static RemoteInterface Interface { get; set; }
+
+        public delegate void StateEventDelegate(byte previous, byte current);
+        public static event StateEventDelegate EngineStateChanged;
+
+        private static byte previousEngineState;
+
+        private static Task PollEngineState()
+        {
+            while (true)
+            {
+                unsafe
+                {
+                    // invoke EngineStateChanged if the state byte changes
+                    byte engineState = *(byte*)Offsets.EngineState;
+                    if (engineState != previousEngineState)
+                    {
+                        Interface?.Log($";;;;Engine state changed from {previousEngineState} to {engineState}.", LogType.Debug);
+                        EngineStateChanged?.Invoke(previousEngineState, engineState);
+                        previousEngineState = engineState;
+                    }
+                }
+                //await Task.Delay(20);
+            }
+        }
 
         public static event Action Engine;
 
@@ -19,6 +47,7 @@ namespace Ray2Mod.Components
 
             try
             {
+                // invoke engine actions
                 Engine?.Invoke();
             }
             catch (Exception e)

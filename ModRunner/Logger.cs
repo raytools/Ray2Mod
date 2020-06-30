@@ -1,5 +1,6 @@
 ﻿using Ray2Mod;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 
 namespace ModRunner
@@ -20,6 +21,11 @@ namespace ModRunner
         public override void HandleError(Exception e)
         {
             Log(e.ToString(), LogType.Error);
+        }
+
+        public override void ProcessExit()
+        {
+            Environment.Exit(0);
         }
     }
 }
