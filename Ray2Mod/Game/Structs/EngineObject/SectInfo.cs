@@ -1,6 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using Ray2Mod.Game.Structs.SPO;
+using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.EngineObject
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct SectInfo

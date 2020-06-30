@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Game.Structs.Material;
+using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Utils;
 using System;
 using System.Runtime.InteropServices;

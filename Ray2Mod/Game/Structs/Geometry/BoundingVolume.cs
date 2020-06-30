@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Ray2Mod.Game.Structs.MathStructs;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.Geometry
 {
-
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct BoundingVolumeBox
     {

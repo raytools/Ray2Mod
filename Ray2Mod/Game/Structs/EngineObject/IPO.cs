@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.EngineObject
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct IPO

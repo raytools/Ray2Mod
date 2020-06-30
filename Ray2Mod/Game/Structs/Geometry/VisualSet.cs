@@ -1,8 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.Geometry
 {
-
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct VisualSet
     {

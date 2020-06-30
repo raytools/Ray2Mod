@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.MathStructs
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector3
@@ -13,7 +13,9 @@ namespace Ray2Mod.Game.Structs
             this.z = z;
         }
 
-        public Vector3(Vector3 o) : this(o.x, o.y, o.z) { }
+        public Vector3(Vector3 o) : this(o.x, o.y, o.z)
+        {
+        }
 
         public void Set(Vector3 newVec)
         {
@@ -29,6 +31,7 @@ namespace Ray2Mod.Game.Structs
         public static Vector3 Zero = new Vector3(0, 0, 0);
 
         public double Length => Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
+
         public static Vector3 operator +(Vector3 a, Vector3 b)
         {
             return new Vector3(a.x + b.x, a.y + b.y, a.z + b.z);

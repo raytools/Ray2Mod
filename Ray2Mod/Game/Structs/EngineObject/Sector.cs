@@ -1,14 +1,14 @@
 ﻿using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
+using Ray2Mod.Game.Structs.SPO;
 using Ray2Mod.Utils;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs
+namespace Ray2Mod.Game.Structs.EngineObject
 {
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Sector
     {
-
         public LinkedList.HasHeaderPointers_ElementPointerFirst<SuperObject> persoSPOList;
 
         public LinkedList.HasHeaderPointers<int> staticLightsList;
