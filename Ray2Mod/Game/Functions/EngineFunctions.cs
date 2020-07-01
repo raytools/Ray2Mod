@@ -20,6 +20,9 @@ namespace Ray2Mod.Game.Functions
             COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 = new GameFunction<D_COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2>(Offsets.EngineFunctions.COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2);
             AllocateMem = new GameFunction<D_AllocateMem>(Offsets.EngineFunctions.AllocateMem);
             fn_vInitOneObject = new GameFunction<D_fn_vInitOneObject>(Offsets.EngineFunctions.fn_vInitOneObject);
+            fn_v3dDataCopyClone = new GameFunction<D_fn_v3dDataCopyClone>(Offsets.EngineFunctions.fn_v3dDataCopyClone);
+            fn_vBrainCopyClone = new GameFunction<D_fn_vBrainCopyClone>(Offsets.EngineFunctions.fn_vBrainCopyClone);
+            fn_p_stAllocateAlways = new GameFunction<D_fn_p_stAllocateAlways>(Offsets.EngineFunctions.fn_p_stAllocateAlways);
         }
 
         #region VEngine
@@ -116,5 +119,32 @@ namespace Ray2Mod.Game.Functions
         public static GameFunction<D_fn_vInitOneObject> fn_vInitOneObject { get; }
 
         #endregion fn_vInitOneObject
+
+        #region fn_v3dDataCopyClone
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_fn_v3dDataCopyClone(Perso* target, Perso* source);
+
+        public static GameFunction<D_fn_v3dDataCopyClone> fn_v3dDataCopyClone { get; }
+
+        #endregion fn_v3dDataCopyClone
+
+        #region fn_vBrainCopyClone
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_fn_vBrainCopyClone(Perso* target, Perso* source);
+
+        public static GameFunction<D_fn_vBrainCopyClone> fn_vBrainCopyClone { get; }
+
+        #endregion fn_vBrainCopyClone
+
+        #region fn_p_stAllocateAlways
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_fn_p_stAllocateAlways(Perso* target, Perso* source);
+
+        public static GameFunction<D_fn_p_stAllocateAlways> fn_p_stAllocateAlways { get; }
+
+        #endregion fn_p_stAllocateAlways
     }
 }

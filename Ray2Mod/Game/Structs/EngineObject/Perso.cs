@@ -12,7 +12,7 @@ namespace Ray2Mod.Game.Structs.EngineObject
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Perso
     {
-        public int p3dData;
+        public Perso3dData* p3dData;
         public StandardGame* stdGamePtr;
         public Dynam* dynam;
         public Brain* brain;
@@ -89,11 +89,19 @@ namespace Ray2Mod.Game.Structs.EngineObject
             Perso* newPerso = new Perso().ToUnmanaged();
             newSuperObject->PersoData = newPerso;
 
-            newPerso->p3dData = ogPerso->p3dData;
             var standardGame = (*ogPerso->stdGamePtr).ToUnmanaged(); ;  // Copy StandardGame
             standardGame->superObjectPtr = newSuperObject;
             standardGame->instanceID = 99999;
             newPerso->stdGamePtr = standardGame;
+
+            newPerso->brain = new Brain().ToUnmanaged();
+            newPerso->brain->mind = new Mind() { aiModel = ogPerso->brain->mind->aiModel }.ToUnmanaged();
+            newPerso->p3dData = new Perso3dData().ToUnmanaged();
+
+            if (ogPerso->brain != null)
+                EngineFunctions.fn_vBrainCopyClone.Call(newPerso, ogPerso);
+            if (ogPerso->p3dData != null)
+                EngineFunctions.fn_v3dDataCopyClone.Call(newPerso, ogPerso);
 
             EngineFunctions.fn_vInitOneObject.Call(newPerso, 0);
 

@@ -7,7 +7,7 @@ namespace Ray2Mod.Game.Structs.AI
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Mind
     {
-        public AIModel* mind;
+        public AIModel* aiModel;
         public Behavior* currentIntelligenceNormal;
         public Behavior* currentIntelligenceReflex;
         public DsgMem* dsgMem;
@@ -16,11 +16,11 @@ namespace Ray2Mod.Game.Structs.AI
 
         public T* GetDsgVar<T>(int index, byte* buffer, out byte arraySize) where T : unmanaged
         {
-            if (index < 0 || index >= mind->dsgVar->dsgVarInfosLength)
+            if (index < 0 || index >= aiModel->dsgVar->dsgVarInfosLength)
             {
                 throw new IndexOutOfRangeException("The DsgVar index is outside of the range of the DsgVarInfo-array");
             }
-            DsgVarInfo info = mind->dsgVar->dsgVarInfos[index];
+            DsgVarInfo info = aiModel->dsgVar->dsgVarInfos[index];
 
             if (DsgVarTypes.Map[info.type].IsArray)
             {

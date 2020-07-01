@@ -78,6 +78,8 @@
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
+    <Compile Include="Game\Structs\AlwaysObjects.cs" />
+    <Compile Include="Game\Structs\EngineObject\Perso3dData.cs" />
     <Compile Include="Game\Structs\EngineObject\SectInfo.cs" />
     <Compile Include="Game\Structs\Dynamics\Dynam.cs" />
     <Compile Include="Game\Structs\Dynamics\Dynamics.cs" />
