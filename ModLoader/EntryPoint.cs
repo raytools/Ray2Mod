@@ -57,7 +57,12 @@ namespace ModLoader
         {
             if (current == 2)
             {
-                Interface.ProcessExit();
+                try
+                {
+                    Interface?.ProcessExit();
+                }
+                catch (Exception) { }
+                
             }
         }
     }

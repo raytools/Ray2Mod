@@ -22,7 +22,8 @@ namespace Ray2Mod.Game.Structs.Geometry
 
             //GeometricElementTriangles* gt = (GeometricElementTriangles*)go->off_elements[0];// new GeometricElementTriangles().ToUnmanaged();
 
-            GameMaterial mtl = *material;
+            //GameMaterial mtl = *material;
+            GameMaterial mtl = new GameMaterial();
             //VisualMaterial vm = *mtl.visualMaterial;
 
             List<Texture> textures = TextureLoader.GetTextures();
@@ -56,7 +57,12 @@ namespace Ray2Mod.Game.Structs.Geometry
                 ri.Log($"OBJECT GROUP {objGroup.Name}");
 
                 GameMaterial newMtl = mtl;
-                VisualMaterial vis = *newMtl.visualMaterial;
+                //VisualMaterial vis = *newMtl.visualMaterial;
+                VisualMaterial vis = new VisualMaterial();
+
+                // TODO: figure out visual material flags
+                vis.flags = 1306265599;
+                vis.ambientCoef = new Vector4(0.3f, 0.3f, 0.3f, 0.3f);
 
                 // Group start
 
@@ -119,9 +125,10 @@ namespace Ray2Mod.Game.Structs.Geometry
                     }
                 }
 
-                if (!Memory.IsNull(newMtl.collideMaterial))
+                if (!Memory.IsNull(newMtl.collideMaterial) || true)
                 {
-                    CollideMaterial cm = *newMtl.collideMaterial;
+                    //CollideMaterial cm = *newMtl.collideMaterial;
+                    CollideMaterial cm = new CollideMaterial();
                     string[] nameSplit = objGroup.Name.Split(new[] { ':' }, 2);
                     if (nameSplit.Length > 1)
                     {
