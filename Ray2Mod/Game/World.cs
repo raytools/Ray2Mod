@@ -22,36 +22,13 @@ namespace Ray2Mod.Game
 
         public SuperObject* InactiveDynamicWorld => *((SuperObject**)(Offsets.InactiveDynamicWorld));
 
+        public AlwaysObjects* AlwaysObjects => ((AlwaysObjects*)(Offsets.NumAlways));
+
         public World()
         {
-            GlobalActions.EngineStateChanged += ReadObjectNames;
-        }
+            ReadObjectNames();
 
-        struct ListItem
-        {
-            public ListItem* next;
-            public ListItem* prev;
-            public int header;
-            public int index;
-            public Perso* data;
-        }
-
-        public Dictionary<string, Pointer<Perso>> GetAlwaysObjects()
-        {
-            int* off_NumAlways = (int*)Offsets.NumAlways;
-            Dictionary<string, Pointer<Perso>> result = new Dictionary<string, Pointer<Perso>>();
-
-            int numAlways = *off_NumAlways;
-            ListItem* currentItem = ((ListItem*)(off_NumAlways + 1))->next; // skip the first item, since it's a header
-
-            while (currentItem != null)
-            {
-                Perso* perso = currentItem->data;
-                result.Add(ObjectNames[ObjectSet.Instance][perso->stdGamePtr->instanceID], perso);
-                currentItem = currentItem->next;
-            }
-
-            return result;
+            GlobalActions.EngineStateChanged += EngineStateChanged;
         }
 
         /// <summary>
@@ -85,10 +62,14 @@ namespace Ray2Mod.Game
             return result;
         }
 
-        private void ReadObjectNames(byte previous, byte current)
+        private void EngineStateChanged(byte previous, byte current)
         {
             if (current != 9 || previous >= 9) return;
+            ReadObjectNames();
+        }
 
+        private void ReadObjectNames()
+        {
             const int offObjectTypes = Offsets.ObjectTypes;
             ObjectNames = new Dictionary<ObjectSet, string[]>();
 

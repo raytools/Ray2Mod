@@ -29,6 +29,9 @@
             public const int COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 = 0x04990F0;
             public const int AllocateMem = 0x442420;
             public const int fn_vInitOneObject = 0x405E50;
+            public const int fn_v3dDataCopyClone = 0x4186F0;
+            public const int fn_vBrainCopyClone = 0x4180D0;
+            public const int fn_p_stAllocateAlways = 0x40BCC0;
         }
 
         public class ParticleFunctions
