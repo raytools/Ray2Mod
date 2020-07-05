@@ -20,30 +20,13 @@ namespace Ray2Mod.Game.Structs.Geometry
         {
             GeometricObject* go = original;
 
-            //GeometricElementTriangles* gt = (GeometricElementTriangles*)go->off_elements[0];// new GeometricElementTriangles().ToUnmanaged();
-
-            //GameMaterial mtl = *material;
             GameMaterial mtl = new GameMaterial();
-            //VisualMaterial vm = *mtl.visualMaterial;
 
             List<Texture> textures = TextureLoader.GetTextures();
-
             foreach (Texture t in textures)
             {
                 ri.Log($"Texture ptr 0x{(int)t.TexData:X} {t.Name}");
             }
-
-            /*
-            Texture tex = textures.First(t => t.Name == @"textures_objets\divers\cam_nocam_nz.tga");
-            if (tex != null)
-            {
-                ri.Log($"PREVIOUS TEX PTR 0x{(int)vm.off_texture:X}");
-                ri.Log($"REPLACING WITH TEX PTR 0x{(int)tex.TexData:X}");
-                vm.off_texture = tex.TexData;
-            }
-
-            ri.Log($"MATERIAL CHANGED NEW PTR 0x{(int)gt->material:X}, VIS 0x{(int)(gt->material->visualMaterial):X}, TEX 0x{(int)(gt->material->visualMaterial->off_texture):X}");
-            */
 
             var file = ObjFile.FromFile(objPath);
 
@@ -57,7 +40,6 @@ namespace Ray2Mod.Game.Structs.Geometry
                 ri.Log($"OBJECT GROUP {objGroup.Name}");
 
                 GameMaterial newMtl = mtl;
-                //VisualMaterial vis = *newMtl.visualMaterial;
                 VisualMaterial vis = new VisualMaterial();
 
                 // TODO: figure out visual material flags
@@ -127,7 +109,6 @@ namespace Ray2Mod.Game.Structs.Geometry
 
                 if (!Memory.IsNull(newMtl.collideMaterial) || true)
                 {
-                    //CollideMaterial cm = *newMtl.collideMaterial;
                     CollideMaterial cm = new CollideMaterial();
                     string[] nameSplit = objGroup.Name.Split(new[] { ':' }, 2);
                     if (nameSplit.Length > 1)
@@ -184,8 +165,6 @@ namespace Ray2Mod.Game.Structs.Geometry
             }
             go->SetGeometricElementTypes(types);
             go->SetGeometricElements(tempArray);
-
-            //go->SetGeometricElements(new []{ (int)gt });
 
             return go;
         }

@@ -33,10 +33,18 @@ namespace Ray2Mod.Game.Structs.LinkedLists
 
             public unsafe void Append(SuperObject* newSuperObject)
             {
-                newSuperObject->previousBrother = Tail;
-                newSuperObject->parent = Tail->parent;
-                Tail->nextBrother = newSuperObject;
-                Tail = newSuperObject;
+                if (Count == 0)
+                {
+                    Head = Tail = newSuperObject;
+                }
+                else
+                {
+                    newSuperObject->previousBrother = Tail;
+                    newSuperObject->parent = Tail->parent;
+                    Tail->nextBrother = newSuperObject;
+                    Tail = newSuperObject;
+                }
+
                 Count++;
             }
 
