@@ -5,7 +5,6 @@ using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.MathStructs;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.SPO
@@ -102,7 +101,7 @@ namespace Ray2Mod.Game.Structs.SPO
         {
             get
             {
-                if (flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     return (BoundingVolumeBox*)boundingVolume;
                 }
@@ -113,7 +112,7 @@ namespace Ray2Mod.Game.Structs.SPO
             }
             set
             {
-                if (flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     boundingVolume = (int*)value;
                 }
@@ -125,7 +124,7 @@ namespace Ray2Mod.Game.Structs.SPO
         {
             get
             {
-                if (!flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (!flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     return (BoundingVolumeSphere*)boundingVolume;
                 }
@@ -133,7 +132,7 @@ namespace Ray2Mod.Game.Structs.SPO
             }
             set
             {
-                if (!flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (!flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     boundingVolume = (int*)value;
                 }
@@ -141,7 +140,7 @@ namespace Ray2Mod.Game.Structs.SPO
             }
         }
 
-        public SuperObject*[] GetAllSiblings(SuperObject * includeSelf = null)
+        public SuperObject*[] GetAllSiblings(SuperObject* includeSelf = null)
         {
             List<Pointer<SuperObject>> siblings = new List<Pointer<SuperObject>>();
 
@@ -152,7 +151,7 @@ namespace Ray2Mod.Game.Structs.SPO
 
             SuperObject* brotherIter = previousBrother;
 
-            while(brotherIter != null && !siblings.Contains(brotherIter))
+            while (brotherIter != null && !siblings.Contains(brotherIter))
             {
                 siblings.Add(brotherIter);
                 brotherIter = previousBrother->previousBrother;

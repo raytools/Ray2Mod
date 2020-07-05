@@ -13,7 +13,7 @@ namespace Ray2Mod.Game.Structs.LinkedLists
             public SuperObject* Tail;
             public int Count;
 
-            public unsafe SuperObject*[] Read()
+            public SuperObject*[] Read()
             {
                 SuperObject*[] results = new SuperObject*[Count];
 
@@ -37,29 +37,31 @@ namespace Ray2Mod.Game.Structs.LinkedLists
                 return results;
             }
 
-            public unsafe void Add(SuperObject* newSuperObject)
+            public void Add(SuperObject* newSuperObject)
             {
-                if (Head == null || Tail == null)
+                if (Count == 0)
                 {
-                    Write(new SuperObject*[] { newSuperObject });
-                    return;
+                    Head = Tail = newSuperObject;
+                }
+                else
+                {
+                    newSuperObject->previousBrother = Tail;
+                    newSuperObject->parent = Tail->parent;
+                    Tail->nextBrother = newSuperObject;
+                    Tail = newSuperObject;
                 }
 
-                newSuperObject->previousBrother = Tail;
-                newSuperObject->parent = Tail->parent;
-                Tail->nextBrother = newSuperObject;
-                Tail = newSuperObject;
                 Count++;
             }
 
-            public unsafe void Remove(SuperObject* superObjectToRemove)
+            public void Remove(SuperObject* superObjectToRemove)
             {
                 var oldList = Read();
                 var newList = oldList.Where(i => i != superObjectToRemove);
                 Write(newList);
             }
 
-            public unsafe void Write(SuperObject*[] superObjects)
+            public void Write(SuperObject*[] superObjects)
             {
                 // First read the old list and clear their next and previous brother
                 var oldList = Read();
