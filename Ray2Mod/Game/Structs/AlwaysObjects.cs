@@ -1,5 +1,8 @@
 ﻿using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs.EngineObject;
+using Ray2Mod.Game.Structs.LinkedLists;
+using Ray2Mod.Game.Structs.SPO;
+using Ray2Mod.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +13,17 @@ namespace Ray2Mod.Game.Structs
 {
     public unsafe struct AlwaysObjects
     {
-        public int numAlways;
-        public ListItem* header; // first item is not really a list item, but a header
+        public struct AlwaysPersoListItem
+        {
+            public int index;
+            public Perso* perso;
+        }
+
+        public int numAlways; // Maximum number of always objects that can be spawned
+        public LinkedList.AlwaysPersoList alwaysPersos;
+        public SuperObject* alwaysSuperObjects;
+        public int* alwaysStructuresMaybe;
+        public Perso* reusablePersos;
 
         public struct ListItem
         {
@@ -22,22 +34,18 @@ namespace Ray2Mod.Game.Structs
             public Perso* data;
         }
 
-        public List<Pointer<Perso>> GetAlwaysObjects()
+        public Perso*[] ReusablePersos
         {
-            var result = new List<Pointer<Perso>>();
-
-            ListItem* currentItem = header->next;
-
-            while (currentItem != null)
+            get
             {
-                Perso* perso = currentItem->data;
-                result.Add(perso);
-                currentItem = currentItem->next;
+                Perso*[] result = new Perso*[numAlways];
+                for (int i = 0; i < numAlways; i++)
+                {
+                    result[i] = &reusablePersos[i];
+                }
+
+                return result;
             }
-
-            return result;
         }
-
-        //public void Append()
     }
 }

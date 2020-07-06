@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.MathStructs
 {
+    // Sizeof = 0x58
     [StructLayout(LayoutKind.Sequential)]
     public struct Matrix
     {
@@ -29,6 +30,18 @@ namespace Ray2Mod.Game.Structs.MathStructs
         public float scale_3_1;
         public float scale_3_2;
         public float scale_3_3;
+
+
+        public static Matrix IdentityMatrix = new Matrix()
+        {
+            transformationType = 1,
+            m_1_1 = 1,
+            m_2_2 = 1,
+            m_3_3 = 1,
+            scale_1_1 = 1,
+            scale_2_2 = 1,
+            scale_3_3 = 1
+        };
 
         public Matrix4x4 TransformationMatrix
         {

@@ -1,8 +1,11 @@
-﻿using Ray2Mod.Game.Structs.EngineObject;
+﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.MathStructs;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.SPO
@@ -123,6 +126,34 @@ namespace Ray2Mod.Game.Structs.SPO
                     throw new InvalidCastException($"Bounding volume is a box instead of a sphere, because flag BoundingBoxInsteadOfSphere is set");
                 }
             }
+        }
+
+        public SuperObject*[] GetAllSiblings(SuperObject * includeSelf = null)
+        {
+            List<Pointer<SuperObject>> siblings = new List<Pointer<SuperObject>>();
+
+            if (includeSelf != null)
+            {
+                siblings.Add(includeSelf);
+            }
+
+            SuperObject* brotherIter = previousBrother;
+
+            while(brotherIter != null && !siblings.Contains(brotherIter))
+            {
+                siblings.Add(brotherIter);
+                brotherIter = previousBrother->previousBrother;
+            }
+
+            brotherIter = nextBrother;
+
+            while (brotherIter != null && !siblings.Contains(brotherIter))
+            {
+                siblings.Add(brotherIter);
+                brotherIter = nextBrother->nextBrother;
+            }
+
+            return Pointer<SuperObject>.PointerListToArray(siblings);
         }
     }
 

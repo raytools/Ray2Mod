@@ -2,6 +2,8 @@
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.Geometry;
+using Ray2Mod.Game.Structs.MathStructs;
+using Ray2Mod.Game.Structs.SPO;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Functions
@@ -23,6 +25,13 @@ namespace Ray2Mod.Game.Functions
             fn_v3dDataCopyClone = new GameFunction<D_fn_v3dDataCopyClone>(Offsets.EngineFunctions.fn_v3dDataCopyClone);
             fn_vBrainCopyClone = new GameFunction<D_fn_vBrainCopyClone>(Offsets.EngineFunctions.fn_vBrainCopyClone);
             fn_p_stAllocateAlways = new GameFunction<D_fn_p_stAllocateAlways>(Offsets.EngineFunctions.fn_p_stAllocateAlways);
+            PLA_fn_hFindNextFreeSupObj = new GameFunction<D_PLA_fn_hFindNextFreeSupObj>(Offsets.EngineFunctions.PLA_fn_hFindNextFreeSupObj);
+            PLA_fn_vReleaseSuperObjectInHeap = new GameFunction<D_PLA_fn_vReleaseSuperObjectInHeap>(Offsets.EngineFunctions.PLA_fn_vReleaseSuperObjectInHeap);
+            fn_p_vGenAlloc = new GameFunction<D_fn_p_vGenAlloc>(Offsets.EngineFunctions.fn_p_vGenAlloc);
+            fn_p_vDynAlloc = new GameFunction<D_fn_p_vDynAlloc>(Offsets.EngineFunctions.fn_p_vDynAlloc);
+            fn_vGenFree = new GameFunction<D_fn_vGenFree>(Offsets.EngineFunctions.fn_vGenFree);
+            fn_vDynFree = new GameFunction<D_fn_vDynFree>(Offsets.EngineFunctions.fn_vDynFree);
+            PLA_fn_bSetNewState = new GameFunction<D_PLA_fn_bSetNewState>(Offsets.EngineFunctions.PLA_fn_bSetNewState);
         }
 
         #region VEngine
@@ -141,10 +150,73 @@ namespace Ray2Mod.Game.Functions
         #region fn_p_stAllocateAlways
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate void D_fn_p_stAllocateAlways(Perso* target, Perso* source);
+        public unsafe delegate void D_fn_p_stAllocateAlways(int modelID, Perso* dynamicWorld, Perso* callingSuperObject, int a4, Matrix* matrix);
 
         public static GameFunction<D_fn_p_stAllocateAlways> fn_p_stAllocateAlways { get; }
 
         #endregion fn_p_stAllocateAlways
+
+
+
+
+        #region PLA_fn_hFindNextFreeSupObj
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate SuperObject * D_PLA_fn_hFindNextFreeSupObj();
+
+        public static GameFunction<D_PLA_fn_hFindNextFreeSupObj> PLA_fn_hFindNextFreeSupObj { get; }
+
+        #endregion PLA_fn_hFindNextFreeSupObj
+
+        #region PLA_fn_vReleaseSuperObjectInHeap
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_PLA_fn_vReleaseSuperObjectInHeap(SuperObject * spo);
+
+        public static GameFunction<D_PLA_fn_vReleaseSuperObjectInHeap> PLA_fn_vReleaseSuperObjectInHeap { get; }
+
+        #endregion PLA_fn_vReleaseSuperObjectInHeap
+
+        #region fn_p_vGenAlloc
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int* D_fn_p_vGenAlloc(uint size, char module);
+
+        public static GameFunction<D_fn_p_vGenAlloc> fn_p_vGenAlloc { get; }
+
+        #endregion fn_p_vGenAlloc
+
+        #region fn_p_vDynAlloc
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int* D_fn_p_vDynAlloc(uint size);
+
+        public static GameFunction<D_fn_p_vDynAlloc> fn_p_vDynAlloc { get; }
+
+        #endregion fn_p_vDynAlloc
+
+
+        #region fn_vGenFree
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_fn_vGenFree(uint size, char module);
+
+        public static GameFunction<D_fn_vGenFree> fn_vGenFree { get; }
+
+        #endregion fn_vGenFree
+
+        #region fn_vDynFree
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate void D_fn_vDynFree(uint size);
+
+        public static GameFunction<D_fn_vDynFree> fn_vDynFree { get; }
+
+        #endregion fn_vDynFree
+
+        #region PLA_fn_bSetNewState
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate char D_PLA_fn_bSetNewState(SuperObject * persoSpo, State * state, char force, char withEvents, char setAnim);
+
+        public static GameFunction<D_PLA_fn_bSetNewState> PLA_fn_bSetNewState { get; }
+
+        #endregion PLA_fn_bSetNewState
+
     }
 }

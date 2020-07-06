@@ -92,6 +92,7 @@
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />
     <Compile Include="Game\Structs\Geometry\GeometryUtils.cs" />
     <Compile Include="Game\Structs\Geometry\UvMapping.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Non-Generic\AlwaysPersoList.cs" />
     <Compile Include="Game\Structs\Material\CollideMaterial.cs" />
     <Compile Include="Game\Structs\Material\VisualMaterial.cs" />
     <Compile Include="Game\Structs\Material\GameMaterial.cs" />

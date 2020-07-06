@@ -32,6 +32,12 @@
             public const int fn_v3dDataCopyClone = 0x4186F0;
             public const int fn_vBrainCopyClone = 0x4180D0;
             public const int fn_p_stAllocateAlways = 0x40BCC0;
+            public const int PLA_fn_hFindNextFreeSupObj = 0x40F140;
+            public const int PLA_fn_vReleaseSuperObjectInHeap = 0x40F220;
+            public const int fn_p_vGenAlloc = 0x443120;
+            public const int fn_p_vDynAlloc = 0x442680;
+            public const int fn_vGenFree = 0x443160;
+            public const int fn_vDynFree = 0x442740;
         }
 
         public class ParticleFunctions

@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Utils;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -8,26 +9,30 @@ namespace Ray2Mod.Game.Structs.LinkedLists
     public abstract unsafe partial class LinkedList
     {
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ListElement_HHP
+        public unsafe struct AlwaysPersoListElement
         {
-            public ListElement_HHP* Next;
-            public ListElement_HHP* Previous;
-            public ListElement_HHP* Header;
-            public int* Element;
+            public AlwaysPersoListElement* Next;
+            public AlwaysPersoListElement* Previous;
+            public AlwaysPersoListElement* Header;
+            /// <summary>
+            /// Model ID is checked when allocating an always object
+            /// </summary>
+            public int modelID;
+            public Perso* Element;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct HasHeaderPointers<T> where T : unmanaged
+        public unsafe struct AlwaysPersoList
         {
-            public ListElement_HHP* Head;
-            public ListElement_HHP* Tail;
+            public AlwaysPersoListElement* Head;
+            public AlwaysPersoListElement* Tail;
             public int Count;
 
-            public unsafe T*[] Read()
+            public unsafe Perso*[] Read()
             {
-                T*[] results = new T*[Count];
+                Perso*[] results = new Perso*[Count];
 
-                ListElement_HHP* Next = Head;
+                AlwaysPersoListElement* Next = Head;
 
                 for (int i = 0; i < Count; i++)
                 {
@@ -36,26 +41,27 @@ namespace Ray2Mod.Game.Structs.LinkedLists
                         break;
                     }
 
-                    ListElement_HHP* LinkedListElement = Next;
+                    AlwaysPersoListElement* LinkedListElement = Next;
                     Next = LinkedListElement->Next;
 
-                    results[i] = (T*)LinkedListElement->Element;
+                    results[i] = (Perso*)LinkedListElement->Element;
                 }
 
                 return results;
             }
 
-            public void Write(T*[] items)
+            public void Write(Perso*[] items)
             {
-                ListElement_HHP*[] elements = new ListElement_HHP*[items.Length];
+                AlwaysPersoListElement*[] elements = new AlwaysPersoListElement*[items.Length];
 
                 Count = elements.Length;
 
                 for (int i = 0; i < Count; i++)
                 {
-                    ListElement_HHP* NewElement = new ListElement_HHP()
+                    AlwaysPersoListElement* NewElement = new AlwaysPersoListElement()
                     {
-                        Element = (int*)items[i],
+                        modelID = items[i]->stdGamePtr->modelID,
+                        Element = items[i],
                         Previous = null,
                         Next = null,
                     }.ToUnmanaged();
@@ -82,21 +88,21 @@ namespace Ray2Mod.Game.Structs.LinkedLists
                 }
             }
 
-            public void Add(T* item)
+            public void Add(Perso* item)
             {
-                var items = Pointer<T>.WrapPointerArray(Read());
-                List<Pointer<T>> pointerList = new List<Pointer<T>>(items);
+                var items = Pointer<Perso>.WrapPointerArray(Read());
+                List<Pointer<Perso>> pointerList = new List<Pointer<Perso>>(items);
                 pointerList.Add(item);
-                Write(Pointer<T>.PointerListToArray(pointerList));
+                Write(Pointer<Perso>.PointerListToArray(pointerList));
             }
 
-            public void Remove(T* item)
+            public void Remove(Perso* item)
             {
-                var items = Pointer<T>.WrapPointerArray(Read());
-                List<Pointer<T>> pointerList = new List<Pointer<T>>(items);
+                var items = Pointer<Perso>.WrapPointerArray(Read());
+                List<Pointer<Perso>> pointerList = new List<Pointer<Perso>>(items);
                 pointerList.Remove(item);
                 var newLength = pointerList.Count;
-                Write(Pointer<T>.PointerListToArray(pointerList));
+                Write(Pointer<Perso>.PointerListToArray(pointerList));
             }
         }
 

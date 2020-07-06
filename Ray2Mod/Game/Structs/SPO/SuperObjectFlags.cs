@@ -6,7 +6,7 @@ namespace Ray2Mod.Game.Structs.SPO
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct SuperObjectFlags
     {
-        public ushort rawFlags;
+        public int rawFlags;
 
         public EnumSuperObjectFlags Flags
         {
@@ -16,7 +16,7 @@ namespace Ray2Mod.Game.Structs.SPO
             }
             set
             {
-                rawFlags = (ushort)value;
+                rawFlags = (int)value;
             }
         }
 

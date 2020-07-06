@@ -17,22 +17,34 @@ namespace Ray2Mod.Game.Structs.LinkedLists
             {
                 SuperObject*[] results = new SuperObject*[Count];
 
-                SuperObject* Next = Head;
-
-                for (int i = 0; i < Count; i++)
+                // List not empty?
+                if (Head != null)
                 {
-                    SuperObject* Element = Next;
-                    Next = Next->nextBrother;
-                    // Previous pointer is ignored
 
-                    results[i] = (SuperObject*)(Element);
+                    SuperObject* Next = Head;
+
+                    for (int i = 0; i < Count; i++)
+                    {
+                        SuperObject* Element = Next;
+                        Next = Next->nextBrother;
+                        // Previous pointer is ignored
+
+                        results[i] = (SuperObject*)(Element);
+                    }
+
                 }
 
                 return results;
             }
 
-            public unsafe void Append(SuperObject* newSuperObject)
+            public unsafe void Add(SuperObject* newSuperObject)
             {
+                if (Head == null || Tail == null)
+                {
+                    Write(new SuperObject*[] { newSuperObject });
+                    return;
+                }
+
                 newSuperObject->previousBrother = Tail;
                 newSuperObject->parent = Tail->parent;
                 Tail->nextBrother = newSuperObject;

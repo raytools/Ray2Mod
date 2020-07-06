@@ -108,7 +108,7 @@ namespace Ray2Mod.Game
             return names;
         }
 
-        public int GenerateAlwaysObject(SuperObject* spawnedBy, Perso* alwaysPerso, Vector3 position)
+        public Perso* GenerateAlwaysObject(SuperObject* spawnedBy, Perso* alwaysPerso, Vector3 position)
         {
             if (spawnedBy == null)
             {
@@ -144,7 +144,7 @@ namespace Ray2Mod.Game
 
             EngineFunctions.MiscFunction.Call((int)spawnedBy, (int)interpPtrStart, (int)paramArray);
 
-            return *(int*)paramArray.ToPointer();
+            return (Perso*)*((int*)paramArray.ToPointer());
         }
 
         public SuperObject*[] GetSectors()

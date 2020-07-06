@@ -1,5 +1,6 @@
 ﻿using EasyHook;
 using Ray2Mod.Components.Types;
+using Ray2Mod.Game.Functions;
 using System;
 using System.Collections.Generic;
 
@@ -29,6 +30,14 @@ namespace Ray2Mod.Components
             Hooks.Remove(hook);
 
             return true;
+        }
+
+        public void CreateHook(object fn_p_vGenFree, object dynamicFreeing) {
+            throw new NotImplementedException();
+        }
+
+        public void CreateHook(GameFunction<EngineFunctions.D_fn_vGenFree> fn_vGenFree, object dynamicFreeing) {
+            throw new NotImplementedException();
         }
     }
 }

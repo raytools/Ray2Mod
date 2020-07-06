@@ -10,7 +10,7 @@ namespace Ray2Mod.Game.Structs.LinkedLists
         [StructLayout(LayoutKind.Sequential)]
         public unsafe struct ListElement_HHP_EPF
         {
-            public int* Element; // Making this a T* gives issues
+            public int* Element;
             public ListElement_HHP_EPF* Next;
             public ListElement_HHP_EPF* Previous;
             public ListElement_HHP_EPF* Header;
