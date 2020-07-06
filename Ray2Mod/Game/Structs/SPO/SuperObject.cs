@@ -102,14 +102,22 @@ namespace Ray2Mod.Game.Structs.SPO
         {
             get
             {
-                if (flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     return (BoundingVolumeBox*)boundingVolume;
                 }
                 else
                 {
-                    throw new InvalidCastException($"Bounding volume is a sphere, unless flag BoundingBoxInsteadOfSphere is set");
+                    throw new InvalidCastException($"Bounding volume is a sphere (flag BoundingBoxInsteadOfSphere is _not_ set)");
                 }
+            }
+            set
+            {
+                if (flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
+                {
+                    boundingVolume = (int*)value;
+                }
+                else throw new InvalidCastException($"Bounding volume is a sphere (flag BoundingBoxInsteadOfSphere is _not_ set)");
             }
         }
 
@@ -117,14 +125,19 @@ namespace Ray2Mod.Game.Structs.SPO
         {
             get
             {
-                if (!flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (!flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     return (BoundingVolumeSphere*)boundingVolume;
                 }
-                else
+                else throw new InvalidCastException($"Bounding volume is a box (flag BoundingBoxInsteadOfSphere is set)");
+            }
+            set
+            {
+                if (!flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
-                    throw new InvalidCastException($"Bounding volume is a box instead of a sphere, because flag BoundingBoxInsteadOfSphere is set");
+                    boundingVolume = (int*)value;
                 }
+                else throw new InvalidCastException($"Bounding volume is a box (flag BoundingBoxInsteadOfSphere is set)");
             }
         }
 
