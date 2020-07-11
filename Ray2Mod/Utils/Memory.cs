@@ -60,13 +60,16 @@ namespace Ray2Mod.Utils
             return result;
         }
 
-        public static T* NewUnmanagedArray<T>(int size) where T : unmanaged
+        public static T* ToUnmanaged<T>(this T @struct) where T : unmanaged
         {
-            T* ptr = Malloc<T>(Marshal.SizeOf<T>() * size);
+            T* ptr = Malloc<T>(Marshal.SizeOf(@struct));
+            // This causes a memory leak if not freed after using. Too bad!
+            *ptr = @struct;
+
             return ptr;
         }
 
-        public static T* ToUnmanagedArray<T>(this T[] array) where T : unmanaged
+        public static T* ToUnmanaged<T>(this T[] array) where T : unmanaged
         {
             int length = array.Length;
             T* ptr = NewUnmanagedArray<T>(length);
@@ -79,12 +82,22 @@ namespace Ray2Mod.Utils
             return ptr;
         }
 
-        public static T* ToUnmanaged<T>(this T obj) where T : unmanaged
+        public static T** ToUnmanaged<T>(this T*[] ptrArray) where T : unmanaged
         {
-            T* ptr = Malloc<T>(Marshal.SizeOf(obj));
-            // This causes a memory leak if not freed after using. Too bad!
-            Marshal.StructureToPtr(obj, (IntPtr)ptr, false);
+            int length = ptrArray.Length;
+            T** ptr = (T**)NewUnmanagedArray<int>(length);
 
+            for (int i = 0; i < length; i++)
+            {
+                ptr[i] = ptrArray[i];
+            }
+
+            return ptr;
+        }
+
+        public static T* NewUnmanagedArray<T>(int size) where T : unmanaged
+        {
+            T* ptr = Malloc<T>(Marshal.SizeOf<T>() * size);
             return ptr;
         }
 

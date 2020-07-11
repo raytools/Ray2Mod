@@ -71,19 +71,19 @@ namespace Ray2Mod.Game.Structs.Geometry
             {
                 throw new Exception("Error while setting Normals, the array length was not equal to the amount of vertices (tris*3). Please call SetTriangles first to change the amount of triangles.");
             }
-            normals = Memory.ToUnmanagedArray(value);
+            normals = Memory.ToUnmanaged(value);
         }
 
         public void SetTriangles(Triangle[] value)
         {
             numTriangles = checked((ushort)value.Length);
-            triangles = Memory.ToUnmanagedArray(value);
+            triangles = Memory.ToUnmanaged(value);
         }
 
         public void SetUVS(UV[] value)
         {
             numUVs = checked((ushort)value.Length);
-            uvs = Memory.ToUnmanagedArray(value);
+            uvs = Memory.ToUnmanaged(value);
         }
 
         public void SetUVMappings(UvMapping[] value)
@@ -93,7 +93,7 @@ namespace Ray2Mod.Game.Structs.Geometry
                 throw new Exception("Error while setting UV Mappings, the array length was not equal to the amount of triangles. Please call SetTriangles first to change the amount of triangles.");
             }
 
-            uvMappings = Memory.ToUnmanagedArray(value);
+            uvMappings = Memory.ToUnmanaged(value);
         }
     }
 

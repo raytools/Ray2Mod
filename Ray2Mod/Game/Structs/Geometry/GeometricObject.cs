@@ -55,7 +55,7 @@ namespace Ray2Mod.Game.Structs.Geometry
         public void SetVertices(Vector3[] value)
         {
             numVertices = checked((ushort)value.Length);
-            off_vertices = Memory.ToUnmanagedArray(value);
+            off_vertices = Memory.ToUnmanaged(value);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Ray2Mod.Game.Structs.Geometry
         public void SetNormals(Vector3[] value)
         {
             numVertices = checked((ushort)value.Length);
-            off_normals = Memory.ToUnmanagedArray(value);
+            off_normals = Memory.ToUnmanaged(value);
         }
 
         public ElementType[] GetGeometricElementTypes()
@@ -117,13 +117,13 @@ namespace Ray2Mod.Game.Structs.Geometry
             {
                 convertedArray[i] = (short)value[i];
             }
-            off_element_types = Memory.ToUnmanagedArray(convertedArray);
+            off_element_types = Memory.ToUnmanaged(convertedArray);
         }
 
         public void SetGeometricElements(int[] value)
         {
             numElements = checked((ushort)value.Length);
-            off_elements = Memory.ToUnmanagedArray(value);
+            off_elements = Memory.ToUnmanaged(value);
         }
 
         /// <summary>
