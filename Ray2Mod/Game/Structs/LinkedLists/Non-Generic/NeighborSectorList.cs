@@ -1,45 +1,42 @@
 ﻿using Ray2Mod.Game.Structs.EngineObject;
 using System.Runtime.InteropServices;
+using Ray2Mod.Game.Structs.SPO;
 
 namespace Ray2Mod.Game.Structs.LinkedLists
 {
     public abstract unsafe partial class LinkedList
     {
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct NeighborSector
+        public struct NeighborGraphicSector
         {
-            public ushort short0;
-            public ushort short2;
-            public Sector* sector;
-
-            public NeighborSector* off_next;
-            public NeighborSector* off_previous;
+            public short short_0;
+            public short short_1;
+            public SuperObject* sector;
+            public NeighborGraphicSector* off_next;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct NeighborSectorList
+        public unsafe struct NeighborGraphicSectorList
         {
-            public NeighborSector* Head;
-            public NeighborSector* Tail;
+            public NeighborGraphicSector* Head;
+            public NeighborGraphicSector* Tail;
             public int Count;
+        }
 
-            public unsafe NeighborSector*[] Read()
-            {
-                NeighborSector*[] results = new NeighborSector*[Count];
 
-                NeighborSector* Next = Head;
+        [StructLayout(LayoutKind.Sequential)]
+        public struct NeightborCollisionSector
+        {
+            public SuperObject* sector;
+            public NeightborCollisionSector* off_next;
+        }
 
-                for (int i = 0; i < Count; i++)
-                {
-                    NeighborSector* Element = Next;
-                    Next = Next->off_next;
-                    // Previous pointer is ignored
-
-                    results[i] = (NeighborSector*)(Element);
-                }
-
-                return results;
-            }
+        [StructLayout(LayoutKind.Sequential)]
+        public unsafe struct NeighborCollisionSectorList
+        {
+            public NeightborCollisionSector* Head;
+            public NeightborCollisionSector* Tail;
+            public int Count;
         }
     }
 }

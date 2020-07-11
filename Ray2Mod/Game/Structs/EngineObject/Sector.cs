@@ -15,8 +15,8 @@ namespace Ray2Mod.Game.Structs.EngineObject
         public LinkedList.HasHeaderPointers<int> staticLightsList;
         public LinkedList.HasHeaderPointers<int> dynamicLightsList;
 
-        public LinkedList.NeighborSectorList linkedListGraphicSectors;
-        public LinkedList.NeighborSectorList linkedListCollisionSector;
+        public LinkedList.NeighborGraphicSectorList linkedListGraphicSectors;
+        public LinkedList.NeighborCollisionSectorList linkedListCollisionSector;
         public LinkedList.NoPreviousPointers_ElementPointerFirst<int> linkedListActivitySector;
         public LinkedList.HasHeaderPointers<int> linkedListSoundSectors;
         public LinkedList.HasHeaderPointers<int> placeholder;
