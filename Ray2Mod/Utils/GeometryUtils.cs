@@ -1,13 +1,13 @@
-﻿using JeremyAnsel.Media.WavefrontObj;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using JeremyAnsel.Media.WavefrontObj;
+using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.Material;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Types;
-using Ray2Mod.Utils;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
-namespace Ray2Mod.Game.Structs.Geometry
+namespace Ray2Mod.Utils
 {
     public static unsafe class GeometryUtils
     {

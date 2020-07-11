@@ -90,7 +90,7 @@
     <Compile Include="Game\Structs\Geometry\BoundingVolume.cs" />
     <Compile Include="Game\Structs\Geometry\GeometricElement.cs" />
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />
-    <Compile Include="Game\Structs\Geometry\GeometryUtils.cs" />
+    <Compile Include="Utils\GeometryUtils.cs" />
     <Compile Include="Game\Structs\Geometry\UvMapping.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointers_HasHeaderPointers.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointers_ElementPointerFirst.cs" />
