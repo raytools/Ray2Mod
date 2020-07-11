@@ -4,6 +4,7 @@ using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Structs.SPO;
+using Ray2Mod.Game.Structs.States;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Functions

@@ -102,7 +102,7 @@ namespace Ray2Mod.Game.Structs.SPO
         {
             get
             {
-                if (flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     return (BoundingVolumeBox*)boundingVolume;
                 }
@@ -113,7 +113,7 @@ namespace Ray2Mod.Game.Structs.SPO
             }
             set
             {
-                if (flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     boundingVolume = (int*)value;
                 }
@@ -125,7 +125,7 @@ namespace Ray2Mod.Game.Structs.SPO
         {
             get
             {
-                if (!flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (!flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     return (BoundingVolumeSphere*)boundingVolume;
                 }
@@ -133,7 +133,7 @@ namespace Ray2Mod.Game.Structs.SPO
             }
             set
             {
-                if (!flags.HasFlag(SuperObjectFlags.BoundingBoxInsteadOfSphere))
+                if (!flags.HasFlag(SuperObjectFlags.EnumSuperObjectFlags.BoundingBoxInsteadOfSphere))
                 {
                     boundingVolume = (int*)value;
                 }

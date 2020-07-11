@@ -30,8 +30,8 @@ namespace Ray2Mod.Components
             // Allocate data
             SuperObject* newSpo = new SuperObject().ToUnmanaged();
             newSpo->type = (SuperObjectType)1;
-            newSpo->matrixPtr = Matrix.IdentityMatrix.ToUnmanaged();
-            newSpo->matrixPtr2 = Matrix.IdentityMatrix.ToUnmanaged();
+            newSpo->matrixPtr = Matrix.Identity().ToUnmanaged();
+            newSpo->matrixPtr2 = Matrix.Identity().ToUnmanaged();
             newSpo->drawFlags = -1;
             newSpo->flags = new SuperObjectFlags(); // 0
 

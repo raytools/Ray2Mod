@@ -76,5 +76,9 @@ namespace Ray2Mod.Components.Types
         {
             return $"Pointer<{typeof(T)}> @0x{(int)this:X}";
         }
+
+        public override int GetHashCode() {
+            return IntPtr.GetHashCode();
+        }
     }
 }

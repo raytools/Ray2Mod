@@ -92,6 +92,10 @@
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />
     <Compile Include="Game\Structs\Geometry\GeometryUtils.cs" />
     <Compile Include="Game\Structs\Geometry\UvMapping.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointers_HasHeaderPointers.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointers_ElementPointerFirst.cs" />
+    <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointers_HasHeaderPointers_ElementPointerFirst.cs" />
+    <Compile Include="Game\Structs\LinkedLists\LinkedListPointer.cs" />
     <Compile Include="Game\Structs\LinkedLists\Non-Generic\AlwaysPersoList.cs" />
     <Compile Include="Game\Structs\Material\CollideMaterial.cs" />
     <Compile Include="Game\Structs\Material\VisualMaterial.cs" />
@@ -105,14 +109,14 @@
     <Compile Include="Game\Structs\Geometry\GeometricObject.cs" />
     <Compile Include="Game\Structs\EngineObject\IPO.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\HasHeaderPointers_ElementPointerFirst.cs" />
-    <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ElementPointerFirst_ReadAtPointer.cs" />
-    <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointersForDouble_ReadAtPointer.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\ElementPointerFirst.cs" />
     <Compile Include="Game\Structs\LinkedLists\LinkedListType.cs" />
     <Compile Include="Game\Structs\LinkedLists\Non-Generic\NeighborSectorList.cs" />
     <Compile Include="Game\Structs\LinkedLists\Non-Generic\SuperObjectList.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\HasHeaderPointers.cs" />
     <Compile Include="Game\Structs\EngineObject\Sector.cs" />
+    <Compile Include="Game\Structs\States\State.cs" />
+    <Compile Include="Game\Structs\States\StateTransition.cs" />
     <Compile Include="Game\Structs\StructExtensions.cs" />
     <Compile Include="Game\Structs\SPO\SuperObjectExtensions.cs" />
     <Compile Include="Game\Structs\Geometry\VisualSet.cs" />

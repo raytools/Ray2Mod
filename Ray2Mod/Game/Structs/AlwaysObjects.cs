@@ -15,12 +15,12 @@ namespace Ray2Mod.Game.Structs
     {
         public struct AlwaysPersoListItem
         {
-            public int index;
+            public int modelID;
             public Perso* perso;
         }
 
         public int numAlways; // Maximum number of always objects that can be spawned
-        public LinkedList.AlwaysPersoList alwaysPersos;
+        public LinkedList.HasHeaderPointers<AlwaysPersoListItem> alwaysPersos;
         public SuperObject* alwaysSuperObjects;
         public int* alwaysStructuresMaybe;
         public Perso* reusablePersos;
@@ -46,6 +46,13 @@ namespace Ray2Mod.Game.Structs
 
                 return result;
             }
+        }
+
+        public void AddAlwaysPerso(Perso* perso) {
+            alwaysPersos.Add(new AlwaysPersoListItem() {
+                modelID = perso->stdGamePtr->modelID,
+                perso = perso
+            });
         }
     }
 }
