@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ray2Mod.Game.Structs.States {
+
+    // State should always be used as a parameter of a LinkedList.ListElement_HHP
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct State {
         public LinkedList.HasHeaderPointers<StateTransition> stateTransitions;

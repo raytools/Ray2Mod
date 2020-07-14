@@ -3,6 +3,8 @@ using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Game.Structs.EngineObject;
+using Ray2Mod.Game.Structs.Families;
+using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Structs.SPO;
 using System;
@@ -23,6 +25,8 @@ namespace Ray2Mod.Game
         public SuperObject* InactiveDynamicWorld => *((SuperObject**)(Offsets.InactiveDynamicWorld));
 
         public AlwaysObjects* AlwaysObjects => ((AlwaysObjects*)(Offsets.NumAlways));
+
+        public LinkedList.HasHeaderPointers<Family> Families => *(LinkedList.HasHeaderPointers<Family>*)Offsets.Families;
 
         public World()
         {

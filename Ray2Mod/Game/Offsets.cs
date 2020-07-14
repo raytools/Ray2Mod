@@ -1,4 +1,7 @@
-﻿namespace Ray2Mod.Game
+﻿using Ray2Mod.Game.Structs.Families;
+using Ray2Mod.Game.Structs.LinkedLists;
+
+namespace Ray2Mod.Game
 {
     // Based on Rayman 2 GOG.com version
 
@@ -16,6 +19,7 @@
         public const int MemChannelsPointer = 0x501660;
         public const int EngineState = 0x500380;
         public const int MainChar = 0x500578;
+        public const int Families = 0x500560;
 
         public class EngineFunctions
         {
