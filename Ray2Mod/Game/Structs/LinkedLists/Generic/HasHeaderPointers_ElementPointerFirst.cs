@@ -104,12 +104,18 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
                 var newItem = new ListElement_HHP_EPF<T>()
                 {
                     Next = null,
-                    Previous = items[items.Length - 1],
+                    Previous = items.Length > 0 ? items[items.Length - 1] : null,
                     Header = Head,
                     Element = item
                 }.ToUnmanaged();
 
-                items[items.Length - 1]->Next = newItem;
+                if (items.Length > 0) {
+                    items[items.Length - 1]->Next = newItem;
+                    Tail = newItem;
+                } else {
+                    Head = newItem;
+                    Tail = newItem;
+                }
 
                 Count++;
 
@@ -133,6 +139,12 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
 
                         if (i - 1 >= 0) {
                             items[i - 1]->Next = i + 1 < items.Length ? items[i + 1] : null;
+                        }
+
+                        if (i == 0) {
+                            Head = Count > 1 ? items[1] : null;
+                        } else if (i == Count - 1) {
+                            Tail = Count > 1 ? items[i - 1] : null;
                         }
 
                         Count--;
