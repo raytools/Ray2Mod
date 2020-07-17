@@ -17,21 +17,21 @@ namespace UnitTests.LinkedListTests {
 
             var items_1 = list.Read();
 
-            Assert.AreEqual(list.Count, 3);
+            Assert.AreEqual(3, list.Count);
 
-            Assert.AreEqual((int)list.Head, (int)items_1[0]);
-            Assert.AreEqual((int)list.Tail, (int)items_1[2]);
+            Assert.AreEqual((int)items_1[0], (int)list.Head);
+            Assert.AreEqual((int)items_1[2], (int)list.Tail);
 
-            Assert.AreEqual(items_1[0]->Element, 1);
-            Assert.AreEqual(items_1[1]->Element, 2);
-            Assert.AreEqual(items_1[2]->Element, 3);
+            Assert.AreEqual(1, items_1[0]->Element);
+            Assert.AreEqual(2, items_1[1]->Element);
+            Assert.AreEqual(3, items_1[2]->Element);
 
-            Assert.AreEqual((int)items_1[0], (int)firstItem);
-            Assert.AreEqual((int)items_1[1], (int)secondItem);
-            Assert.AreEqual((int)items_1[2], (int)thirdItem);
+            Assert.AreEqual((int)firstItem, (int)items_1[0]);
+            Assert.AreEqual((int)secondItem, (int)items_1[1]);
+            Assert.AreEqual((int)thirdItem, (int)items_1[2]);
 
             // No Previous Pointers
-            Assert.AreEqual((int)items_1[0]->Next, (int)items_1[1]);
+            Assert.AreEqual((int)items_1[1], (int)items_1[0]->Next);
         }
 
         [TestMethod]
@@ -46,10 +46,10 @@ namespace UnitTests.LinkedListTests {
             list.Remove(thirdItem);
 
             var items_2 = list.Read();
-            Assert.AreEqual(items_2[0]->Element, 2);
-            Assert.AreEqual((int)list.Head, (int)items_2[0]);
-            Assert.AreEqual((int)list.Tail, (int)list.Head);
-            Assert.AreEqual(list.Count, 1);
+            Assert.AreEqual(2, items_2[0]->Element);
+            Assert.AreEqual((int)items_2[0], (int)list.Head);
+            Assert.AreEqual((int)list.Head, (int)list.Tail);
+            Assert.AreEqual(1, list.Count);
         }
 
         [TestMethod]
@@ -60,12 +60,12 @@ namespace UnitTests.LinkedListTests {
             list.Write(new int[] { 4, 5, 6, 7 });
             var items_3 = list.Read();
 
-            Assert.AreEqual(items_3[0]->Element, 4);
-            Assert.AreEqual(items_3[1]->Element, 5);
-            Assert.AreEqual(items_3[2]->Element, 6);
-            Assert.AreEqual(items_3[3]->Element, 7);
+            Assert.AreEqual(4, items_3[0]->Element);
+            Assert.AreEqual(5, items_3[1]->Element);
+            Assert.AreEqual(6, items_3[2]->Element);
+            Assert.AreEqual(7, items_3[3]->Element);
 
-            Assert.AreEqual(list.Count, 4);
+            Assert.AreEqual(4, list.Count);
 
         }
     }
