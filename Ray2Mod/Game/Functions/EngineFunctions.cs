@@ -2,6 +2,7 @@
 using Ray2Mod.Game.Structs;
 using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.Geometry;
+using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Structs.SPO;
 using Ray2Mod.Game.Structs.States;
@@ -33,6 +34,8 @@ namespace Ray2Mod.Game.Functions
             fn_vGenFree = new GameFunction<D_fn_vGenFree>(Offsets.EngineFunctions.fn_vGenFree);
             fn_vDynFree = new GameFunction<D_fn_vDynFree>(Offsets.EngineFunctions.fn_vDynFree);
             PLA_fn_bSetNewState = new GameFunction<D_PLA_fn_bSetNewState>(Offsets.EngineFunctions.PLA_fn_bSetNewState);
+            fn_p_stReadAnalogJoystickMario = new GameFunction<D_fn_p_stReadAnalogJoystickMario>(Offsets.EngineFunctions.fn_p_stReadAnalogJoystickMario);
+            fn_p_stEvalTree = new GameFunction<D_fn_p_stEvalTree>(Offsets.EngineFunctions.fn_p_stEvalTree);
         }
 
         #region VEngine
@@ -213,11 +216,26 @@ namespace Ray2Mod.Game.Functions
 
         #region PLA_fn_bSetNewState
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate char D_PLA_fn_bSetNewState(SuperObject * persoSpo, State * state, char force, char withEvents, char setAnim);
+        public unsafe delegate char D_PLA_fn_bSetNewState(SuperObject * persoSpo, LinkedList.ListElement_HHP<State>* state, char force, char withEvents, char setAnim);
 
         public static GameFunction<D_PLA_fn_bSetNewState> PLA_fn_bSetNewState { get; }
 
         #endregion PLA_fn_bSetNewState
 
+        #region fn_p_stReadAnalogJoystickMario
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int D_fn_p_stReadAnalogJoystickMario(SuperObject* persoSpo, int* nodeInterp);
+
+        public static GameFunction<D_fn_p_stReadAnalogJoystickMario> fn_p_stReadAnalogJoystickMario { get; }
+
+        #endregion fn_p_stReadAnalogJoystickMario
+
+        #region fn_p_stEvalTree
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int D_fn_p_stEvalTree(SuperObject* persoSpo, int* nodeInterp, int* param);
+
+        public static GameFunction<D_fn_p_stEvalTree> fn_p_stEvalTree { get; }
+
+        #endregion fn_p_stEvalTree
     }
 }

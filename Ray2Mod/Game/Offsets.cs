@@ -1,4 +1,5 @@
 ﻿using Ray2Mod.Game.Structs.Families;
+using Ray2Mod.Game.Structs.Input;
 using Ray2Mod.Game.Structs.LinkedLists;
 
 namespace Ray2Mod.Game
@@ -20,6 +21,8 @@ namespace Ray2Mod.Game
         public const int EngineState = 0x500380;
         public const int MainChar = 0x500578;
         public const int Families = 0x500560;
+        public const int InputStructure = 0x00509E60;
+        public const int LocalizationStructure = 0x00500260;
 
         public class EngineFunctions
         {
@@ -43,6 +46,8 @@ namespace Ray2Mod.Game
             public const int fn_p_vDynAlloc = 0x442680;
             public const int fn_vGenFree = 0x443160;
             public const int fn_vDynFree = 0x442740;
+            public const int fn_p_stReadAnalogJoystickMario = 0x46E450;
+            public const int fn_p_stEvalTree = 0x480B90;
         }
 
         public class ParticleFunctions

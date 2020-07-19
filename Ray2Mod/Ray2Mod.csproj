@@ -92,6 +92,12 @@
     <Compile Include="Game\Structs\Geometry\BoundingVolume.cs" />
     <Compile Include="Game\Structs\Geometry\GeometricElement.cs" />
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />
+    <Compile Include="Game\Structs\Input\EntryElement.cs" />
+    <Compile Include="Game\Structs\Input\InputFunctions.cs" />
+    <Compile Include="Game\Structs\Input\InputStructure.cs" />
+    <Compile Include="Game\Structs\Input\KeyCode.cs" />
+    <Compile Include="Game\Structs\Input\KeyWord.cs" />
+    <Compile Include="Game\Structs\Input\ParsedKeyWord.cs" />
     <Compile Include="Utils\GeometryUtils.cs" />
     <Compile Include="Game\Structs\Geometry\UvMapping.cs" />
     <Compile Include="Game\Structs\LinkedLists\Generic\NoPreviousPointers_HasHeaderPointers.cs" />
