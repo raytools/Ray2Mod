@@ -17,5 +17,17 @@ namespace Ray2Mod.Game.Structs.AI
     {
         public Behavior* Array;
         public int Length;
+
+        public Behavior*[] Behaviors
+        {
+            get
+            {
+                Behavior*[] behaviors = new Behavior*[Length];
+                for (int i = 0; i < Length; i++) {
+                    behaviors[i] = &Array[i];
+                }
+                return behaviors;
+            }
+        }
     }
 }

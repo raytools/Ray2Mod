@@ -48,6 +48,7 @@ namespace Ray2Mod.Game
             public const int fn_vDynFree = 0x442740;
             public const int fn_p_stReadAnalogJoystickMario = 0x46E450;
             public const int fn_p_stEvalTree = 0x480B90;
+            public const int PLA_fn_vSetCurrFrame = 0x40FD30;
         }
 
         public class ParticleFunctions
@@ -73,6 +74,10 @@ namespace Ray2Mod.Game
         {
             public const int DrawsTexts = 0x460670;
             public const int DrawText = 0x4660B0;
+        }
+
+        public class Globals {
+            public const int g_hCurrentSuperObjPerso = 0x4B9C28;
         }
     }
 }

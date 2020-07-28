@@ -16,11 +16,11 @@ namespace Ray2Mod.Game.Structs.Input {
             }
         }
 
-        public EntryElement* indexAsPointer
+        public EntryAction* indexAsPointer
         {
             get
             {
-                return (EntryElement*)indexOrKeyCode;
+                return (EntryAction*)indexOrKeyCode;
             }
         }
 
@@ -29,14 +29,14 @@ namespace Ray2Mod.Game.Structs.Input {
             get { return (byte)(indexOrKeyCode & 0xFF); }
         }
 
-        public InputFunctions.FunctionType FunctionType
+        public Functions.FunctionType FunctionType
         {
             get
             {
-                if (Index <= Enum.GetNames(typeof(InputFunctions.FunctionType)).Length) {
-                    return InputFunctions.GetFunctionType(Index);
+                if (Index <= Enum.GetNames(typeof(Functions.FunctionType)).Length) {
+                    return Functions.GetFunctionType(Index);
                 } else {
-                    return InputFunctions.FunctionType.Unknown;
+                    return Functions.FunctionType.Unknown;
                 }
             }
         }

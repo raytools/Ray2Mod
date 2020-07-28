@@ -3,7 +3,7 @@
 namespace Ray2Mod.Game.Structs.Input {
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct EntryElement {
+    public unsafe struct EntryAction {
         public int numKeyWords;
         public KeyWord* keywordArray;
         public int name; // Not used in PC?

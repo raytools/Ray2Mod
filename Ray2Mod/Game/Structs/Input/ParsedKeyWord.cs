@@ -23,14 +23,14 @@ namespace Ray2Mod.Game.Structs.Input {
             int keywordsRead = 1;
 
             switch (kw.FunctionType) {
-                case InputFunctions.FunctionType.Not:
+                case Functions.FunctionType.Not:
                     subkeywords = new ParsedKeyWord[1];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += subkeywords[0].FillInSubKeywords(keywords, thisIndex + keywordsRead);
                     break;
 
-                case InputFunctions.FunctionType.And:
-                case InputFunctions.FunctionType.Or:
+                case Functions.FunctionType.And:
+                case Functions.FunctionType.Or:
                     subkeywords = new ParsedKeyWord[2];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += subkeywords[0].FillInSubKeywords(keywords, thisIndex + keywordsRead);
@@ -38,16 +38,16 @@ namespace Ray2Mod.Game.Structs.Input {
                     keywordsRead += subkeywords[1].FillInSubKeywords(keywords, thisIndex + keywordsRead);
                     break;
 
-                case InputFunctions.FunctionType.KeyPressed:
-                case InputFunctions.FunctionType.KeyReleased:
-                case InputFunctions.FunctionType.KeyJustPressed:
-                case InputFunctions.FunctionType.KeyJustReleased:
+                case Functions.FunctionType.KeyPressed:
+                case Functions.FunctionType.KeyReleased:
+                case Functions.FunctionType.KeyJustPressed:
+                case Functions.FunctionType.KeyJustReleased:
                     subkeywords = new ParsedKeyWord[1];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += 1;
                     break;
 
-                case InputFunctions.FunctionType.Sequence:
+                case Functions.FunctionType.Sequence:
                     subkeywords = new ParsedKeyWord[1];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += 1;
@@ -64,15 +64,15 @@ namespace Ray2Mod.Game.Structs.Input {
                     }
                     break;
 
-                case InputFunctions.FunctionType.SequenceKey:
-                case InputFunctions.FunctionType.SequenceKeyEnd:
+                case Functions.FunctionType.SequenceKey:
+                case Functions.FunctionType.SequenceKeyEnd:
                     subkeywords = new ParsedKeyWord[1];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]); // Keycode
                     keywordsRead += 1;
                     break;
 
-                case InputFunctions.FunctionType.SequencePad:
-                case InputFunctions.FunctionType.SequencePadEnd:
+                case Functions.FunctionType.SequencePad:
+                case Functions.FunctionType.SequencePadEnd:
 
                     subkeywords = new ParsedKeyWord[2];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]); // 0
@@ -82,8 +82,8 @@ namespace Ray2Mod.Game.Structs.Input {
 
                     break;
 
-                case InputFunctions.FunctionType.MouseAxeValue:
-                case InputFunctions.FunctionType.MouseAxePosition:
+                case Functions.FunctionType.MouseAxeValue:
+                case Functions.FunctionType.MouseAxePosition:
                     subkeywords = new ParsedKeyWord[3];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += 1;
@@ -93,26 +93,26 @@ namespace Ray2Mod.Game.Structs.Input {
                     keywordsRead += 1;
                     break;
 
-                case InputFunctions.FunctionType.MousePressed:
-                case InputFunctions.FunctionType.MouseJustPressed:
-                case InputFunctions.FunctionType.MouseJustReleased:
+                case Functions.FunctionType.MousePressed:
+                case Functions.FunctionType.MouseJustPressed:
+                case Functions.FunctionType.MouseJustReleased:
                     subkeywords = new ParsedKeyWord[1];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += 1;
                     break;
 
-                case InputFunctions.FunctionType.PadPressed:
-                case InputFunctions.FunctionType.PadReleased:
-                case InputFunctions.FunctionType.PadJustPressed:
-                case InputFunctions.FunctionType.PadJustReleased:
-                case InputFunctions.FunctionType.JoystickPressed:
-                case InputFunctions.FunctionType.JoystickReleased:
-                case InputFunctions.FunctionType.JoystickJustPressed:
-                case InputFunctions.FunctionType.JoystickJustReleased:
-                case InputFunctions.FunctionType.JoystickOrPadPressed:
-                case InputFunctions.FunctionType.JoystickOrPadReleased:
-                case InputFunctions.FunctionType.JoystickOrPadJustPressed:
-                case InputFunctions.FunctionType.JoystickOrPadJustReleased:
+                case Functions.FunctionType.PadPressed:
+                case Functions.FunctionType.PadReleased:
+                case Functions.FunctionType.PadJustPressed:
+                case Functions.FunctionType.PadJustReleased:
+                case Functions.FunctionType.JoystickPressed:
+                case Functions.FunctionType.JoystickReleased:
+                case Functions.FunctionType.JoystickJustPressed:
+                case Functions.FunctionType.JoystickJustReleased:
+                case Functions.FunctionType.JoystickOrPadPressed:
+                case Functions.FunctionType.JoystickOrPadReleased:
+                case Functions.FunctionType.JoystickOrPadJustPressed:
+                case Functions.FunctionType.JoystickOrPadJustReleased:
 
                     subkeywords = new ParsedKeyWord[2];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
@@ -121,7 +121,7 @@ namespace Ray2Mod.Game.Structs.Input {
                     keywordsRead += 1;
                     break;
 
-                case InputFunctions.FunctionType.JoystickAxeValue:
+                case Functions.FunctionType.JoystickAxeValue:
                     subkeywords = new ParsedKeyWord[4];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += 1;
@@ -133,9 +133,9 @@ namespace Ray2Mod.Game.Structs.Input {
                     keywordsRead += 1;
                     break;
 
-                case InputFunctions.FunctionType.JoystickAngularValue:
-                case InputFunctions.FunctionType.JoystickTrueNormValue:
-                case InputFunctions.FunctionType.JoystickCorrectedNormValue:
+                case Functions.FunctionType.JoystickAngularValue:
+                case Functions.FunctionType.JoystickTrueNormValue:
+                case Functions.FunctionType.JoystickCorrectedNormValue:
                     subkeywords = new ParsedKeyWord[5];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += 1;
@@ -149,10 +149,10 @@ namespace Ray2Mod.Game.Structs.Input {
                     keywordsRead += 1;
                     break;
 
-                case InputFunctions.FunctionType.ActionValidated:
-                case InputFunctions.FunctionType.ActionInvalidated:
-                case InputFunctions.FunctionType.ActionJustValidated:
-                case InputFunctions.FunctionType.ActionJustInvalidated:
+                case Functions.FunctionType.ActionValidated:
+                case Functions.FunctionType.ActionInvalidated:
+                case Functions.FunctionType.ActionJustValidated:
+                case Functions.FunctionType.ActionJustInvalidated:
                     subkeywords = new ParsedKeyWord[1];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                     keywordsRead += 1;
@@ -165,67 +165,67 @@ namespace Ray2Mod.Game.Structs.Input {
         {
             if (isFunction) {
                 switch (kw.FunctionType) {
-                    case InputFunctions.FunctionType.Not:
+                    case Functions.FunctionType.Not:
                         return "!(" + subkeywords[0] + ")";
 
-                    case InputFunctions.FunctionType.And:
+                    case Functions.FunctionType.And:
                         return "(" + subkeywords[0] + " && " + subkeywords[1] + ")";
 
-                    case InputFunctions.FunctionType.Or:
+                    case Functions.FunctionType.Or:
                         return "(" + subkeywords[0] + " || " + subkeywords[1] + ")";
 
-                    case InputFunctions.FunctionType.KeyPressed:
-                    case InputFunctions.FunctionType.KeyReleased:
-                    case InputFunctions.FunctionType.KeyJustPressed:
-                    case InputFunctions.FunctionType.KeyJustReleased:
+                    case Functions.FunctionType.KeyPressed:
+                    case Functions.FunctionType.KeyReleased:
+                    case Functions.FunctionType.KeyJustPressed:
+                    case Functions.FunctionType.KeyJustReleased:
                         return kw.FunctionType + "(" + Enum.GetName(typeof(KeyCode), subkeywords[0].kw.indexOrKeyCode) + ")";
 
-                    case InputFunctions.FunctionType.Sequence:
+                    case Functions.FunctionType.Sequence:
                         string sequence = "";
                         // Skip 1 at the end (first sequenceKey), then do -2 to skip over every other sequenceKey
                         // Then stop because first two keywords (last two processed here) are length and sequenceEnd
                         for (int i = subkeywords.Length - 1; i > 0; i--) {
                             ParsedKeyWord w = subkeywords[i];
                             switch (w.kw.FunctionType) {
-                                case InputFunctions.FunctionType.SequenceKey:
-                                case InputFunctions.FunctionType.SequenceKeyEnd:
+                                case Functions.FunctionType.SequenceKey:
+                                case Functions.FunctionType.SequenceKeyEnd:
                                     sequence += Enum.GetName(typeof(KeyCode), subkeywords[i].subkeywords[0].kw.indexOrKeyCode);
                                     break;
 
-                                case InputFunctions.FunctionType.SequencePad:
-                                case InputFunctions.FunctionType.SequencePadEnd:
+                                case Functions.FunctionType.SequencePad:
+                                case Functions.FunctionType.SequencePadEnd:
                                     sequence += GetJoyPadString(subkeywords[i].subkeywords);
                                     break;
                             }
                         }
                         return "Sequence(\"" + sequence + "\")";
 
-                    case InputFunctions.FunctionType.PadPressed:
-                    case InputFunctions.FunctionType.PadReleased:
-                    case InputFunctions.FunctionType.PadJustPressed:
-                    case InputFunctions.FunctionType.PadJustReleased:
-                    case InputFunctions.FunctionType.JoystickPressed:
-                    case InputFunctions.FunctionType.JoystickReleased:
-                    case InputFunctions.FunctionType.JoystickJustPressed:
-                    case InputFunctions.FunctionType.JoystickJustReleased:
-                    case InputFunctions.FunctionType.JoystickOrPadPressed:
-                    case InputFunctions.FunctionType.JoystickOrPadReleased:
-                    case InputFunctions.FunctionType.JoystickOrPadJustPressed:
-                    case InputFunctions.FunctionType.JoystickOrPadJustReleased:
+                    case Functions.FunctionType.PadPressed:
+                    case Functions.FunctionType.PadReleased:
+                    case Functions.FunctionType.PadJustPressed:
+                    case Functions.FunctionType.PadJustReleased:
+                    case Functions.FunctionType.JoystickPressed:
+                    case Functions.FunctionType.JoystickReleased:
+                    case Functions.FunctionType.JoystickJustPressed:
+                    case Functions.FunctionType.JoystickJustReleased:
+                    case Functions.FunctionType.JoystickOrPadPressed:
+                    case Functions.FunctionType.JoystickOrPadReleased:
+                    case Functions.FunctionType.JoystickOrPadJustPressed:
+                    case Functions.FunctionType.JoystickOrPadJustReleased:
                         return kw.FunctionType + GetJoyPadString(subkeywords);
 
-                    case InputFunctions.FunctionType.JoystickAxeValue:
+                    case Functions.FunctionType.JoystickAxeValue:
                         return kw.FunctionType + "("
                             + (subkeywords[1].kw.indexOrKeyCode == 4 ? "X" : "Y")
                             + ", " + subkeywords[2].kw.valueAsInt
                             + ", " + subkeywords[3].kw.valueAsInt
                             + (subkeywords[0].kw.indexOrKeyCode != 0 ? (", " + subkeywords[0].kw.indexOrKeyCode) : "") + ")";
 
-                    case InputFunctions.FunctionType.ActionValidated:
-                    case InputFunctions.FunctionType.ActionInvalidated:
-                    case InputFunctions.FunctionType.ActionJustValidated:
-                    case InputFunctions.FunctionType.ActionJustInvalidated:
-                        EntryElement* action = subkeywords[0].kw.indexAsPointer;
+                    case Functions.FunctionType.ActionValidated:
+                    case Functions.FunctionType.ActionInvalidated:
+                    case Functions.FunctionType.ActionJustValidated:
+                    case Functions.FunctionType.ActionJustInvalidated:
+                        EntryAction* action = subkeywords[0].kw.indexAsPointer;
                         return kw.FunctionType + "{" + (action != null ? action->ToString() : "null") + "}";
 
                     default:

@@ -13,9 +13,9 @@ namespace Ray2Mod.Game.Structs.Dynamics
         public Vector3* speedVector;
 
         [FieldOffset(0x78)]
-        public MatrixDynamics matrixA;
+        public Matrix matrixA;
 
         [FieldOffset(0xD0)]
-        public MatrixDynamics matrixB;
+        public Matrix matrixB;
     }
 }

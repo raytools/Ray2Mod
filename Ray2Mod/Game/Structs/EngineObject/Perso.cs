@@ -107,5 +107,81 @@ namespace Ray2Mod.Game.Structs.EngineObject
 
             return newPerso;
         }
+
+        public int GetStateIndex() => GetStateIndex(p3dData->stateCurrent);
+
+        public int GetStateIndex(LinkedLists.LinkedList.ListElement_HHP<States.State>* state)
+        {
+            var states = p3dData->family->Element.states.Read();
+
+            for (int i = 0; i < states.Length; i++) {
+                if (states[i] == state) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public void SetState(int animationIndex, bool force = true, bool withEvents = true, bool setAnimation = true)
+        {
+            var states = p3dData->family->Element.states.Read();
+            if (animationIndex < states.Length) {
+                EngineFunctions.PLA_fn_bSetNewState.Call(stdGamePtr->superObjectPtr, states[animationIndex], force ? (char)1 : (char)0, withEvents ? (char)1 : (char)0, setAnimation ? (char)1 : (char)0);
+            } else {
+                throw new Exception("Invalid State Number " + animationIndex+", number of states is "+states.Length);
+            }
+        }
+
+        public int NormalBehaviourIndex
+        {
+            get
+            {
+                var currentBehaviourNormal = brain->mind->intelligenceNormal->behavior;
+                var normalBehaviours = brain->mind->aiModel->behaviorsListNormal->Behaviors;
+
+                for (int i = 0; i < normalBehaviours.Length; i++) {
+                    if (normalBehaviours[i] == currentBehaviourNormal) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+
+            set
+            {
+                var normalBehaviours = brain->mind->aiModel->behaviorsListNormal->Behaviors;
+                if (value < normalBehaviours.Length) {
+                    brain->mind->intelligenceNormal->behavior = normalBehaviours[value];
+                } else {
+                    throw new Exception("Invalid Normal Behaviour Number " + value + ", number of states is " + normalBehaviours.Length);
+                }
+            }
+        }
+
+        public int ReflexBehaviourIndex
+        {
+            get
+            {
+                var currentBehaviourReflex = brain->mind->intelligenceReflex->behavior;
+                var reflexBehaviours = brain->mind->aiModel->behaviorsListReflex->Behaviors;
+
+                for (int i = 0; i < reflexBehaviours.Length; i++) {
+                    if (reflexBehaviours[i] == currentBehaviourReflex) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+
+            set
+            {
+                var reflexBehaviours = brain->mind->aiModel->behaviorsListReflex->Behaviors;
+                if (value < reflexBehaviours.Length) {
+                    brain->mind->intelligenceReflex->behavior = reflexBehaviours[value];
+                } else {
+                    throw new Exception("Invalid Reflex Behaviour Number " + value + ", number of states is " + reflexBehaviours.Length);
+                }
+            }
+        }
     }
 }

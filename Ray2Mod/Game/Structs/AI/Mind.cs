@@ -8,8 +8,8 @@ namespace Ray2Mod.Game.Structs.AI
     public unsafe struct Mind
     {
         public AIModel* aiModel;
-        public Behavior* currentIntelligenceNormal;
-        public Behavior* currentIntelligenceReflex;
+        public Intelligence* intelligenceNormal;
+        public Intelligence* intelligenceReflex;
         public DsgMem* dsgMem;
 
         public T* GetDsgVar<T>(int index, byte* buffer) where T : unmanaged => GetDsgVar<T>(index, buffer, out byte _);

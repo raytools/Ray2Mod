@@ -2,7 +2,7 @@
 using System;
 
 namespace Ray2Mod.Game.Structs.Input {
-    public static class InputFunctions {
+    public static class Functions {
 
         public enum FunctionType {
             Unknown,

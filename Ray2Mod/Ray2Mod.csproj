@@ -78,6 +78,8 @@
     <Compile Include="Game\Functions\GfxSecondaryFunctions.cs" />
     <Compile Include="Game\Functions\InputFunctions.cs" />
     <Compile Include="Game\Functions\TextFunctions.cs" />
+    <Compile Include="Game\Structs\AI\BehaviourEnums\BehaviourEnums_YLT_RaymanModel.cs" />
+    <Compile Include="Game\Structs\AI\Intelligence.cs" />
     <Compile Include="Game\Structs\AlwaysObjects.cs" />
     <Compile Include="Game\Structs\EngineObject\Perso3dData.cs" />
     <Compile Include="Game\Structs\EngineObject\SectInfo.cs" />
@@ -92,8 +94,8 @@
     <Compile Include="Game\Structs\Geometry\BoundingVolume.cs" />
     <Compile Include="Game\Structs\Geometry\GeometricElement.cs" />
     <Compile Include="Game\Structs\Geometry\CollideSet.cs" />
-    <Compile Include="Game\Structs\Input\EntryElement.cs" />
-    <Compile Include="Game\Structs\Input\InputFunctions.cs" />
+    <Compile Include="Game\Structs\Input\EntryAction.cs" />
+    <Compile Include="Game\Structs\Input\Functions.cs" />
     <Compile Include="Game\Structs\Input\InputStructure.cs" />
     <Compile Include="Game\Structs\Input\KeyCode.cs" />
     <Compile Include="Game\Structs\Input\KeyWord.cs" />
@@ -153,6 +155,8 @@
     <Compile Include="Utils\ObjectUtils.cs" />
     <Compile Include="Utils\OtherUtils.cs" />
     <Compile Include="Game\World.cs" />
+    <Compile Include="Game\Structs\Input\EntryActionNames.cs" />
+    <Compile Include="Utils\QuaternionUtils.cs" />
     <Compile Include="Utils\TextUtils.cs" />
     <Compile Include="Utils\TextureLoader.cs" />
     <Compile Include="Utils\TexturePointers.cs" />

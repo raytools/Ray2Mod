@@ -34,6 +34,7 @@ namespace Ray2Mod.Game.Functions
             fn_vGenFree = new GameFunction<D_fn_vGenFree>(Offsets.EngineFunctions.fn_vGenFree);
             fn_vDynFree = new GameFunction<D_fn_vDynFree>(Offsets.EngineFunctions.fn_vDynFree);
             PLA_fn_bSetNewState = new GameFunction<D_PLA_fn_bSetNewState>(Offsets.EngineFunctions.PLA_fn_bSetNewState);
+            PLA_fn_vSetCurrFrame = new GameFunction<D_PLA_fn_vSetCurrFrame>(Offsets.EngineFunctions.PLA_fn_vSetCurrFrame);
             fn_p_stReadAnalogJoystickMario = new GameFunction<D_fn_p_stReadAnalogJoystickMario>(Offsets.EngineFunctions.fn_p_stReadAnalogJoystickMario);
             fn_p_stEvalTree = new GameFunction<D_fn_p_stEvalTree>(Offsets.EngineFunctions.fn_p_stEvalTree);
         }
@@ -221,6 +222,14 @@ namespace Ray2Mod.Game.Functions
         public static GameFunction<D_PLA_fn_bSetNewState> PLA_fn_bSetNewState { get; }
 
         #endregion PLA_fn_bSetNewState
+
+        #region PLA_fn_vSetCurrFrame
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate char D_PLA_fn_vSetCurrFrame(SuperObject* persoSpo, short frame);
+
+        public static GameFunction<D_PLA_fn_vSetCurrFrame> PLA_fn_vSetCurrFrame { get; }
+
+        #endregion PLA_fn_vSetCurrFrame
 
         #region fn_p_stReadAnalogJoystickMario
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
