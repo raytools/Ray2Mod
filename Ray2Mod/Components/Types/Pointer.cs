@@ -38,7 +38,7 @@ namespace Ray2Mod.Components.Types
             Pointer<T>[] results = new Pointer<T>[ptrArray.Length];
             for (int i = 0; i < ptrArray.Length; i++)
             {
-                results[i] = (Pointer<T>)ptrArray[i];
+                results[i] = ptrArray[i];
             }
 
             return results;
@@ -77,7 +77,8 @@ namespace Ray2Mod.Components.Types
             return $"Pointer<{typeof(T)}> @0x{(int)this:X}";
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return IntPtr.GetHashCode();
         }
     }

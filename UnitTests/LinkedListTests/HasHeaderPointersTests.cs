@@ -1,21 +1,23 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using Ray2Mod.Game.Structs.LinkedLists;
 
-namespace UnitTests.LinkedListTests {
+namespace UnitTests.LinkedListTests
+{
 
     [TestClass]
-    public class HasHeaderPointersTests {
-            
+    public class HasHeaderPointersTests
+    {
+
         [TestMethod]
         public unsafe void Test1_Add()
         {
             LinkedList.HasHeaderPointers<int> list = new LinkedList.HasHeaderPointers<int>();
-            var firstItem = list.Add(1);
-            var secondItem = list.Add(2);
-            var thirdItem = list.Add(3);
+            LinkedList.ListElement_HHP<int>* firstItem = list.Add(1);
+            LinkedList.ListElement_HHP<int>* secondItem = list.Add(2);
+            LinkedList.ListElement_HHP<int>* thirdItem = list.Add(3);
 
-            var items_1 = list.Read();
+            LinkedList.ListElement_HHP<int>*[] items_1 = list.Read();
 
             Assert.AreEqual(3, list.Count);
 
@@ -38,14 +40,14 @@ namespace UnitTests.LinkedListTests {
         public unsafe void Test2_AddAndRemove()
         {
             LinkedList.HasHeaderPointers<int> list = new LinkedList.HasHeaderPointers<int>();
-            var firstItem = list.Add(1);
-            var secondItem = list.Add(2);
-            var thirdItem = list.Add(3);
+            LinkedList.ListElement_HHP<int>* firstItem = list.Add(1);
+            LinkedList.ListElement_HHP<int>* secondItem = list.Add(2);
+            LinkedList.ListElement_HHP<int>* thirdItem = list.Add(3);
 
             list.Remove(firstItem);
             list.Remove(thirdItem);
 
-            var items_2 = list.Read();
+            LinkedList.ListElement_HHP<int>*[] items_2 = list.Read();
             Assert.AreEqual(2, items_2[0]->Element);
             Assert.AreEqual((int)items_2[0], (int)list.Head);
             Assert.AreEqual((int)list.Head, (int)list.Tail);
@@ -58,7 +60,7 @@ namespace UnitTests.LinkedListTests {
             LinkedList.HasHeaderPointers<int> list = new LinkedList.HasHeaderPointers<int>();
 
             list.Write(new int[] { 4, 5, 6, 7 });
-            var items_3 = list.Read();
+            LinkedList.ListElement_HHP<int>*[] items_3 = list.Read();
 
             Assert.AreEqual(4, items_3[0]->Element);
             Assert.AreEqual(5, items_3[1]->Element);

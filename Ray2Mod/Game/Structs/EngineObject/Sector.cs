@@ -1,9 +1,9 @@
-﻿using Ray2Mod.Components.Types;
+﻿using System.Runtime.InteropServices;
+
 using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.SPO;
 using Ray2Mod.Utils;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.EngineObject
 {
@@ -31,8 +31,8 @@ namespace Ray2Mod.Game.Structs.EngineObject
 
         public static SuperObject* CreateSectorSuperObject()
         {
-            var spo = new SuperObject().ToUnmanaged();
-            var spoData = new Sector().ToUnmanaged();
+            SuperObject* spo = new SuperObject().ToUnmanaged();
+            Sector* spoData = new Sector().ToUnmanaged();
 
             spo->SectorData = spoData;
 

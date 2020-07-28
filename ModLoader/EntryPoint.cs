@@ -1,12 +1,14 @@
-﻿using EasyHook;
+﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Threading;
+
+using EasyHook;
+
 using Ray2Mod;
 using Ray2Mod.Components;
 using Ray2Mod.Game;
 using Ray2Mod.Utils;
-using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace ModLoader
 {
@@ -45,7 +47,10 @@ namespace ModLoader
 
                 RemoteHooking.WakeUpProcess();
 
-                while (true) Thread.Sleep(1000);
+                while (true)
+                {
+                    Thread.Sleep(1000);
+                }
             }
             catch (Exception e)
             {
@@ -62,7 +67,7 @@ namespace ModLoader
                     Interface?.ProcessExit();
                 }
                 catch (Exception) { }
-                
+
             }
         }
     }

@@ -1,5 +1,6 @@
-﻿using Ray2Mod.Components.Types;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+
+using Ray2Mod.Components.Types;
 
 namespace Ray2Mod.Game.Functions
 {

@@ -1,6 +1,7 @@
-﻿using Ray2Mod.Game.Structs.MathStructs;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+
+using Ray2Mod.Game.Structs.MathStructs;
 
 namespace Ray2Mod.Game.Structs.Geometry
 {
@@ -18,13 +19,7 @@ namespace Ray2Mod.Game.Structs.Geometry
             }
         }
 
-        public Vector3 BoxCenter
-        {
-            get
-            {
-                return boxMin + (BoxSize * 0.5f);
-            }
-        }
+        public Vector3 BoxCenter => boxMin + (BoxSize * 0.5f);
 
         /// <summary>
         /// Combines the bounding box with another bounding box, making sure that both bounding boxes are contained in the new one

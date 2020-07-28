@@ -1,13 +1,6 @@
-﻿using Ray2Mod.Components.Types;
-using Ray2Mod.Game.Structs.EngineObject;
+﻿using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.SPO;
-using Ray2Mod.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ray2Mod.Game.Structs
 {
@@ -48,8 +41,10 @@ namespace Ray2Mod.Game.Structs
             }
         }
 
-        public void AddAlwaysPerso(Perso* perso) {
-            alwaysPersos.Add(new AlwaysPersoListItem() {
+        public void AddAlwaysPerso(Perso* perso)
+        {
+            alwaysPersos.Add(new AlwaysPersoListItem()
+            {
                 modelID = perso->stdGamePtr->modelID,
                 perso = perso
             });

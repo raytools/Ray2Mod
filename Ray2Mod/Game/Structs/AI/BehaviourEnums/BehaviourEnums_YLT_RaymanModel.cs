@@ -1,7 +1,7 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Ray2Mod.Game.Structs.AI.BehaviourEnums {
-    public enum BehaviourEnums_YLT_RaymanModel_Normal {
+﻿namespace Ray2Mod.Game.Structs.AI.BehaviourEnums
+{
+    public enum BehaviourEnums_YLT_RaymanModel_Normal
+    {
         YLT_Init,
         YLT_Attente,
         YLT_SautReception,
@@ -50,7 +50,8 @@ namespace Ray2Mod.Game.Structs.AI.BehaviourEnums {
         BNT_InitSuiteEtFin,
     }
 
-    public enum BehaviourEnums_YLT_RaymanModel_Reflex {
+    public enum BehaviourEnums_YLT_RaymanModel_Reflex
+    {
 
         BNT_ReflexeMort,
         YLT_AucunReflexe,

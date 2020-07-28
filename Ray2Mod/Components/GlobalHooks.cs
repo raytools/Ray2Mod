@@ -17,16 +17,19 @@ namespace Ray2Mod.Components
 
         // TODO: put this in a nice, separate class somewhere
 
-        private static unsafe int* DynamicAllocation(uint size, char module) {
+        private static unsafe int* DynamicAllocation(uint size, char module)
+        {
             return EngineFunctions.fn_p_vDynAlloc.Call(size);
         }
 
-        private static unsafe void DynamicFreeing(uint size, char module) {
+        private static unsafe void DynamicFreeing(uint size, char module)
+        {
             return; // oh no, poor memory will never be freed
             // TODO: actually free stuff
         }
 
-        private static unsafe SuperObject* FindNextFreeSupObj() {
+        private static unsafe SuperObject* FindNextFreeSupObj()
+        {
             // Allocate data
             SuperObject* newSpo = new SuperObject().ToUnmanaged();
             newSpo->type = (SuperObjectType)1;
@@ -39,7 +42,8 @@ namespace Ray2Mod.Components
         }
         #endregion
 
-        private static unsafe void ReleaseSuperObj(SuperObject* spo) {
+        private static unsafe void ReleaseSuperObj(SuperObject* spo)
+        {
             return; // TODO: actually free stuff
         }
 

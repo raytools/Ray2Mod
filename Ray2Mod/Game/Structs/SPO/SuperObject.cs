@@ -1,11 +1,12 @@
-﻿using Ray2Mod.Components.Types;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.MathStructs;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.SPO
 {
@@ -116,7 +117,10 @@ namespace Ray2Mod.Game.Structs.SPO
                 {
                     boundingVolume = (int*)value;
                 }
-                else throw new InvalidCastException($"Bounding volume is a sphere (flag BoundingBoxInsteadOfSphere is _not_ set)");
+                else
+                {
+                    throw new InvalidCastException($"Bounding volume is a sphere (flag BoundingBoxInsteadOfSphere is _not_ set)");
+                }
             }
         }
 
@@ -128,7 +132,10 @@ namespace Ray2Mod.Game.Structs.SPO
                 {
                     return (BoundingVolumeSphere*)boundingVolume;
                 }
-                else throw new InvalidCastException($"Bounding volume is a box (flag BoundingBoxInsteadOfSphere is set)");
+                else
+                {
+                    throw new InvalidCastException($"Bounding volume is a box (flag BoundingBoxInsteadOfSphere is set)");
+                }
             }
             set
             {
@@ -136,7 +143,10 @@ namespace Ray2Mod.Game.Structs.SPO
                 {
                     boundingVolume = (int*)value;
                 }
-                else throw new InvalidCastException($"Bounding volume is a box (flag BoundingBoxInsteadOfSphere is set)");
+                else
+                {
+                    throw new InvalidCastException($"Bounding volume is a box (flag BoundingBoxInsteadOfSphere is set)");
+                }
             }
         }
 

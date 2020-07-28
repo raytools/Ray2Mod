@@ -1,8 +1,9 @@
-﻿using Ray2Mod.Game.Structs.Material;
+﻿using System;
+using System.Runtime.InteropServices;
+
+using Ray2Mod.Game.Structs.Material;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Utils;
-using System;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.Geometry
 {
@@ -23,7 +24,7 @@ namespace Ray2Mod.Game.Structs.Geometry
 
         public UV[] GetUVs()
         {
-            var uvsArray = new UV[numUVs];
+            UV[] uvsArray = new UV[numUVs];
             for (int i = 0; i < numUVs; i++)
             {
                 uvsArray[i] = uvs[i];
@@ -34,7 +35,7 @@ namespace Ray2Mod.Game.Structs.Geometry
 
         public Triangle[] GetTriangles()
         {
-            var trianglesArray = new Triangle[numTriangles];
+            Triangle[] trianglesArray = new Triangle[numTriangles];
             for (int i = 0; i < numTriangles; i++)
             {
                 trianglesArray[i] = triangles[i];
@@ -45,7 +46,7 @@ namespace Ray2Mod.Game.Structs.Geometry
 
         public Vector3[] GetNormals()
         {
-            var normalsArray = new Vector3[numTriangles * 3];
+            Vector3[] normalsArray = new Vector3[numTriangles * 3];
             for (int i = 0; i < numTriangles * 3; i++)
             {
                 normalsArray[i] = normals[i];
@@ -56,7 +57,7 @@ namespace Ray2Mod.Game.Structs.Geometry
 
         public UvMapping[] GetUVMappings()
         {
-            var uvMappingsArray = new UvMapping[numTriangles];
+            UvMapping[] uvMappingsArray = new UvMapping[numTriangles];
             for (int i = 0; i < numTriangles; i++)
             {
                 uvMappingsArray[i] = uvMappings[i];

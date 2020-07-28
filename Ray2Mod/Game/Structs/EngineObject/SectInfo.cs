@@ -1,5 +1,6 @@
-﻿using Ray2Mod.Game.Structs.SPO;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+
+using Ray2Mod.Game.Structs.SPO;
 
 namespace Ray2Mod.Game.Structs.EngineObject
 {

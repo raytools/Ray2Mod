@@ -1,14 +1,12 @@
-﻿using Ray2Mod.Structs.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.Input {
+using Ray2Mod.Structs.Input;
+
+namespace Ray2Mod.Game.Structs.Input
+{
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct InputStructure {
+    public unsafe struct InputStructure
+    {
         [FieldOffset(0x700)]
         public int numEntryActions;
         [FieldOffset(0x704)]
@@ -19,7 +17,8 @@ namespace Ray2Mod.Game.Structs.Input {
             get
             {
                 EntryAction*[] result = new EntryAction*[numEntryActions];
-                for (int i = 0; i < numEntryActions; i++) {
+                for (int i = 0; i < numEntryActions; i++)
+                {
                     result[i] = &entryActionArray[i];
                 }
                 return result;
@@ -28,8 +27,9 @@ namespace Ray2Mod.Game.Structs.Input {
 
         public EntryAction* GetEntryAction(EntryActionNames name)
         {
-            var actions = EntryActions;
-            if (actions.Length>(int)name) {
+            EntryAction*[] actions = EntryActions;
+            if (actions.Length > (int)name)
+            {
                 return actions[(int)name];
             }
             return null;

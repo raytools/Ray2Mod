@@ -1,6 +1,7 @@
-﻿using Ray2Mod.Game;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+
+using Ray2Mod.Game;
 
 namespace Ray2Mod.Utils
 {
@@ -37,7 +38,10 @@ namespace Ray2Mod.Utils
 
                 byte[] nameBytes = new byte[64];
                 for (int i = 0; i < nameBytes.Length && off_name[i] != 0; i++)
+                {
                     nameBytes[i] = off_name[i];
+                }
+
                 names[j] = Encoding.GetEncoding(1252).GetString(nameBytes).Trim('\0');
 
                 if (off_names_next != null)

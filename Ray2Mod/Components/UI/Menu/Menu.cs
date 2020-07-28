@@ -1,10 +1,10 @@
-﻿using Ray2Mod.Components.Types;
+﻿using System.Collections.Generic;
+
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
-using Ray2Mod.Game.Structs;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Types;
 using Ray2Mod.Utils;
-using System.Collections.Generic;
 
 namespace Ray2Mod.Components.UI.Menu
 {
@@ -35,7 +35,9 @@ namespace Ray2Mod.Components.UI.Menu
             set
             {
                 if (value >= 0 && value < Items.Count)
+                {
                     _selected = value;
+                }
             }
         }
 
@@ -54,11 +56,17 @@ namespace Ray2Mod.Components.UI.Menu
                 Items[Selected].Submenu?.Show(this);
             }
             else if (code == KeyCode.Backspace)
+            {
                 GoBack();
+            }
             else if (code == KeyCode.Up)
+            {
                 Selected--;
+            }
             else if (code == KeyCode.Down)
+            {
                 Selected++;
+            }
         }
 
         protected override void DrawGraphics()
@@ -66,7 +74,9 @@ namespace Ray2Mod.Components.UI.Menu
             Vector3 vpos2 = new Vector3(Position.x + Width + 2, Position.y + 2 + Items.Count * 4, 0);
 
             using (StructPtr pos1 = new StructPtr(Position), pos2 = new StructPtr(vpos2))
+            {
                 GfxFunctions.VAddParticle.Call(110, pos1, pos2, TexturePointers.blueSparkTexture, 190);
+            }
         }
 
         protected override void DrawText()
@@ -88,7 +98,9 @@ namespace Ray2Mod.Components.UI.Menu
             {
                 int itemWidth = item.Name.Length * 2;
                 if (itemWidth > newWidth)
+                {
                     newWidth = itemWidth;
+                }
             }
 
             return newWidth;

@@ -1,12 +1,8 @@
-﻿using Ray2Mod.Game.Structs.Families;
+﻿using System.Runtime.InteropServices;
+
+using Ray2Mod.Game.Structs.Families;
 using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.States;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ray2Mod.Game.Structs.EngineObject
 {
@@ -20,13 +16,13 @@ namespace Ray2Mod.Game.Structs.EngineObject
         public LinkedList.ListElement_HHP<State>* stateCurrent;
         [FieldOffset(0x8)]
         public int* state2;
-        
+
         [FieldOffset(0xC)]
         public int* objectList;
         [FieldOffset(0x10)]
         public int* objectListInitial;
         [FieldOffset(0x14)]
-        public LinkedList.ListElement_HHP<Family> * family;
+        public LinkedList.ListElement_HHP<Family>* family;
 
         // Exactly 0x100 bytes after this
         [FieldOffset(0x18)]

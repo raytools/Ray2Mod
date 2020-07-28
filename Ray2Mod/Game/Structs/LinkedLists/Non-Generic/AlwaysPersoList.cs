@@ -1,8 +1,9 @@
-﻿using Ray2Mod.Components.Types;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Utils;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.LinkedLists
 {
@@ -44,7 +45,7 @@ namespace Ray2Mod.Game.Structs.LinkedLists
                     AlwaysPersoListElement* LinkedListElement = Next;
                     Next = LinkedListElement->Next;
 
-                    results[i] = (Perso*)LinkedListElement->Element;
+                    results[i] = LinkedListElement->Element;
                 }
 
                 return results;
@@ -90,18 +91,20 @@ namespace Ray2Mod.Game.Structs.LinkedLists
 
             public void Add(Perso* item)
             {
-                var items = Pointer<Perso>.WrapPointerArray(Read());
-                List<Pointer<Perso>> pointerList = new List<Pointer<Perso>>(items);
-                pointerList.Add(item);
+                Pointer<Perso>[] items = Pointer<Perso>.WrapPointerArray(Read());
+                List<Pointer<Perso>> pointerList = new List<Pointer<Perso>>(items)
+                {
+                    item
+                };
                 Write(Pointer<Perso>.PointerListToArray(pointerList));
             }
 
             public void Remove(Perso* item)
             {
-                var items = Pointer<Perso>.WrapPointerArray(Read());
+                Pointer<Perso>[] items = Pointer<Perso>.WrapPointerArray(Read());
                 List<Pointer<Perso>> pointerList = new List<Pointer<Perso>>(items);
                 pointerList.Remove(item);
-                var newLength = pointerList.Count;
+                int newLength = pointerList.Count;
                 Write(Pointer<Perso>.PointerListToArray(pointerList));
             }
         }

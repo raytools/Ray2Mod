@@ -1,10 +1,12 @@
 ﻿using System.Numerics;
 using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.Dynamics {
+namespace Ray2Mod.Game.Structs.Dynamics
+{
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct MatrixDynamics {
+    public struct MatrixDynamics
+    {
         public double m_1_1;
         public double m_2_1;
         public double m_3_1;
@@ -25,13 +27,16 @@ namespace Ray2Mod.Game.Structs.Dynamics {
         public double m_3_4;
         public double m_4_4;
 
-        public static MatrixDynamics Identity() => new MatrixDynamics
+        public static MatrixDynamics Identity()
         {
-            m_1_1 = 1,
-            m_2_2 = 1,
-            m_3_3 = 1,
-            m_4_4 = 1,
-        };
+            return new MatrixDynamics
+            {
+                m_1_1 = 1,
+                m_2_2 = 1,
+                m_3_3 = 1,
+                m_4_4 = 1,
+            };
+        }
 
         public Matrix4x4 TransformationMatrix
         {

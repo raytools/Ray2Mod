@@ -1,10 +1,11 @@
-﻿using Ray2Mod;
-using Ray2Mod.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
+using Ray2Mod;
+using Ray2Mod.Utils;
 
 namespace ModLoader
 {
@@ -30,8 +31,14 @@ namespace ModLoader
 
                 Interface.Log($"Loading {shortName}...", LogType.Debug);
 
-                if (LoadDll(name, out IMod mod)) Mods.Add(mod);
-                else Interface.Log($"An error occurred. Skipping {shortName}...", LogType.Warning);
+                if (LoadDll(name, out IMod mod))
+                {
+                    Mods.Add(mod);
+                }
+                else
+                {
+                    Interface.Log($"An error occurred. Skipping {shortName}...", LogType.Warning);
+                }
             }
 
             Interface.Log($"{Mods.Count}/{modNames.Length} mods successfully loaded.");

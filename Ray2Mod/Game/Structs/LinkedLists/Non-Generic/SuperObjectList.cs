@@ -1,6 +1,7 @@
-﻿using Ray2Mod.Components.Types;
+﻿using System.Runtime.InteropServices;
+
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs.SPO;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.LinkedLists
 {
@@ -29,7 +30,7 @@ namespace Ray2Mod.Game.Structs.LinkedLists
                         Next = Next->nextBrother;
                         // Previous pointer is ignored
 
-                        results[i] = (SuperObject*)(Element);
+                        results[i] = Element;
                     }
 
                 }
@@ -56,16 +57,16 @@ namespace Ray2Mod.Game.Structs.LinkedLists
 
             public void Remove(SuperObject* superObjectToRemove)
             {
-                var oldList = Read();
-                var newList = oldList.Where(i => i != superObjectToRemove);
+                SuperObject*[] oldList = Read();
+                SuperObject*[] newList = oldList.Where(i => i != superObjectToRemove);
                 Write(newList);
             }
 
             public void Write(SuperObject*[] superObjects)
             {
                 // First read the old list and clear their next and previous brother
-                var oldList = Read();
-                foreach (var oldSPO in oldList)
+                SuperObject*[] oldList = Read();
+                foreach (SuperObject* oldSPO in oldList)
                 {
                     oldSPO->previousBrother = null;
                     oldSPO->nextBrother = null;

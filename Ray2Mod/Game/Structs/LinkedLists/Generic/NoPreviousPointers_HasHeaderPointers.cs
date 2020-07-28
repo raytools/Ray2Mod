@@ -1,13 +1,16 @@
-﻿using Ray2Mod.Utils;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.LinkedLists {
+using Ray2Mod.Utils;
 
-    public abstract unsafe partial class LinkedList {
+namespace Ray2Mod.Game.Structs.LinkedLists
+{
+
+    public abstract unsafe partial class LinkedList
+    {
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct ListElement_NPP_HHP<T> where T : unmanaged {
+        public unsafe struct ListElement_NPP_HHP<T> where T : unmanaged
+        {
             public ListElement_NPP_HHP<T>* Next;
             public ListElement_NPP_HHP<T>* Header;
             public T Element;
@@ -15,7 +18,8 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public unsafe struct NoPreviousPointers_HasHeaderPointers<T> where T : unmanaged {
+        public unsafe struct NoPreviousPointers_HasHeaderPointers<T> where T : unmanaged
+        {
             public ListElement_NPP_HHP<T>* Head;
             public ListElement_NPP_HHP<T>* Tail;
             public int Count;
@@ -26,8 +30,10 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
 
                 ListElement_NPP_HHP<T>* Next = Head;
 
-                for (int i = 0; i < Count; i++) {
-                    if (Next == null) {
+                for (int i = 0; i < Count; i++)
+                {
+                    if (Next == null)
+                    {
                         break;
                     }
 
@@ -46,7 +52,8 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
 
                 Count = elements.Length;
 
-                for (int i = 0; i < Count; i++) {
+                for (int i = 0; i < Count; i++)
+                {
                     ListElement_NPP_HHP<T>* NewElement = new ListElement_NPP_HHP<T>()
                     {
                         Element = items[i],
@@ -54,9 +61,12 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
                         Next = null,
                     }.ToUnmanaged();
 
-                    if (i == 0) {
+                    if (i == 0)
+                    {
                         Head = NewElement;
-                    } else if (i == Count - 1) {
+                    }
+                    else if (i == Count - 1)
+                    {
                         Tail = NewElement;
                     }
 
@@ -66,7 +76,8 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
                 }
 
                 // Set Next and Previous
-                for (int i = 0; i < Count; i++) {
+                for (int i = 0; i < Count; i++)
+                {
                     // No Previous Pointers
                     if (i < Count - 1) { elements[i]->Next = elements[i + 1]; }
                 }
@@ -76,17 +87,22 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
             {
                 Count = items.Length;
 
-                for (int i = 0; i < Count; i++) {
+                for (int i = 0; i < Count; i++)
+                {
 
-                    if (i == 0) {
+                    if (i == 0)
+                    {
                         Head = items[i];
-                    } else if (i == Count - 1) {
+                    }
+                    else if (i == Count - 1)
+                    {
                         Tail = items[i];
                     }
                 }
 
                 // Set Next and Previous
-                for (int i = 0; i < Count; i++) {
+                for (int i = 0; i < Count; i++)
+                {
                     // No Previous Pointers
                     if (i < Count - 1) { items[i]->Next = items[i + 1]; }
                 }
@@ -99,9 +115,9 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
             /// <returns>A pointer to the newly created list element</returns>
             public ListElement_NPP_HHP<T>* Add(T item)
             {
-                var items = Read();
+                ListElement_NPP_HHP<T>*[] items = Read();
 
-                var newItem = new ListElement_NPP_HHP<T>()
+                ListElement_NPP_HHP<T>* newItem = new ListElement_NPP_HHP<T>()
                 {
                     Next = null,
                     // No Previous Pointers
@@ -109,10 +125,13 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
                     Element = item
                 }.ToUnmanaged();
 
-                if (items.Length > 0) {
+                if (items.Length > 0)
+                {
                     items[items.Length - 1]->Next = newItem;
                     Tail = newItem;
-                } else {
+                }
+                else
+                {
                     Head = newItem;
                     Tail = newItem;
                 }
@@ -129,21 +148,28 @@ namespace Ray2Mod.Game.Structs.LinkedLists {
             /// <returns>True if the item was found and removed, false otherwise</returns>
             public bool Remove(ListElement_NPP_HHP<T>* item)
             {
-                var items = Read();
+                ListElement_NPP_HHP<T>*[] items = Read();
 
-                for (int i = 0; i < items.Length; i++) {
-                    if (items[i] == item) {
-                        if (i + 1 < items.Length) {
+                for (int i = 0; i < items.Length; i++)
+                {
+                    if (items[i] == item)
+                    {
+                        if (i + 1 < items.Length)
+                        {
                             // No Previous Pointers
                         }
 
-                        if (i - 1 >= 0) {
+                        if (i - 1 >= 0)
+                        {
                             items[i - 1]->Next = i + 1 < items.Length ? items[i + 1] : null;
                         }
 
-                        if (i == 0) {
+                        if (i == 0)
+                        {
                             Head = Count > 1 ? items[1] : null;
-                        } else if (i == Count - 1) {
+                        }
+                        else if (i == Count - 1)
+                        {
                             Tail = Count > 1 ? items[i - 1] : null;
                         }
 

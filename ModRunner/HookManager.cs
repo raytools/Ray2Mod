@@ -1,12 +1,14 @@
-﻿using EasyHook;
-using Ray2Mod;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Threading;
+
+using EasyHook;
+
+using Ray2Mod;
 
 namespace ModRunner
 {
@@ -70,8 +72,10 @@ namespace ModRunner
                         Thread.Sleep(5000);
                     }
                 }
-            });
-            injectionThread.IsBackground = true;
+            })
+            {
+                IsBackground = true
+            };
             injectionThread.Start();
         }
 
@@ -82,7 +86,9 @@ namespace ModRunner
                 Process[] processes = Process.GetProcessesByName(name);
 
                 if (processes.Length > 0)
+                {
                     return processes[0].Id;
+                }
             }
 
             return 0;

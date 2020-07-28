@@ -1,5 +1,6 @@
-﻿using Ray2Mod.Components.Types;
-using System;
+﻿using System;
+
+using Ray2Mod.Components.Types;
 
 namespace Ray2Mod.Game.Structs
 {

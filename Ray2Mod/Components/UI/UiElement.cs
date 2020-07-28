@@ -1,7 +1,7 @@
-﻿using Ray2Mod.Game.Structs;
+﻿using System;
+
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Types;
-using System;
 
 namespace Ray2Mod.Components.UI
 {

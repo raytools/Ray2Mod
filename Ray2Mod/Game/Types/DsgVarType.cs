@@ -1,9 +1,10 @@
-﻿using Ray2Mod.Game.Structs.AI;
+﻿using System;
+using System.Collections.Generic;
+
+using Ray2Mod.Game.Structs.AI;
 using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Structs.SPO;
-using System;
-using System.Collections.Generic;
 
 namespace Ray2Mod.Game.Structs
 {

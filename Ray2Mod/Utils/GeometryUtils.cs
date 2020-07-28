@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using JeremyAnsel.Media.WavefrontObj;
+
 using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.Material;
 using Ray2Mod.Game.Structs.MathStructs;
@@ -28,7 +30,7 @@ namespace Ray2Mod.Utils
                 ri.Log($"Texture ptr 0x{(int)t.TexData:X} {t.Name}");
             }
 
-            var file = ObjFile.FromFile(objPath);
+            ObjFile file = ObjFile.FromFile(objPath);
 
             GeometricElementTriangles*[] elements = new GeometricElementTriangles*[file.Groups.Count];
 
@@ -40,11 +42,13 @@ namespace Ray2Mod.Utils
                 ri.Log($"OBJECT GROUP {objGroup.Name}");
 
                 GameMaterial newMtl = mtl;
-                VisualMaterial vis = new VisualMaterial();
+                VisualMaterial vis = new VisualMaterial
+                {
 
-                // TODO: figure out visual material flags
-                vis.flags = 1306265599;
-                vis.ambientCoef = new Vector4(0.3f, 0.3f, 0.3f, 0.3f);
+                    // TODO: figure out visual material flags
+                    flags = 1306265599,
+                    ambientCoef = new Vector4(0.3f, 0.3f, 0.3f, 0.3f)
+                };
 
                 // Group start
 
@@ -55,7 +59,7 @@ namespace Ray2Mod.Utils
                 List<UvMapping> uvMappings = new List<UvMapping>();
 
                 short vertexCount = 0;
-                foreach (var f in objGroup.Faces)
+                foreach (ObjFace f in objGroup.Faces)
                 {
                     if (f.Vertices.Count > 3)
                     {
@@ -67,17 +71,17 @@ namespace Ray2Mod.Utils
                         throw new InvalidDataException("Face with less than 3 vertices detected while importing .obj, make sure all faces are triangles!");
                     }
 
-                    var normal_0 = file.VertexNormals[f.Vertices[0].Normal - 1]; // Wavefront uses 1-based indexing :(
-                    var normal_1 = file.VertexNormals[f.Vertices[1].Normal - 1];
-                    var normal_2 = file.VertexNormals[f.Vertices[2].Normal - 1];
+                    ObjVector3 normal_0 = file.VertexNormals[f.Vertices[0].Normal - 1]; // Wavefront uses 1-based indexing :(
+                    ObjVector3 normal_1 = file.VertexNormals[f.Vertices[1].Normal - 1];
+                    ObjVector3 normal_2 = file.VertexNormals[f.Vertices[2].Normal - 1];
 
                     normals.Add(new Vector3(normal_0.X, normal_0.Y, normal_0.Z));
                     normals.Add(new Vector3(normal_1.X, normal_1.Y, normal_1.Z));
                     normals.Add(new Vector3(normal_2.X, normal_2.Y, normal_2.Z));
 
-                    var textureVertex_0 = file.TextureVertices[f.Vertices[0].Texture - 1];
-                    var textureVertex_1 = file.TextureVertices[f.Vertices[1].Texture - 1];
-                    var textureVertex_2 = file.TextureVertices[f.Vertices[2].Texture - 1];
+                    ObjVector3 textureVertex_0 = file.TextureVertices[f.Vertices[0].Texture - 1];
+                    ObjVector3 textureVertex_1 = file.TextureVertices[f.Vertices[1].Texture - 1];
+                    ObjVector3 textureVertex_2 = file.TextureVertices[f.Vertices[2].Texture - 1];
 
                     uvs.Add(new UV() { u = textureVertex_0.X, v = textureVertex_0.Y });
                     uvs.Add(new UV() { u = textureVertex_1.X, v = textureVertex_1.Y });
@@ -131,9 +135,9 @@ namespace Ray2Mod.Utils
                 newMtl.visualMaterial = vis.ToUnmanaged();
                 geoElem.material = newMtl.ToUnmanaged();
 
-                var normalArray = normals.ToArray();
-                var triArray = triangles.ToArray();
-                var uvArray = uvs.ToArray();
+                Vector3[] normalArray = normals.ToArray();
+                Triangle[] triArray = triangles.ToArray();
+                UV[] uvArray = uvs.ToArray();
 
                 geoElem.SetTriangles(triArray);
                 geoElem.SetUVS(uvArray);
@@ -145,17 +149,17 @@ namespace Ray2Mod.Utils
                 elements[i] = geoElem.ToUnmanaged();
             }
 
-            var verts = file.Vertices.Select(v =>
+            IEnumerable<Vector3> verts = file.Vertices.Select(v =>
             {
                 return new Vector3(v.Position.X, v.Position.Y, v.Position.Z);
             });
 
-            var vertsArray = verts.ToArray();
+            Vector3[] vertsArray = verts.ToArray();
 
             go->SetVertices(vertsArray);
             go->SetNormals(new Vector3[vertsArray.Length]); // empty normals for geometric object
 
-            var types = new GeometricObject.ElementType[elements.Length];
+            GeometricObject.ElementType[] types = new GeometricObject.ElementType[elements.Length];
 
             int[] tempArray = new int[elements.Length];
             for (int i = 0; i < elements.Length; i++)

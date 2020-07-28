@@ -1,7 +1,6 @@
 ﻿using Ray2Mod;
 using Ray2Mod.Components.Text;
 using Ray2Mod.Game;
-using Ray2Mod.Game.Structs;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Utils;
 

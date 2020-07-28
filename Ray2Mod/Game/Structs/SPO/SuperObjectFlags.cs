@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.SPO
 {

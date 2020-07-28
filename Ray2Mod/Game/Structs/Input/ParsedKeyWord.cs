@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Ray2Mod.Game.Structs.Input {
-    public unsafe class ParsedKeyWord {
-        
+namespace Ray2Mod.Game.Structs.Input
+{
+    public unsafe class ParsedKeyWord
+    {
+
         public KeyWord kw;
-        
+
         public bool isFunction;
         public ParsedKeyWord[] subkeywords;
 
@@ -22,7 +20,8 @@ namespace Ray2Mod.Game.Structs.Input {
             isFunction = true;
             int keywordsRead = 1;
 
-            switch (kw.FunctionType) {
+            switch (kw.FunctionType)
+            {
                 case Functions.FunctionType.Not:
                     subkeywords = new ParsedKeyWord[1];
                     subkeywords[0] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
@@ -53,11 +52,13 @@ namespace Ray2Mod.Game.Structs.Input {
                     keywordsRead += 1;
                     int sequenceLength = subkeywords[0].kw.indexOrKeyCode;
 
-                    if (sequenceLength > 0) {
+                    if (sequenceLength > 0)
+                    {
                         ParsedKeyWord[] newArray = subkeywords;
                         Array.Resize(ref newArray, sequenceLength + 1);
                         subkeywords = newArray;
-                        for (int i = 0; i < sequenceLength; i++) {
+                        for (int i = 0; i < sequenceLength; i++)
+                        {
                             subkeywords[1 + i] = new ParsedKeyWord(keywords[thisIndex + keywordsRead]);
                             keywordsRead += subkeywords[1 + i].FillInSubKeywords(keywords, thisIndex + keywordsRead);
                         }
@@ -163,8 +164,10 @@ namespace Ray2Mod.Game.Structs.Input {
 
         public override string ToString()
         {
-            if (isFunction) {
-                switch (kw.FunctionType) {
+            if (isFunction)
+            {
+                switch (kw.FunctionType)
+                {
                     case Functions.FunctionType.Not:
                         return "!(" + subkeywords[0] + ")";
 
@@ -184,9 +187,11 @@ namespace Ray2Mod.Game.Structs.Input {
                         string sequence = "";
                         // Skip 1 at the end (first sequenceKey), then do -2 to skip over every other sequenceKey
                         // Then stop because first two keywords (last two processed here) are length and sequenceEnd
-                        for (int i = subkeywords.Length - 1; i > 0; i--) {
+                        for (int i = subkeywords.Length - 1; i > 0; i--)
+                        {
                             ParsedKeyWord w = subkeywords[i];
-                            switch (w.kw.FunctionType) {
+                            switch (w.kw.FunctionType)
+                            {
                                 case Functions.FunctionType.SequenceKey:
                                 case Functions.FunctionType.SequenceKeyEnd:
                                     sequence += Enum.GetName(typeof(KeyCode), subkeywords[i].subkeywords[0].kw.indexOrKeyCode);
@@ -231,7 +236,9 @@ namespace Ray2Mod.Game.Structs.Input {
                     default:
                         return kw.FunctionType.ToString() + "()";
                 }
-            } else {
+            }
+            else
+            {
                 return "[" + kw.indexOrKeyCode + "]<" + Enum.GetName(typeof(KeyCode), kw.indexOrKeyCode) + ">";
             }
         }

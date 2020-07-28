@@ -1,5 +1,5 @@
-﻿using Ray2Mod.Game.Structs.EngineObject;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+
 using Ray2Mod.Game.Structs.SPO;
 
 namespace Ray2Mod.Game.Structs.LinkedLists

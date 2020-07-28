@@ -1,6 +1,7 @@
-﻿using Ray2Mod.Utils;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+
+using Ray2Mod.Utils;
 
 namespace Ray2Mod.Components.Types
 {
@@ -47,7 +48,10 @@ namespace Ray2Mod.Components.Types
                 Pointer = Marshal.AllocHGlobal(Marshal.SizeOf(obj));
                 Marshal.StructureToPtr(obj, Pointer, false);
             }
-            else Pointer = IntPtr.Zero;
+            else
+            {
+                Pointer = IntPtr.Zero;
+            }
         }
 
         public IntPtr Pointer { get; private set; }

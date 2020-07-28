@@ -2,7 +2,6 @@
 using Ray2Mod.Components;
 using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
-using Ray2Mod.Game.Structs;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Utils;
 

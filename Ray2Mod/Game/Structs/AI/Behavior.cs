@@ -23,7 +23,8 @@ namespace Ray2Mod.Game.Structs.AI
             get
             {
                 Behavior*[] behaviors = new Behavior*[Length];
-                for (int i = 0; i < Length; i++) {
+                for (int i = 0; i < Length; i++)
+                {
                     behaviors[i] = &Array[i];
                 }
                 return behaviors;

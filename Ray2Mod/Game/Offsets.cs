@@ -1,8 +1,4 @@
-﻿using Ray2Mod.Game.Structs.Families;
-using Ray2Mod.Game.Structs.Input;
-using Ray2Mod.Game.Structs.LinkedLists;
-
-namespace Ray2Mod.Game
+﻿namespace Ray2Mod.Game
 {
     // Based on Rayman 2 GOG.com version
 
@@ -76,7 +72,8 @@ namespace Ray2Mod.Game
             public const int DrawText = 0x4660B0;
         }
 
-        public class Globals {
+        public class Globals
+        {
             public const int g_hCurrentSuperObjPerso = 0x4B9C28;
         }
     }

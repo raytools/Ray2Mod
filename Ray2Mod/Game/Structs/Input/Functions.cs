@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 
-namespace Ray2Mod.Game.Structs.Input {
-    public static class Functions {
+namespace Ray2Mod.Game.Structs.Input
+{
+    public static class Functions
+    {
 
-        public enum FunctionType {
+        public enum FunctionType
+        {
             Unknown,
             And,
             Or,
@@ -47,9 +49,12 @@ namespace Ray2Mod.Game.Structs.Input {
 
         public static FunctionType GetFunctionType(uint index)
         {
-            try {
+            try
+            {
                 return (FunctionType)(index);
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 return FunctionType.Unknown;
             }
         }

@@ -1,6 +1,8 @@
-﻿namespace Ray2Mod.Game.Structs.Input {
+﻿namespace Ray2Mod.Game.Structs.Input
+{
 
-    public enum JoypadKeyCode {
+    public enum JoypadKeyCode
+    {
         Shoot = 0xA,
         Jump = 0xB,
         Triangle = 0xC,
@@ -21,7 +23,8 @@
         DPadLeft = 0x1B
     }
 
-    public enum KeyCode { // AZERTY because UbiSoft is le french
+    public enum KeyCode
+    { // AZERTY because UbiSoft is le french
         _UNDEFINED = 0x00,
         Escape = 0x01,
         One = 0x02,

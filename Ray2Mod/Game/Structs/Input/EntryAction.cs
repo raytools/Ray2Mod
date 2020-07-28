@@ -1,9 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.Input {
+namespace Ray2Mod.Game.Structs.Input
+{
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct EntryAction {
+    public unsafe struct EntryAction
+    {
         public int numKeyWords;
         public KeyWord* keywordArray;
         public int name; // Not used in PC?
@@ -16,7 +18,8 @@ namespace Ray2Mod.Game.Structs.Input {
             get
             {
                 KeyWord[] result = new KeyWord[numKeyWords];
-                for (int i = 0; i < numKeyWords; i++) {
+                for (int i = 0; i < numKeyWords; i++)
+                {
                     result[i] = keywordArray[i];
                 }
                 return result;
@@ -27,11 +30,14 @@ namespace Ray2Mod.Game.Structs.Input {
         {
             get
             {
-                if (numKeyWords > 0) {
-                    var result = new ParsedKeyWord(KeyWords[0]);
+                if (numKeyWords > 0)
+                {
+                    ParsedKeyWord result = new ParsedKeyWord(KeyWords[0]);
                     result.FillInSubKeywords(KeyWords, 0);
                     return result;
-                } else {
+                }
+                else
+                {
                     return null;
                 }
             }
@@ -62,14 +68,20 @@ namespace Ray2Mod.Game.Structs.Input {
             //string result = "<NullEntryAction>";
             string result = "EntryAction{";
 
-            if (ParsedFirstKeyWord != null) {
+            if (ParsedFirstKeyWord != null)
+            {
                 result += ParsedFirstKeyWord.ToString() + ", ";
             }
-            if (result.EndsWith("(")) {
+            if (result.EndsWith("("))
+            {
                 result = "<NullEntryAction>";
-            } else if (result.EndsWith(", ")) {
+            }
+            else if (result.EndsWith(", "))
+            {
                 result = result.Substring(0, result.Length - 2) + "}";
-            } else {
+            }
+            else
+            {
                 result += "}";
             }
             return result;

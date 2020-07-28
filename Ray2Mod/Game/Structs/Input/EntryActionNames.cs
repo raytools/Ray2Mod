@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ray2Mod.Structs.Input {
-    public enum EntryActionNames {
+﻿namespace Ray2Mod.Structs.Input
+{
+    public enum EntryActionNames
+    {
         Action_Pad_AxeX,
         Action_Pad_AxeY,
         Action_Clavier_Haut,

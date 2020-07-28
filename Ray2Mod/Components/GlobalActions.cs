@@ -1,8 +1,8 @@
-﻿using Ray2Mod.Game.Functions;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Ray2Mod.Components.Text;
+
 using Ray2Mod.Game;
+using Ray2Mod.Game.Functions;
 
 namespace Ray2Mod.Components
 {

@@ -1,16 +1,14 @@
-﻿using Ray2Mod.Game.Structs.LinkedLists;
-using Ray2Mod.Game.Structs.States;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
-namespace Ray2Mod.Game.Structs.Families {
-    
+using Ray2Mod.Game.Structs.LinkedLists;
+using Ray2Mod.Game.Structs.States;
+
+namespace Ray2Mod.Game.Structs.Families
+{
+
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct Family {
+    public unsafe struct Family
+    {
         public int familyIndex;
         public LinkedList.HasHeaderPointers<State> states;
         public LinkedList.ListElement_HHP<ObjectList>* physicalListDefault;

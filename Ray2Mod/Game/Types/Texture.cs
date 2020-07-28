@@ -1,7 +1,8 @@
-﻿using Ray2Mod.Game.Structs;
-using Ray2Mod.Utils;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+
+using Ray2Mod.Game.Structs;
+using Ray2Mod.Utils;
 
 namespace Ray2Mod.Game.Types
 {
@@ -19,9 +20,13 @@ namespace Ray2Mod.Game.Types
             if (ptrBytes[0] == 0 && ptrBytes[1] == 0)
             {
                 if (ptrBytes[2] == 0)
+                {
                     Pointer = Marshal.ReadIntPtr(ptr - 0x90);
+                }
                 else
+                {
                     Pointer = Marshal.ReadIntPtr(ptr - ptrBytes[2] - 0x8);
+                }
             }
             else
             {

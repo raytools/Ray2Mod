@@ -1,8 +1,10 @@
-﻿using EasyHook;
+﻿using System;
+using System.Collections.Generic;
+
+using EasyHook;
+
 using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
-using System;
-using System.Collections.Generic;
 
 namespace Ray2Mod.Components
 {
@@ -13,7 +15,9 @@ namespace Ray2Mod.Components
         public bool CreateHook<T>(GameFunction<T> function, T hook) where T : Delegate
         {
             if (hook == null)
+            {
                 return false;
+            }
 
             Hooks[hook] = LocalHook.Create(function.Pointer, hook, function);
             Hooks[hook].ThreadACL.SetExclusiveACL(new[] { 0 });
@@ -24,7 +28,9 @@ namespace Ray2Mod.Components
         public bool RemoveHook<T>(GameFunction<T> function, T hook) where T : Delegate
         {
             if (!Hooks.ContainsKey(hook))
+            {
                 return false;
+            }
 
             Hooks[hook].Dispose();
             Hooks.Remove(hook);
@@ -32,11 +38,13 @@ namespace Ray2Mod.Components
             return true;
         }
 
-        public void CreateHook(object fn_p_vGenFree, object dynamicFreeing) {
+        public void CreateHook(object fn_p_vGenFree, object dynamicFreeing)
+        {
             throw new NotImplementedException();
         }
 
-        public void CreateHook(GameFunction<EngineFunctions.D_fn_vGenFree> fn_vGenFree, object dynamicFreeing) {
+        public void CreateHook(GameFunction<EngineFunctions.D_fn_vGenFree> fn_vGenFree, object dynamicFreeing)
+        {
             throw new NotImplementedException();
         }
     }

@@ -1,5 +1,4 @@
-﻿using Ray2Mod.Game.Structs.AI;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.AI
@@ -12,7 +11,10 @@ namespace Ray2Mod.Game.Structs.AI
         public Intelligence* intelligenceReflex;
         public DsgMem* dsgMem;
 
-        public T* GetDsgVar<T>(int index, byte* buffer) where T : unmanaged => GetDsgVar<T>(index, buffer, out byte _);
+        public T* GetDsgVar<T>(int index, byte* buffer) where T : unmanaged
+        {
+            return GetDsgVar<T>(index, buffer, out byte _);
+        }
 
         public T* GetDsgVar<T>(int index, byte* buffer, out byte arraySize) where T : unmanaged
         {

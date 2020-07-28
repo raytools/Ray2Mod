@@ -1,5 +1,6 @@
-﻿using Ray2Mod.Game.Structs.Geometry;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+
+using Ray2Mod.Game.Structs.Geometry;
 
 namespace Ray2Mod.Game.Structs.EngineObject
 {

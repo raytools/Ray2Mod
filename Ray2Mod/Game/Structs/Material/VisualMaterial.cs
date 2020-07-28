@@ -1,5 +1,6 @@
-﻿using Ray2Mod.Game.Structs.MathStructs;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+
+using Ray2Mod.Game.Structs.MathStructs;
 
 namespace Ray2Mod.Game.Structs.Material
 {

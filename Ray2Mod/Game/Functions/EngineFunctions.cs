@@ -1,12 +1,12 @@
-﻿using Ray2Mod.Components.Types;
-using Ray2Mod.Game.Structs;
+﻿using System.Runtime.InteropServices;
+
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Structs.EngineObject;
 using Ray2Mod.Game.Structs.Geometry;
 using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Structs.SPO;
 using Ray2Mod.Game.Structs.States;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Functions
 {
@@ -167,7 +167,7 @@ namespace Ray2Mod.Game.Functions
         #region PLA_fn_hFindNextFreeSupObj
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate SuperObject * D_PLA_fn_hFindNextFreeSupObj();
+        public unsafe delegate SuperObject* D_PLA_fn_hFindNextFreeSupObj();
 
         public static GameFunction<D_PLA_fn_hFindNextFreeSupObj> PLA_fn_hFindNextFreeSupObj { get; }
 
@@ -176,7 +176,7 @@ namespace Ray2Mod.Game.Functions
         #region PLA_fn_vReleaseSuperObjectInHeap
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate void D_PLA_fn_vReleaseSuperObjectInHeap(SuperObject * spo);
+        public unsafe delegate void D_PLA_fn_vReleaseSuperObjectInHeap(SuperObject* spo);
 
         public static GameFunction<D_PLA_fn_vReleaseSuperObjectInHeap> PLA_fn_vReleaseSuperObjectInHeap { get; }
 
@@ -217,7 +217,7 @@ namespace Ray2Mod.Game.Functions
 
         #region PLA_fn_bSetNewState
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public unsafe delegate char D_PLA_fn_bSetNewState(SuperObject * persoSpo, LinkedList.ListElement_HHP<State>* state, char force, char withEvents, char setAnim);
+        public unsafe delegate char D_PLA_fn_bSetNewState(SuperObject* persoSpo, LinkedList.ListElement_HHP<State>* state, char force, char withEvents, char setAnim);
 
         public static GameFunction<D_PLA_fn_bSetNewState> PLA_fn_bSetNewState { get; }
 

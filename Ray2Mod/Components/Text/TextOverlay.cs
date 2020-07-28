@@ -1,8 +1,9 @@
-﻿using Ray2Mod.Components.Types;
+﻿using System;
+using System.Runtime.InteropServices;
+
+using Ray2Mod.Components.Types;
 using Ray2Mod.Game;
 using Ray2Mod.Game.Functions;
-using System;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Components.Text
 {
@@ -82,7 +83,11 @@ namespace Ray2Mod.Components.Text
 
         private void DrawText()
         {
-            if (UpdateText != null) Text = UpdateText(Text);
+            if (UpdateText != null)
+            {
+                Text = UpdateText(Text);
+            }
+
             UpdateProperties?.Invoke(this);
 
             using (StructPtr ptr = new StructPtr(Data))

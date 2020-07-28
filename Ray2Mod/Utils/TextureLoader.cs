@@ -1,6 +1,7 @@
-﻿using Ray2Mod.Game;
+﻿using System.Collections.Generic;
+
+using Ray2Mod.Game;
 using Ray2Mod.Game.Types;
-using System.Collections.Generic;
 
 namespace Ray2Mod.Utils
 {

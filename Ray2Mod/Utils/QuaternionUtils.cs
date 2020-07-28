@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Ray2Mod.Utils {
-    public static class QuaternionUtils {
+namespace Ray2Mod.Utils
+{
+    public static class QuaternionUtils
+    {
         public static Vector3 ToEuler(this Quaternion q)
         {
             Vector3 pitchYawRoll;

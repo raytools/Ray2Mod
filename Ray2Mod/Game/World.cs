@@ -1,4 +1,9 @@
-﻿using Ray2Mod.Components;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
+
+using Ray2Mod.Components;
 using Ray2Mod.Components.Types;
 using Ray2Mod.Game.Functions;
 using Ray2Mod.Game.Structs;
@@ -8,14 +13,12 @@ using Ray2Mod.Game.Structs.Input;
 using Ray2Mod.Game.Structs.LinkedLists;
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Game.Structs.SPO;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 
-namespace Ray2Mod.Game {
+namespace Ray2Mod.Game
+{
 
-    public unsafe class World {
+    public unsafe class World
+    {
         public Dictionary<ObjectSet, string[]> ObjectNames { get; private set; }
 
         public SuperObject* WorldSector => *((SuperObject**)(Offsets.FatherSector));
@@ -48,18 +51,24 @@ namespace Ray2Mod.Game {
 
             SuperObject*[] superObjects = world->children.Read();
 
-            foreach (SuperObject* superObject in superObjects) {
+            foreach (SuperObject* superObject in superObjects)
+            {
                 Perso* perso = (Perso*)superObject->engineObjectPtr;
-                if (perso != null) {
+                if (perso != null)
+                {
                     StandardGame* offStdGame = perso->stdGamePtr;
                     int nameIndex = offStdGame->instanceID;
                     string name = $"unknown_{(int)superObject:X}";
 
                     if (nameIndex >= 0 && nameIndex < ObjectNames[ObjectSet.Instance].Length)
+                    {
                         name = ObjectNames[ObjectSet.Instance][nameIndex];
+                    }
 
                     if (!result.ContainsKey(name))
+                    {
                         result.Add(name, superObject);
+                    }
                 }
             }
 
@@ -68,7 +77,11 @@ namespace Ray2Mod.Game {
 
         private void EngineStateChanged(byte previous, byte current)
         {
-            if (current != 9 || previous >= 9) return;
+            if (current != 9 || previous >= 9)
+            {
+                return;
+            }
+
             ReadObjectNames();
         }
 
@@ -77,7 +90,8 @@ namespace Ray2Mod.Game {
             const int offObjectTypes = Offsets.ObjectTypes;
             ObjectNames = new Dictionary<ObjectSet, string[]>();
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 int* offNamesHeader = (int*)(offObjectTypes + (i * 12));
                 int offNamesFirst = *offNamesHeader;
                 int offNamesLast = *(offNamesHeader + 1);
@@ -92,16 +106,21 @@ namespace Ray2Mod.Game {
             int* currentOffset = offNamesFirst;
             string[] names = new string[numNames];
 
-            for (int j = 0; j < numNames; j++) {
+            for (int j = 0; j < numNames; j++)
+            {
                 int* offNamesNext = (int*)*currentOffset;
                 byte* offName = (byte*)*(currentOffset + 3);
 
                 byte[] nameBytes = new byte[64];
                 for (int i = 0; i < nameBytes.Length && offName[i] != 0; i++)
+                {
                     nameBytes[i] = offName[i];
+                }
+
                 names[j] = Encoding.GetEncoding(1252).GetString(nameBytes).Trim('\0');
 
-                if (offNamesNext != null) {
+                if (offNamesNext != null)
+                {
                     currentOffset = offNamesNext;
                 }
             }
@@ -111,7 +130,8 @@ namespace Ray2Mod.Game {
 
         public Perso* GenerateAlwaysObject(SuperObject* spawnedBy, Perso* alwaysPerso, Vector3 position)
         {
-            if (spawnedBy == null) {
+            if (spawnedBy == null)
+            {
                 throw new NullReferenceException("GenerateAlwaysObject: spawnedBy is not allowed to be null!");
             }
 
@@ -133,7 +153,8 @@ namespace Ray2Mod.Game {
             // TODO: use ArrayPtr()
 
             IntPtr interpArray = Marshal.AllocHGlobal(interp.Length * 4);
-            for (int i = 0; i < interp.Length; i++) {
+            for (int i = 0; i < interp.Length; i++)
+            {
                 Marshal.WriteInt32(interpArray, i * 4, interp[i]);
             }
 
@@ -152,7 +173,8 @@ namespace Ray2Mod.Game {
         }
     }
 
-    public enum ObjectSet {
+    public enum ObjectSet
+    {
         Family = 0,
         Model = 1,
         Instance = 2

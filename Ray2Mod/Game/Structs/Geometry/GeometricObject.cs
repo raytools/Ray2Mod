@@ -1,8 +1,8 @@
-﻿using Ray2Mod.Game.Structs.Geometry;
+﻿using System.Linq;
+using System.Runtime.InteropServices;
+
 using Ray2Mod.Game.Structs.MathStructs;
 using Ray2Mod.Utils;
-using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace Ray2Mod.Game.Structs.Geometry
 {
@@ -132,7 +132,7 @@ namespace Ray2Mod.Game.Structs.Geometry
         /// <returns>A bounding box that contains all vertices.</returns>
         public BoundingVolumeBox GetVertexBounds()
         {
-            var vertices = GetVertices();
+            Vector3[] vertices = GetVertices();
             float minX = vertices.Select(v => v.x).Min();
             float minY = vertices.Select(v => v.y).Min();
             float minZ = vertices.Select(v => v.z).Min();
@@ -153,13 +153,13 @@ namespace Ray2Mod.Game.Structs.Geometry
         /// </summary>
         public void RecalculateNormals(RemoteInterface ri)
         {
-            var types = GetGeometricElementTypes();
-            var vertices = GetVertices();
+            ElementType[] types = GetGeometricElementTypes();
+            Vector3[] vertices = GetVertices();
 
             ri.Log("Recalculate normals");
             ri.Log("Vertices");
             int iv = 0;
-            foreach (var v in vertices)
+            foreach (Vector3 v in vertices)
             {
                 ri.Log($"v{iv}: {v}");
                 iv++;
@@ -172,7 +172,7 @@ namespace Ray2Mod.Game.Structs.Geometry
                     continue;
                 }
 
-                var tris = (GeometricElementTriangles*)off_elements[i];
+                GeometricElementTriangles* tris = (GeometricElementTriangles*)off_elements[i];
 
                 for (int j = 0; j < tris->numTriangles; j++)
                 {
@@ -194,7 +194,7 @@ namespace Ray2Mod.Game.Structs.Geometry
 
         public void RecalculateBoundingSphere()
         {
-            var sphere = GetVertexBounds().CreateBoundingSphere();
+            BoundingVolumeSphere sphere = GetVertexBounds().CreateBoundingSphere();
             boundingSphereCenter = sphere.center;
             boundingSphereRadius = sphere.radius;
         }
