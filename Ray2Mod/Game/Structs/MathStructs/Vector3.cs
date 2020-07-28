@@ -32,15 +32,9 @@ namespace Ray2Mod.Game.Structs.MathStructs
 
         public double Length => Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2));
 
-        public static Vector3 operator +(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
-        }
+        public static Vector3 operator +(Vector3 a, Vector3 b) => new Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
 
-        public static Vector3 operator -(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
-        }
+        public static Vector3 operator -(Vector3 a, Vector3 b) => new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
 
         /// <summary>
         /// Returns true if all components of this vector are a floating point number that's not NaN or an infinity.
@@ -51,25 +45,13 @@ namespace Ray2Mod.Game.Structs.MathStructs
             return !(float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsInfinity(x) || float.IsInfinity(y) || float.IsInfinity(z));
         }
 
-        public static Vector3 operator *(Vector3 a, float magnitude)
-        {
-            return new Vector3(a.x * magnitude, a.y * magnitude, a.z * magnitude);
-        }
+        public static Vector3 operator *(Vector3 a, float magnitude) => new Vector3(a.x * magnitude, a.y * magnitude, a.z * magnitude);
 
-        public static Vector3 operator *(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
-        }
+        public static Vector3 operator *(Vector3 a, Vector3 b) => new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
 
-        public static bool operator ==(Vector3 a, Vector3 b)
-        {
-            return (a.x == b.x && a.y == b.y && a.z == b.z);
-        }
+        public static bool operator ==(Vector3 a, Vector3 b) => (a.x == b.x && a.y == b.y && a.z == b.z);
 
-        public static bool operator !=(Vector3 a, Vector3 b)
-        {
-            return !(a == b);
-        }
+        public static bool operator !=(Vector3 a, Vector3 b) => !(a == b);
 
         public Vector3 Cross(Vector3 b)
         {
@@ -82,6 +64,9 @@ namespace Ray2Mod.Game.Structs.MathStructs
             return new Vector3(x / length, y / length, z / length);
         }
 
-        public override string ToString() => $"({x:F3}, {y:F3}, {z:F3})";
+        public override string ToString()
+        {
+            return $"({x:F3}, {y:F3}, {z:F3})";
+        }
     }
 }

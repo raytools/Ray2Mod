@@ -20,9 +20,11 @@ namespace Ray2Mod.Game.Structs.Geometry
                 VisualSetLOD[] visualSetLODs = new VisualSetLOD[numberOfLOD];
                 for (uint i = 0; i < numberOfLOD; i++)
                 {
-                    visualSetLODs[i] = new VisualSetLOD();
-                    visualSetLODs[i].LODdistance = off_LODDistances[i];
-                    visualSetLODs[i].off_data = off_LODDataOffsets[i];
+                    visualSetLODs[i] = new VisualSetLOD
+                    {
+                        LODdistance = off_LODDistances[i],
+                        off_data = off_LODDataOffsets[i]
+                    };
                 }
 
                 return visualSetLODs;

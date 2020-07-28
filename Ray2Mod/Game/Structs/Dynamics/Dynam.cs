@@ -11,20 +11,11 @@ namespace Ray2Mod.Game.Structs.Dynamics
         public int* parsingDatas;
         public int* unknown;
 
-        public DynamicsSmall* DynamicsAsSmallDynamics
-        {
-            get { return ((dynamics != null) ? (DynamicsSmall*)AssertType(Dynamics.DynamicsType.Small) : null); }
-        }
+        public DynamicsSmall* DynamicsAsSmallDynamics => ((dynamics != null) ? (DynamicsSmall*)AssertType(Dynamics.DynamicsType.Small) : null);
 
-        public DynamicsMedium* DynamicsAsMediumDynamics
-        {
-            get { return ((dynamics != null) ? (DynamicsMedium*)AssertType(Dynamics.DynamicsType.Medium) : null); }
-        }
+        public DynamicsMedium* DynamicsAsMediumDynamics => ((dynamics != null) ? (DynamicsMedium*)AssertType(Dynamics.DynamicsType.Medium) : null);
 
-        public DynamicsBig* DynamicsAsBigDynamics
-        {
-            get { return ((dynamics != null) ? (DynamicsBig*)AssertType(Dynamics.DynamicsType.Big) : null); }
-        }
+        public DynamicsBig* DynamicsAsBigDynamics => ((dynamics != null) ? (DynamicsBig*)AssertType(Dynamics.DynamicsType.Big) : null);
 
         private Dynamics* AssertType(Dynamics.DynamicsType dynamicsType)
         {

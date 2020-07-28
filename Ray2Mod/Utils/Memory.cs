@@ -5,9 +5,15 @@ namespace Ray2Mod.Utils
 {
     public static unsafe class Memory
     {
-        public static T* Malloc<T>(int size) where T : unmanaged => (T*)Marshal.AllocHGlobal(size);
+        public static T* Malloc<T>(int size) where T : unmanaged
+        {
+            return (T*)Marshal.AllocHGlobal(size);
+        }
 
-        public static void Free<T>(T* ptr) where T : unmanaged => Marshal.FreeHGlobal((IntPtr)ptr);
+        public static void Free<T>(T* ptr) where T : unmanaged
+        {
+            Marshal.FreeHGlobal((IntPtr)ptr);
+        }
 
         public static IntPtr GetPointerAtOffset(IntPtr address, params int[] offsets)
         {
@@ -35,7 +41,9 @@ namespace Ray2Mod.Utils
         {
             byte[] bytes = new byte[length];
             for (int i = 0; i < length; i++)
+            {
                 bytes[i] = Marshal.ReadByte(address + i);
+            }
 
             return bytes;
         }
@@ -44,7 +52,9 @@ namespace Ray2Mod.Utils
         {
             byte[] bytes = new byte[length];
             for (int i = 0; i < length; i++)
+            {
                 bytes[i] = *(address + i);
+            }
 
             return bytes;
         }
@@ -101,6 +111,9 @@ namespace Ray2Mod.Utils
             return ptr;
         }
 
-        public static bool IsNull<T>(T* ptr) where T : unmanaged => ptr == null || ptr == (T*)0xFFFFFFFF;
+        public static bool IsNull<T>(T* ptr) where T : unmanaged
+        {
+            return ptr == null || ptr == (T*)0xFFFFFFFF;
+        }
     }
 }

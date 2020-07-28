@@ -9,7 +9,7 @@ namespace Ray2Mod.Components.Types
         public static T*[] Where<T>(this T*[] array, Func<Pointer<T>, bool> filter) where T : unmanaged
         {
             List<Pointer<T>> result = new List<Pointer<T>>();
-            foreach (var item in array)
+            foreach (T* item in array)
             {
                 if (filter.Invoke(new Pointer<T>(item)))
                 {

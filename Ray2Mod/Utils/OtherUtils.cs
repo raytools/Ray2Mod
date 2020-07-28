@@ -17,8 +17,15 @@ namespace Ray2Mod.Utils
         public static string ApiVersion = GetVersionString(Assembly.GetExecutingAssembly());
         public static string ApiProductName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
 
-        public static string GetAssemblyVersion() => GetVersionString(Assembly.GetCallingAssembly());
-        public static string GetAssemblyProductName() => Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+        public static string GetAssemblyVersion()
+        {
+            return GetVersionString(Assembly.GetCallingAssembly());
+        }
+
+        public static string GetAssemblyProductName()
+        {
+            return Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+        }
 
         public static Dictionary<string, Dictionary<string, string>> Levels = new Dictionary<string, Dictionary<string, string>>
         {

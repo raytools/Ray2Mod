@@ -35,35 +35,17 @@ namespace Ray2Mod.Game.Structs.MathStructs
 
         public double Length => Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2) + Math.Pow(z, 2) + Math.Pow(w, 2));
 
-        public static Vector4 operator +(Vector4 a, Vector4 b)
-        {
-            return new Vector4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        }
+        public static Vector4 operator +(Vector4 a, Vector4 b) => new Vector4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
 
-        public static Vector4 operator -(Vector4 a, Vector4 b)
-        {
-            return new Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-        }
+        public static Vector4 operator -(Vector4 a, Vector4 b) => new Vector4(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
 
-        public static Vector4 operator *(Vector4 a, float magnitude)
-        {
-            return new Vector4(a.x * magnitude, a.y * magnitude, a.z * magnitude, a.w * magnitude);
-        }
+        public static Vector4 operator *(Vector4 a, float magnitude) => new Vector4(a.x * magnitude, a.y * magnitude, a.z * magnitude, a.w * magnitude);
 
-        public static Vector4 operator *(Vector4 a, Vector4 b)
-        {
-            return new Vector4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
-        }
+        public static Vector4 operator *(Vector4 a, Vector4 b) => new Vector4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
 
-        public static bool operator ==(Vector4 a, Vector4 b)
-        {
-            return (a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w);
-        }
+        public static bool operator ==(Vector4 a, Vector4 b) => (a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w);
 
-        public static bool operator !=(Vector4 a, Vector4 b)
-        {
-            return !(a == b);
-        }
+        public static bool operator !=(Vector4 a, Vector4 b) => !(a == b);
 
         public Vector4 Normalized()
         {
@@ -71,6 +53,9 @@ namespace Ray2Mod.Game.Structs.MathStructs
             return new Vector4(x / length, y / length, z / length, w / length);
         }
 
-        public override string ToString() => $"({x:F3}, {y:F3}, {z:F3}, {w:F3})";
+        public override string ToString()
+        {
+            return $"({x:F3}, {y:F3}, {z:F3}, {w:F3})";
+        }
     }
 }

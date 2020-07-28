@@ -26,9 +26,13 @@ namespace ModRunner
             foreach (string path in paths)
             {
                 if (Path.IsPathRooted(path))
+                {
                     yield return path;
+                }
                 else
+                {
                     yield return Path.Combine(Directory.GetCurrentDirectory(), path);
+                }
             }
         }
     }

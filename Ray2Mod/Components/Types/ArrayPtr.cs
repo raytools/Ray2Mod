@@ -19,9 +19,14 @@ namespace Ray2Mod.Components.Types
                 Pointer = Marshal.AllocHGlobal(array.Length * 4);
 
                 for (int i = 0; i < array.Length; i++)
+                {
                     Marshal.WriteInt32(Pointer, i * 4, array[i]);
+                }
             }
-            else Pointer = IntPtr.Zero;
+            else
+            {
+                Pointer = IntPtr.Zero;
+            }
         }
 
         /// <summary>
