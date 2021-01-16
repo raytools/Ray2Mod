@@ -31,6 +31,18 @@ namespace Ray2Mod.Game
 
         public InputStructure* InputStructure => ((InputStructure*)(Offsets.InputStructure));
 
+        public byte GlobalRandomizer
+        {
+            get
+            {
+                return *(byte*)Offsets.gcGlobAleat;
+            }
+            set
+            {
+                *(byte*)Offsets.gcGlobAleat = value;
+            }
+        }
+
         public LinkedList.HasHeaderPointers<Family> Families => *(LinkedList.HasHeaderPointers<Family>*)Offsets.Families;
 
         public World()
@@ -75,9 +87,9 @@ namespace Ray2Mod.Game
             return result;
         }
 
-        private void EngineStateChanged(byte previous, byte current)
+        private void EngineStateChanged(EnumEngineState previous, EnumEngineState current)
         {
-            if (current != 9 || previous >= 9)
+            if (current != EnumEngineState.STATE_9_LOADED || previous >= EnumEngineState.STATE_9_LOADED)
             {
                 return;
             }

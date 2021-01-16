@@ -19,6 +19,8 @@
         public const int Families = 0x500560;
         public const int InputStructure = 0x00509E60;
         public const int LocalizationStructure = 0x00500260;
+        public const int gcGlobAleat = 0x4A7070; // Global Randomizer (byte)
+        //500456 camera?
 
         public class EngineFunctions
         {
@@ -45,6 +47,7 @@
             public const int fn_p_stReadAnalogJoystickMario = 0x46E450;
             public const int fn_p_stEvalTree = 0x480B90;
             public const int PLA_fn_vSetCurrFrame = 0x40FD30;
+            public const int DoQueryPerformanceCounter = 0x45E930;
         }
 
         public class ParticleFunctions

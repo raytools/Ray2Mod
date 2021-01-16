@@ -72,6 +72,7 @@
     <Compile Include="Components\UI\Menu\Menu.cs" />
     <Compile Include="Components\UI\Menu\MenuItem.cs" />
     <Compile Include="Components\UI\UiElement.cs" />
+    <Compile Include="Game\EnumEngineState.cs" />
     <Compile Include="Game\Offsets.cs" />
     <Compile Include="Game\Functions\EngineFunctions.cs" />
     <Compile Include="Game\Functions\GfxFunctions.cs" />

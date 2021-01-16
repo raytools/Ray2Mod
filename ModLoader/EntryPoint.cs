@@ -58,9 +58,9 @@ namespace ModLoader
             }
         }
 
-        private void OnGameExit(byte previous, byte current)
+        private void OnGameExit(EnumEngineState previous, EnumEngineState current)
         {
-            if (current == 2)
+            if (current == EnumEngineState.STATE_2_LOAD)
             {
                 try
                 {

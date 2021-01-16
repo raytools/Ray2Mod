@@ -37,6 +37,7 @@ namespace Ray2Mod.Game.Functions
             PLA_fn_vSetCurrFrame = new GameFunction<D_PLA_fn_vSetCurrFrame>(Offsets.EngineFunctions.PLA_fn_vSetCurrFrame);
             fn_p_stReadAnalogJoystickMario = new GameFunction<D_fn_p_stReadAnalogJoystickMario>(Offsets.EngineFunctions.fn_p_stReadAnalogJoystickMario);
             fn_p_stEvalTree = new GameFunction<D_fn_p_stEvalTree>(Offsets.EngineFunctions.fn_p_stEvalTree);
+            DoQueryPerformanceCounter = new GameFunction<D_DoQueryPerformanceCounter>(Offsets.EngineFunctions.DoQueryPerformanceCounter);
         }
 
         #region VEngine
@@ -246,5 +247,13 @@ namespace Ray2Mod.Game.Functions
         public static GameFunction<D_fn_p_stEvalTree> fn_p_stEvalTree { get; }
 
         #endregion fn_p_stEvalTree
+
+        #region DoQueryPerformanceCounter
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int D_DoQueryPerformanceCounter(short a1, long* lpPerformanceCount);
+
+        public static GameFunction<D_DoQueryPerformanceCounter> DoQueryPerformanceCounter { get; }
+
+        #endregion DoQueryPerformanceCounter
     }
 }
