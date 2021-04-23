@@ -24,6 +24,7 @@ namespace Ray2Mod.Game.Functions
             COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2 = new GameFunction<D_COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2>(Offsets.EngineFunctions.COL_fn_vCollideStaticGeomObj1WithStaticGeomObj2);
             AllocateMem = new GameFunction<D_AllocateMem>(Offsets.EngineFunctions.AllocateMem);
             fn_vInitOneObject = new GameFunction<D_fn_vInitOneObject>(Offsets.EngineFunctions.fn_vInitOneObject);
+            fn_vMakeCharacterThink = new GameFunction<D_fn_vMakeCharacterThink>(Offsets.EngineFunctions.fn_vMakeCharacterThink);
             fn_v3dDataCopyClone = new GameFunction<D_fn_v3dDataCopyClone>(Offsets.EngineFunctions.fn_v3dDataCopyClone);
             fn_vBrainCopyClone = new GameFunction<D_fn_vBrainCopyClone>(Offsets.EngineFunctions.fn_vBrainCopyClone);
             fn_p_stAllocateAlways = new GameFunction<D_fn_p_stAllocateAlways>(Offsets.EngineFunctions.fn_p_stAllocateAlways);
@@ -247,6 +248,14 @@ namespace Ray2Mod.Game.Functions
         public static GameFunction<D_fn_p_stEvalTree> fn_p_stEvalTree { get; }
 
         #endregion fn_p_stEvalTree
+
+        #region fn_vMakeCharacterThink
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public unsafe delegate int D_fn_vMakeCharacterThink(SuperObject* persoSpo);
+
+        public static GameFunction<D_fn_vMakeCharacterThink> fn_vMakeCharacterThink { get; }
+
+        #endregion fn_vMakeCharacterThink
 
         #region DoQueryPerformanceCounter
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

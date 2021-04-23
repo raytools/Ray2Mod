@@ -1,4 +1,6 @@
-﻿namespace Ray2Mod.Game
+﻿using Ray2Mod.Components.Types;
+
+namespace Ray2Mod.Game
 {
     // Based on Rayman 2 GOG.com version
 
@@ -24,6 +26,7 @@
 
         public class EngineFunctions
         {
+            public const int fn_vMakeCharacterThink = 0x4120D0;
             public const int VEngine = 0x40ADA0;
             public const int GetCurrentLevelName = 0x404DA0;
             public const int AskToChangeLevel = 0x4054D0;
